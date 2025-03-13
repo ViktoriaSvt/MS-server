@@ -1,4 +1,4 @@
-package skytales.Payments.dto;
+package skytales.Payments.web.dto;
 
 import java.util.UUID;
 

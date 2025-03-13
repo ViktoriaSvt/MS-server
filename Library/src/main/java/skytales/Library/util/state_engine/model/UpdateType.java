@@ -1,4 +1,4 @@
-package skytales.Library.state_engine.model;
+package skytales.Library.util.state_engine.model;
 
 public enum UpdateType {
     NEW_BOOK, REMOVE_BOOK, STOCK_CHANGE

@@ -1,8 +1,8 @@
-package skytales.auth.repository;
+package skytales.Auth.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import skytales.auth.model.User;
+import skytales.Auth.model.User;
 
 import java.util.UUID;
 

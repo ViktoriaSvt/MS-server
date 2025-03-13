@@ -1,4 +1,4 @@
-package skytales.questions.dto;
+package skytales.Questions.dto;
 
 import jakarta.validation.constraints.Size;
 

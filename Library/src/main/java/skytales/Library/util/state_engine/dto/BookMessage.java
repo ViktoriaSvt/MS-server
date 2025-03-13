@@ -1,4 +1,4 @@
-package skytales.Library.state_engine.dto;
+package skytales.Library.util.state_engine.dto;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package skytales.auth.dto;
+package skytales.Auth.dto;
 
 public record NewCartRequest(
         String userId

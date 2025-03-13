@@ -1,4 +1,4 @@
-package skytales.payment.model;
+package skytales.Payments.model;
 
 public enum PaymentStatus {
     SUCCEEDED,

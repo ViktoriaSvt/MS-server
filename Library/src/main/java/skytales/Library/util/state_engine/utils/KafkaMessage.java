@@ -1,4 +1,4 @@
-package skytales.Library.state_engine.utils;
+package skytales.Library.util.state_engine.utils;
 
 public class KafkaMessage<T> {
     private String type;

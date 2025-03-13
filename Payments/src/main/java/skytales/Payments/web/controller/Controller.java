@@ -1,8 +1,8 @@
-package skytales.Payments;
+package skytales.Payments.web.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import skytales.Payments.dto.StockChange;
+import skytales.Payments.web.dto.StockChange;
 import skytales.Payments.model.BookState;
 import skytales.Payments.service.PaymentService;
 

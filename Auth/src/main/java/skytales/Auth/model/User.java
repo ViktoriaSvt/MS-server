@@ -1,12 +1,8 @@
-package skytales.auth.model;
+package skytales.Auth.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import skytales.cart.model.Cart;
-import skytales.library.model.Book;
-import skytales.questions.model.Question;
 
-import java.util.List;
 import java.util.UUID;
 
 @Builder

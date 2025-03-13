@@ -1,8 +1,9 @@
-package skytales.Carts.redis;
+package skytales.Carts.util.redis.util;
 
 import org.springframework.stereotype.Service;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.model.Cart;
+import skytales.Carts.util.redis.RedisService;
 import skytales.Carts.repository.CartRepository;
 
 

@@ -1,8 +1,8 @@
-package skytales.common.state_engine.model;
+package com.skytales.common.common_utils.common.state_engine.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import skytales.common.state_engine.dto.BookMessage;
+import com.skytales.common.common_utils.common.state_engine.dto.BookMessage;
 
 
 public class Message {

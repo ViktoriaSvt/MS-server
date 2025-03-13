@@ -2,7 +2,7 @@ package skytales.Payments.util.state_engine;
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import skytales.Payments.util.state_engine.utils.KafkaMessage;
+import skytales.Payments.util.state_engine.transferModel.KafkaMessage;
 
 @Service
 public class UpdateProducer {

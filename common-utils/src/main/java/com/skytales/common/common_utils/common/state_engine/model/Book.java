@@ -1,4 +1,4 @@
-package skytales.common.state_engine.model;
+package com.skytales.common.common_utils.common.state_engine.model;
 
 import jakarta.persistence.*;
 

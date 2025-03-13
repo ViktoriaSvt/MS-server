@@ -1,11 +1,11 @@
-package skytales.Carts.redis.sync;
+package skytales.Carts.util.redis.sync;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.stereotype.Service;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.model.Cart;
-import skytales.Carts.redis.RedisService;
+import skytales.Carts.util.redis.RedisService;
 import skytales.Carts.repository.CartRepository;
 
 

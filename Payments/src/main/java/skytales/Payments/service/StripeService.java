@@ -1,16 +1,16 @@
-package skytales.payment.service;
+package skytales.Payments.service;
 
 import com.stripe.Stripe;
-import com.stripe.model.PaymentIntent;
 import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
 import com.stripe.param.PaymentIntentCreateParams;
 import jakarta.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import skytales.payment.dto.PaymentRequest;
-import skytales.payment.exception.PaymentFailedException;
-import skytales.payment.model.BookState;
+import skytales.Payments.web.dto.PaymentRequest;
+import skytales.Payments.util.exception.PaymentFailedException;
+import skytales.Payments.model.BookState;
+
 
 @Service
 public class StripeService {
@@ -53,7 +53,6 @@ public class StripeService {
             }
         }
     }
-
 
 
 }

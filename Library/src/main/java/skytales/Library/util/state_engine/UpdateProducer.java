@@ -1,11 +1,11 @@
-package skytales.Library.state_engine;
+package skytales.Library.util.state_engine;
 
 
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
-import skytales.Library.state_engine.dto.BookMessage;
-import skytales.Library.state_engine.model.UpdateType;
-import skytales.Library.state_engine.utils.KafkaMessage;
+import skytales.Library.util.state_engine.dto.BookMessage;
+import skytales.Library.util.state_engine.model.UpdateType;
+import skytales.Library.util.state_engine.utils.KafkaMessage;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;

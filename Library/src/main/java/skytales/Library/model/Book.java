@@ -1,8 +1,9 @@
-package skytales.library.model;
+package skytales.Library.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import skytales.auth.model.User;
+
+
 import java.math.BigDecimal;
 import java.util.UUID;
 
@@ -44,8 +45,4 @@ public class Book {
 
     @Column(nullable = false)
     public int quantity;
-
-    @ManyToOne
-    private User creator;
-
 }

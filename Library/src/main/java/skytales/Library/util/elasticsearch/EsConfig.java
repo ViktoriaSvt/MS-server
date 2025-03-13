@@ -1,4 +1,4 @@
-package skytales.Library.elasticsearch;
+package skytales.Library.util.elasticsearch;
 
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;

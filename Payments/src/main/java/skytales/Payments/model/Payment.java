@@ -1,4 +1,4 @@
-package skytales.payment.model;
+package skytales.Payments.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;

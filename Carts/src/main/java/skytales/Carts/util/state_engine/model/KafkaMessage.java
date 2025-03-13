@@ -1,4 +1,4 @@
-package skytales.Carts.state_engine.model;
+package skytales.Carts.util.state_engine.model;
 
 public class KafkaMessage<T> {
     private String type;

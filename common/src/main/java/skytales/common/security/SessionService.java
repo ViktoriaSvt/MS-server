@@ -3,7 +3,9 @@ package skytales.common.security;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.stereotype.Service;
-import skytales.auth.dto.SessionResponse;
+
+import java.util.UUID;
+
 
 @Service
 public class SessionService {
@@ -22,3 +24,5 @@ public class SessionService {
         return new SessionResponse(email, username, userId, role, cartId);
     }
 }
+
+//        UUID userId = (UUID) request.getAttribute("userId");

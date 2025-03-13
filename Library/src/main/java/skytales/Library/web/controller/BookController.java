@@ -1,4 +1,4 @@
-package skytales.Library;
+package skytales.Library.web.controller;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchRequest;

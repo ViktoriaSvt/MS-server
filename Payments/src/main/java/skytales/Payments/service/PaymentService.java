@@ -1,13 +1,18 @@
-package skytales.payment.service;
+package skytales.Payments.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import skytales.payment.dto.BookItem;
-import skytales.payment.model.BookState;
-import skytales.payment.model.Payment;
-import skytales.payment.model.PaymentStatus;
-import skytales.payment.repository.PaymentRepository;
-import java.util.*;
+import skytales.Payments.web.dto.BookItem;
+import skytales.Payments.model.BookState;
+import skytales.Payments.model.Payment;
+import skytales.Payments.model.PaymentStatus;
+import skytales.Payments.repository.PaymentRepository;
+
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PaymentService {
@@ -27,7 +32,7 @@ public class PaymentService {
     @Transactional
     public void sufficientQuantity(List<BookItem> books) {
 
-        if(books.isEmpty()) {
+        if (books.isEmpty()) {
             throw new RuntimeException("Nothing to purchase!");
         }
 
@@ -55,14 +60,14 @@ public class PaymentService {
                 .bookTitles(new ArrayList<>())
                 .build();
 
-        if(status == PaymentStatus.SUCCEEDED) {
-           books.forEach(book ->  payment.getBookTitles().add(book.title()));
+        if (status == PaymentStatus.SUCCEEDED) {
+            books.forEach(book -> payment.getBookTitles().add(book.title()));
         }
 
         paymentRepository.save(payment);
     }
 
     public List<Payment> getAllByOwner(UUID userId) {
-      return  paymentRepository.findByUser(userId);
+        return paymentRepository.findByUser(userId);
     }
 }

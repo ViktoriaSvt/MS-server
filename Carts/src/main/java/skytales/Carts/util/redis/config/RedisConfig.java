@@ -1,4 +1,4 @@
-package skytales.Carts.redis;
+package skytales.Carts.util.redis.config;
 
 import io.lettuce.core.RedisException;
 import org.springframework.beans.factory.annotation.Value;
@@ -13,6 +13,7 @@ import org.springframework.data.redis.listener.ChannelTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import skytales.Carts.util.redis.util.RedisMessageSubscriber;
 
 @Configuration
 public class RedisConfig {

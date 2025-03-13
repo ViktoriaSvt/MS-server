@@ -1,13 +1,13 @@
-package skytales.Carts.events;
+package skytales.Carts.util.events;
 
 
 import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import skytales.Carts.redis.sync.CacheStartupSync;
-import skytales.Carts.redis.sync.CartBatchSync;
+import skytales.Carts.util.redis.sync.CacheStartupSync;
+import skytales.Carts.util.redis.sync.CartBatchSync;
 import skytales.Carts.service.CartService;
-import skytales.Carts.state_engine.model.KafkaMessage;
+import skytales.Carts.util.state_engine.model.KafkaMessage;
 
 
 import java.util.UUID;

@@ -1,8 +1,9 @@
-package skytales.cart.repository;
+package skytales.Carts.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import skytales.cart.model.Cart;
+import skytales.Carts.model.Cart;
+
 
 import java.util.Optional;
 import java.util.UUID;

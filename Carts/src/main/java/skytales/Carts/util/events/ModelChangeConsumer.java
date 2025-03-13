@@ -1,12 +1,12 @@
-package skytales.Carts.events;
+package skytales.Carts.util.events;
 
 
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
-import skytales.Carts.dto.BookRequest;
+import skytales.Carts.web.dto.BookRequest;
 import skytales.Carts.service.BookReferenceService;
-import skytales.Carts.state_engine.dto.BookMessage;
-import skytales.Carts.state_engine.model.KafkaMessage;
+import skytales.Carts.util.state_engine.dto.BookMessage;
+import skytales.Carts.util.state_engine.model.KafkaMessage;
 
 
 @Service

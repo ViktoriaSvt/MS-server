@@ -1,4 +1,4 @@
-package skytales.questions.model;
+package skytales.Questions.model;
 
 public enum Status {
     PENDING, ANSWERED

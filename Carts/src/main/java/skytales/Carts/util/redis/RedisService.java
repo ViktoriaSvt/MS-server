@@ -1,4 +1,4 @@
-package skytales.Carts.redis;
+package skytales.Carts.util.redis;
 
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.connection.RedisConnection;

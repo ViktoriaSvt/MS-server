@@ -1,11 +1,11 @@
-package skytales.payment.util;
+package skytales.Payments.util;
 
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-import skytales.payment.model.BookState;
+import skytales.Payments.model.BookState;
 
 import java.util.Arrays;
 import java.util.List;

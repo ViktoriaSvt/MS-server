@@ -1,4 +1,4 @@
-package skytales.Carts;
+package skytales.Carts.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,7 @@ public class CartController {
     @PutMapping("add/{id}")
     public ResponseEntity<?> addToCart(@PathVariable String id, HttpServletRequest request) {
 
-        UUID cartId = (UUID) request.getAttribute("cartId");
+        UUID cartId = UUID.fromString(request.getAttribute("cartId").toString());
         cartService.addToCart(cartId, UUID.fromString(id));
 
         return ResponseEntity.ok(cartId);
@@ -34,7 +34,7 @@ public class CartController {
     @DeleteMapping("/remove/{id}")
     public ResponseEntity<?> removeFromCart(@PathVariable String id, HttpServletRequest request) {
 
-        UUID cartId = (UUID) request.getAttribute("cartId");
+        UUID cartId = UUID.fromString(request.getAttribute("cartId").toString());
         cartService.deleteFromCart(cartId, UUID.fromString(id));
 
         return ResponseEntity.ok(cartId);
@@ -43,7 +43,7 @@ public class CartController {
     @GetMapping("/items")
     public ResponseEntity<?> getItems(HttpServletRequest request) {
 
-        UUID cartId = (UUID) request.getAttribute("cartId");
+        UUID cartId = UUID.fromString(request.getAttribute("cartId").toString());
         Set<BookItemReference> items = cartService.getCartItems(cartId);
 
         return ResponseEntity.ok(items);

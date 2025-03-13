@@ -1,4 +1,4 @@
-package skytales.auth.model;
+package skytales.Auth.model;
 
 public enum Role {
     USER,ADMIN

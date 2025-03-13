@@ -1,4 +1,4 @@
-package skytales.Carts.redis;
+package skytales.Carts.util.redis.util;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,8 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
-import skytales.Carts.state_engine.UpdateProducer;
+import skytales.Carts.util.redis.RedisService;
+import skytales.Carts.util.state_engine.UpdateProducer;
 
 
 @EnableAsync
@@ -22,12 +23,11 @@ public class RedisHealthChecker {
 
     private final RedisTemplate<String, Object> redisTemplate;
 
-    @Autowired
+
     private final RedisService redisService;
+    private UpdateProducer updateProducer;
 
     private volatile boolean redisAvailable = false;
-    @Autowired
-    private UpdateProducer updateProducer;
 
     public RedisHealthChecker( RedisTemplate<String, Object> redisTemplate, RedisService redisService) {
 

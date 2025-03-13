@@ -1,4 +1,4 @@
-package skytales.Payments;
+package skytales.Payments.web.controller;
 
 
 import com.stripe.exception.StripeException;
@@ -7,13 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import skytales.Payments.dto.PaymentRequest;
-import skytales.Payments.exception.PaymentFailedException;
+import skytales.Payments.web.dto.PaymentRequest;
+import skytales.Payments.util.exception.PaymentFailedException;
 import skytales.Payments.model.Payment;
 import skytales.Payments.model.PaymentStatus;
 import skytales.Payments.service.PaymentService;
 import skytales.Payments.service.StripeService;
-import skytales.Payments.state_engine.UpdateProducer;
+import skytales.Payments.util.state_engine.UpdateProducer;
 
 import java.util.List;
 import java.util.Map;

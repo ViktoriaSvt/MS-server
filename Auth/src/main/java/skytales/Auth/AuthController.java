@@ -1,4 +1,4 @@
-package skytales.auth;
+package skytales.Auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
@@ -8,13 +8,11 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import skytales.auth.dto.*;
-import skytales.auth.model.User;
-import skytales.auth.service.JwtService;
-import skytales.common.security.SessionService;
-import skytales.auth.service.UserService;
+import skytales.Auth.dto.*;
+import skytales.Auth.model.User;
+import skytales.Auth.service.AuthService;
+import skytales.Auth.service.UserService;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/auth")
@@ -23,12 +21,13 @@ public class AuthController {
 
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final SessionService sessionService;
+    private final AuthService authService;
 
-    public AuthController(UserService userService, BCryptPasswordEncoder passwordEncoder, SessionService sessionService) {
+
+    public AuthController(UserService userService, BCryptPasswordEncoder passwordEncoder, AuthService authService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
-        this.sessionService = sessionService;
+        this.authService = authService;
     }
 
     @PostMapping("/register")
@@ -38,9 +37,9 @@ public class AuthController {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
 
-        User user = userService.register(registerRequest, passwordEncoder);
-        RegisterResponse registerResponse = userService.generateRegisterResponse(user);
-        System.out.println("finished token");
+        User user = authService.register(registerRequest, passwordEncoder);
+        RegisterResponse registerResponse = authService.generateRegisterResponse(user);
+
         return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
     }
 
@@ -51,8 +50,8 @@ public class AuthController {
             return new ResponseEntity<>(bindingResult.getAllErrors(), HttpStatus.BAD_REQUEST);
         }
 
-        User user = userService.login(loginRequest);
-        LoginResponse loginResponse = userService.generateLoginResponse(user);
+        User user = authService.login(loginRequest);
+        LoginResponse loginResponse = authService.generateLoginResponse(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(loginResponse);
     }
@@ -62,7 +61,15 @@ public class AuthController {
     public ResponseEntity<?> getSession(HttpServletRequest request) {
 
         try {
-            SessionResponse sessionResponse = sessionService.getSessionData(request);
+
+            String userId = (String) request.getAttribute("userId");
+            String username = (String) request.getAttribute("username");
+            String email = (String) request.getAttribute("email");
+            String role = (String) request.getAttribute("role");
+            String cartId = (String) request.getAttribute("cartId");
+
+
+            SessionResponse sessionResponse = new SessionResponse(email, username, userId, role, cartId);
             return ResponseEntity.ok(sessionResponse);
 
         } catch (SessionAuthenticationException e) {

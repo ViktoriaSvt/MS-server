@@ -1,4 +1,4 @@
-package skytales.cart.model;
+package skytales.Carts.model;
 
 import jakarta.persistence.*;
 import lombok.*;

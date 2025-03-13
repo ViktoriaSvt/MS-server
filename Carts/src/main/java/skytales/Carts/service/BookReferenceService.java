@@ -1,13 +1,11 @@
-package skytales.cart.service;
+package skytales.Carts.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
-import skytales.cart.dto.BookRequest;
-import skytales.cart.model.BookItemReference;
-import skytales.cart.repository.BookItemReferenceRepository;
-import skytales.common.kafka.state_engine.dto.BookMessage;
+import skytales.Carts.web.dto.BookRequest;
+import skytales.Carts.model.BookItemReference;
+import skytales.Carts.repository.BookItemReferenceRepository;
+import skytales.Carts.util.state_engine.dto.BookMessage;
 
-import java.util.UUID;
 
 @Service
 public class BookReferenceService {

@@ -1,14 +1,12 @@
-package skytales.auth;
+package skytales.Auth;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import skytales.auth.dto.UserListItem;
-import skytales.auth.model.User;
-import skytales.auth.service.UserService;
+import org.springframework.web.bind.annotation.*;
+import skytales.Auth.dto.UserListItem;
+import skytales.Auth.model.User;
+import skytales.Auth.service.UserService;
+
 
 import java.util.List;
 import java.util.UUID;
@@ -41,5 +39,31 @@ public class UserController {
     public ResponseEntity<?> getAllUsers() {
         List<UserListItem> users = userService.listUsers();
         return ResponseEntity.ok(users);
+    }
+
+    @PutMapping("/promote")
+    public ResponseEntity<?> promote(@RequestParam String id) {
+
+        boolean success = userService.giveAdminRole(id);
+
+        if (success) {
+            return ResponseEntity.ok("User promoted successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+
+    }
+
+    @PutMapping("/demote")
+    public ResponseEntity<?> demote(@RequestParam String id) {
+
+        boolean success = userService.giveUserRole(id);
+
+        if (success) {
+            return ResponseEntity.ok("User demoted successfully");
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
+
     }
 }

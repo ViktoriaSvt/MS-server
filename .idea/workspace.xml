@@ -5,30 +5,340 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/AuthController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/LoginRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/LoginResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/NewCartRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/RegisterRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/RegisterResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/SessionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/dto/UserListItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/model/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/model/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/service/AuthService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/service/JwtService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/model/BookItemReference.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/model/Cart.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/repository/BookItemReferenceRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/repository/CartRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/CartService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/events/CartEventConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/events/ModelChangeConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/config/OnRedisAvailableCondition.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/config/RedisConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/sync/CacheStartupSync.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/sync/CartBatchSync.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/sync/HealthMonitor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/util/RedisHealthChecker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/util/RedisMessageSubscriber.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/state_engine/UpdateProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/state_engine/dto/BookMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/state_engine/model/KafkaMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/state_engine/model/UpdateType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/web/CartController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/web/dto/BookRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/model/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/repository/BookRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/service/BookService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/BulkInsert.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/elasticsearch/EsConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/elasticsearch/service/ElasticSearchService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/UpdateProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/dto/BookMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/model/UpdateType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/BookSyncConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/BookSyncWorker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/KafkaMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/controller/BookController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/dto/BookData.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/model/BookState.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/model/Payment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/model/PaymentStatus.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/repository/PaymentRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/service/PaymentService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/service/StripeService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/configuration/Beans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/exception/PaymentFailedException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/state_engine/UpdateProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/state_engine/transferModel/KafkaMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/controller/Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/controller/Payments.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/dto/BookItem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/dto/PaymentRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/dto/StockChange.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/QuestionController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/dto/AnswerRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/dto/PostQuestionRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/model/Question.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/model/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/repository/QuestionRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/service/QuestionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Questions/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/.gitattributes" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/mvnw" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/mvnw.cmd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/CommonUtilsApplication.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/configuration/Beans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/configuration/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/security/SessionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/security/SessionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/BookSyncConsumer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/BookSyncWorker.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/UpdateProducer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/dto/BookMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/model/Book.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/model/Message.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/model/UpdateType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/state_engine/utils/KafkaMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common-utils/src/test/java/com/skytales/common/common_utils/CommonUtilsApplicationTests.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/configuration/Beans.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/configuration/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/security/JwtAuthenticationFilter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/security/SessionResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/security/SessionService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/qodana.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/sweetopia/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="C:\Maven\apache-maven-3.9.9" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2u8413Vo0FPIFcCvCek8sVxFTKh" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Maven.Auth [clean].executor": "Run",
+    "Maven.Auth [install].executor": "Run",
+    "Maven.Payments [clean].executor": "Run",
+    "Maven.Payments [install].executor": "Run",
+    "Maven.Questions [clean].executor": "Run",
+    "Maven.Questions [install].executor": "Run",
+    "Maven.Server [clean].executor": "Run",
+    "Maven.common [clean].executor": "Run",
+    "Maven.common [deploy].executor": "Run",
+    "Maven.common [install].executor": "Run",
+    "Maven.common-utils [clean].executor": "Run",
+    "Maven.common-utils [deploy].executor": "Run",
+    "Maven.common-utils [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.AuthApplication (1).executor": "Run",
+    "Spring Boot.AuthApplication.executor": "Run",
+    "Spring Boot.CartsApplication.executor": "Run",
+    "Spring Boot.CommonUtilsApplication.executor": "Run",
+    "Spring Boot.LibraryApplication.executor": "Run",
+    "Spring Boot.PaymentsApplication (1).executor": "Run",
+    "Spring Boot.PaymentsApplication.executor": "Run",
+    "Spring Boot.QuestionsApplication.executor": "Run",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/PC/Desktop/Server/Carts/src/main/java/skytales/Carts",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "MavenSettings",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="QodanaHighlightedReportService">
+    <option name="localRunNotPublishedPersistedInfo">
+      <LocalReportPersistedInfo>
+        <option name="path" value="C:\Users\PC\AppData\Local\Temp\qodana_output1\qodana.sarif.json" />
+        <option name="reportGuid" value="0f2b72fe-de32-4e1a-9002-a0f83b02b892" />
+        <option name="reportName" value="Server/qodana/2025-03-13" />
+      </LocalReportPersistedInfo>
+    </option>
+  </component>
+  <component name="QodanaIsSelectedPersistenceService">
+    <option name="selectedOrLoading" value="true" />
+  </component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\PC\AppData\Local\Temp\qodana_output1\qodana.sarif.json" reportGuid="0f2b72fe-de32-4e1a-9002-a0f83b02b892" reportId="Server/qodana/2025-03-13" />
+      <ReportDescription localRun="true" path="C:\Users\PC\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4779b8dd-7f1a-4586-ab9f-f00f4463902b" reportId="Server/qodana/2025-03-13" />
+    </option>
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\Desktop\Server\Carts\src\main\java\skytales\Carts" />
+      <recent name="C:\Users\PC\Desktop\Server\src\main\java\sweetopia" />
+      <recent name="C:\Users\PC\Desktop\Server" />
+      <recent name="C:\Users\PC\Desktop\Server\Library\src\main\java\skytales\Library" />
+      <recent name="C:\Users\PC\Desktop\Server\Payments\src\main\java\skytales\Payments" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\Desktop\Server\Library\src\main\java\skytales\Library\util" />
+      <recent name="C:\Users\PC\Desktop\Server\src\main\java" />
+      <recent name="C:\Users\PC\Desktop\Server\src\main\java\sweetopia" />
+      <recent name="C:\Users\PC\Desktop\Server\common-utils" />
+      <recent name="C:\Users\PC\Desktop\Server" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="skytales.Library" />
+      <recent name="skytales" />
+      <recent name="" />
+      <recent name="AuthRoot" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="skytales.Library" />
+      <recent name="skytales.Payments.util.configuration" />
+      <recent name="skytales.common.state_engine.model" />
+      <recent name="skytales.common.security" />
+      <recent name="com.skytales.common.common_utils.common.state_engine.model" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.QuestionsApplication">
+    <configuration name="AuthApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Auth" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Auth.AuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Auth" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.AuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CartsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Carts" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Carts.CartsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="common" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.common.CommonApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CommonUtilsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="common-utils" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.skytales.common.common_utils.CommonUtilsApplication" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.skytales.common.common_utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Library" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Library.LibraryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PaymentsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Payments" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Payments.PaymentsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Questions" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Questions.QuestionsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Spring Boot.CommonUtilsApplication" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -45,11 +355,53 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1741616650453</updated>
-      <workItem from="1741616651585" duration="3000" />
+      <workItem from="1741616651585" duration="8519000" />
+      <workItem from="1741628725977" duration="1459000" />
+      <workItem from="1741630912058" duration="7334000" />
+      <workItem from="1741788827041" duration="5077000" />
+      <workItem from="1741794685939" duration="6051000" />
+      <workItem from="1741804702593" duration="2360000" />
+      <workItem from="1741882139893" duration="13187000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Questions/src/main/java/QuestionMs/QuestionController.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Questions/src/main/java/QuestionMs/QuestionController.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/security/SessionService.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Payments/src/main/java/PaymentMs/Payments.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Auth/src/main/java/skytales/AuthController.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/service/UserService.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -1,4 +1,4 @@
-package skytales.Payments.exception;
+package skytales.Payments.util.exception;
 
 public class PaymentFailedException extends RuntimeException {
 

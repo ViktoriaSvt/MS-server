@@ -1,15 +1,16 @@
-package skytales.cart.service;
+package skytales.Carts.service;
 
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.stereotype.Service;
-import skytales.cart.model.BookItemReference;
-import skytales.cart.model.Cart;
-import skytales.cart.redis.RedisService;
-import skytales.cart.repository.BookItemReferenceRepository;
-import skytales.cart.repository.CartRepository;
+import skytales.Carts.model.BookItemReference;
+import skytales.Carts.model.Cart;
+import skytales.Carts.util.redis.RedisService;
+import skytales.Carts.repository.BookItemReferenceRepository;
+import skytales.Carts.repository.CartRepository;
 
 
-import java.util.*;
+import java.util.Set;
+import java.util.UUID;
 
 @Service
 public class CartService {

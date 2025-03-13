@@ -1,9 +1,10 @@
-package skytales.cart.model;
+package skytales.Carts.model;
 
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+
 import java.util.Set;
 import java.util.UUID;
 

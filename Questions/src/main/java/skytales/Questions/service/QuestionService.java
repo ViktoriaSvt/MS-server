@@ -1,11 +1,12 @@
-package skytales.questions.service;
+package skytales.Questions.service;
 
 import org.springframework.stereotype.Service;
-import skytales.questions.dto.AnswerRequest;
-import skytales.questions.repository.QuestionRepository;
-import skytales.questions.dto.PostQuestionRequest;
-import skytales.questions.model.Question;
-import skytales.questions.model.Status;
+import skytales.Questions.dto.AnswerRequest;
+import skytales.Questions.dto.PostQuestionRequest;
+import skytales.Questions.model.Question;
+import skytales.Questions.model.Status;
+import skytales.Questions.repository.QuestionRepository;
+
 
 import java.util.List;
 import java.util.UUID;

@@ -1,4 +1,4 @@
-package skytales.Carts.dto;
+package skytales.Carts.web.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

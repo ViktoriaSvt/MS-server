@@ -1,4 +1,4 @@
-package skytales.Carts.redis;
+package skytales.Carts.util.redis.config;
 
 import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;

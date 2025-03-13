@@ -1,8 +1,7 @@
-package skytales.questions.model;
+package skytales.Questions.model;
 
 import jakarta.persistence.*;
 import lombok.*;
-import skytales.auth.model.User;
 
 import java.util.UUID;
 
