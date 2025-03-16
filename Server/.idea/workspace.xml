@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="Added cloudinary support for faster lookup on book files (images) and support for uploading files from user end">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dockerfile" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Viktoria12345123&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Viktoria12345123/MS-server.git&quot;,
+    &quot;accountId&quot;: &quot;78a3b1e4-ab43-4ab0-a03c-18fcbd6eaada&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
+  <component name="KubernetesApiProvider"><![CDATA[{
+  "isMigrated": true
+}]]></component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="customMavenHome" value="C:\Maven\apache-maven-3.9.9" />
+        <option name="mavenHomeTypeForPersistence" value="CUSTOM" />
+      </MavenGeneralSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="QODANA_PROBLEMS_VIEW_TAB" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
+  <component name="ProjectId" id="2u8413Vo0FPIFcCvCek8sVxFTKh" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.Auth [clean].executor": "Run",
+    "Maven.Auth [install].executor": "Run",
+    "Maven.Carts [clean].executor": "Run",
+    "Maven.Carts [install].executor": "Run",
+    "Maven.Library [clean].executor": "Run",
+    "Maven.Library [install].executor": "Run",
+    "Maven.Payments [clean].executor": "Run",
+    "Maven.Payments [install].executor": "Run",
+    "Maven.Payments [package].executor": "Run",
+    "Maven.Questions [clean].executor": "Run",
+    "Maven.Questions [install].executor": "Run",
+    "Maven.Server [clean].executor": "Run",
+    "Maven.common [clean].executor": "Run",
+    "Maven.common [deploy].executor": "Run",
+    "Maven.common [install].executor": "Run",
+    "Maven.common-utils [clean].executor": "Run",
+    "Maven.common-utils [deploy].executor": "Run",
+    "Maven.common-utils [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.AuthApplication (1).executor": "Run",
+    "Spring Boot.AuthApplication.executor": "Run",
+    "Spring Boot.CartsApplication.executor": "Run",
+    "Spring Boot.CommonUtilsApplication.executor": "Run",
+    "Spring Boot.LibraryApplication.executor": "Run",
+    "Spring Boot.PaymentsApplication (1).executor": "Run",
+    "Spring Boot.PaymentsApplication.executor": "Debug",
+    "Spring Boot.QuestionsApplication.executor": "Run",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/PC/Desktop/Server/Payments/src/main/java/skytales/Payments/util/state_engine",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "run.configurations.included.in.services": "true",
+    "settings.editor.selected.configurable": "MavenSettings",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="QodanaReportsService">
+    <option name="descriptions">
+      <ReportDescription localRun="true" path="C:\Users\PC\AppData\Local\Temp\qodana_output1\qodana.sarif.json" reportGuid="0f2b72fe-de32-4e1a-9002-a0f83b02b892" reportId="Server/qodana/2025-03-13" />
+      <ReportDescription localRun="true" path="C:\Users\PC\AppData\Local\Temp\qodana_output\qodana.sarif.json" reportGuid="4779b8dd-7f1a-4586-ab9f-f00f4463902b" reportId="Server/qodana/2025-03-13" />
+    </option>
+  </component>
+  <component name="ReactorSettings">
+    <option name="notificationShown" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\Desktop\Server\Payments\src\main\java\skytales\Payments\util\state_engine" />
+      <recent name="C:\Users\PC\Desktop\Server\Payments\src\main\java\skytales\Payments\util\state_engine\transferModel" />
+      <recent name="C:\Users\PC\Desktop\Server\Carts\src\main\java\skytales\Carts\util\state_engine" />
+      <recent name="C:\Users\PC\Desktop\Server\Library\src\main\java\skytales\Library\util\state_engine\utils" />
+      <recent name="C:\Users\PC\Desktop\Server\Auth\src\main\java\skytales\Auth\util" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\Desktop\Server\Library\src\main\java\skytales\Library\util" />
+      <recent name="C:\Users\PC\Desktop\Server\src\main\java" />
+      <recent name="C:\Users\PC\Desktop\Server\src\main\java\sweetopia" />
+      <recent name="C:\Users\PC\Desktop\Server\common-utils" />
+      <recent name="C:\Users\PC\Desktop\Server" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="skytales.Library" />
+      <recent name="skytales" />
+      <recent name="" />
+      <recent name="AuthRoot" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="skytales.Library.util" />
+      <recent name="skytales.Library" />
+      <recent name="skytales.Payments.util.configuration" />
+      <recent name="skytales.common.state_engine.model" />
+      <recent name="skytales.common.security" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.LibraryApplication">
+    <configuration name="AuthApplication (1)" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Auth" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Auth.AuthApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CartsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Carts" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Carts.CartsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LibraryApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Library" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Library.LibraryApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PaymentsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="Payments" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Payments.PaymentsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="QuestionsApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Questions" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="skytales.Questions.QuestionsApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="" />
+      <created>1741616650453</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741616650453</updated>
+      <workItem from="1741616651585" duration="8519000" />
+      <workItem from="1741628725977" duration="1459000" />
+      <workItem from="1741630912058" duration="7334000" />
+      <workItem from="1741788827041" duration="5077000" />
+      <workItem from="1741794685939" duration="6051000" />
+      <workItem from="1741804702593" duration="2360000" />
+      <workItem from="1741882139893" duration="14094000" />
+      <workItem from="1741955970918" duration="496000" />
+      <workItem from="1741957770799" duration="63330000" />
+    </task>
+    <task id="LOCAL-00001" summary="setup microservices as independent modules">
+      <option name="closed" value="true" />
+      <created>1741896268446</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741896268446</updated>
+    </task>
+    <task id="LOCAL-00002" summary="setup microservices as independent modules 2">
+      <option name="closed" value="true" />
+      <created>1741896476021</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741896476021</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Containerised the microservices and their dependencies, fixed kafka state_engine serialisation issues">
+      <option name="closed" value="true" />
+      <created>1742130402505</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742130402505</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Added cloudinary support for faster lookup on book files (images) and support for uploading files from user end">
+      <option name="closed" value="true" />
+      <created>1742143859707</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742143859707</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="setup microservices as independent modules" />
+    <MESSAGE value="setup microservices as independent modules 2" />
+    <MESSAGE value="Containerised the microservices and their dependencies, fixed kafka state_engine serialisation issues" />
+    <MESSAGE value="Added cloudinary support for faster lookup on book files (images) and support for uploading files from user end" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added cloudinary support for faster lookup on book files (images) and support for uploading files from user end" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Questions/src/main/java/QuestionMs/QuestionController.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Questions/src/main/java/QuestionMs/QuestionController.java</url>
+          <line>40</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/common-utils/src/main/java/com/skytales/common/common_utils/common/security/SessionService.java</url>
+          <line>11</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Payments/src/main/java/PaymentMs/Payments.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Auth/src/main/java/skytales/AuthController.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/service/UserService.java</url>
+          <line>53</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/BookSyncWorker.java</url>
+          <line>22</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/UpdateProducer.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>jar://$MAVEN_REPOSITORY$/org/apache/kafka/kafka-clients/3.8.1/kafka-clients-3.8.1.jar!/org/apache/kafka/common/serialization/StringSerializer.class</url>
+          <line>22</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/MessageSerializer.java</url>
+          <line>12</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/MessageDeserializer.java</url>
+          <line>14</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/service/PaymentService.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/events/CartEventConsumer.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/controller/Payments.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/CartService.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/controller/BookController.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
