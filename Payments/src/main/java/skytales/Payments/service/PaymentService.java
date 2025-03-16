@@ -68,6 +68,6 @@ public class PaymentService {
     }
 
     public List<Payment> getAllByOwner(UUID userId) {
-        return paymentRepository.findByUser(userId);
+        return paymentRepository.findTop4ByUserOrderByCreatedAtDesc(userId);
     }
 }

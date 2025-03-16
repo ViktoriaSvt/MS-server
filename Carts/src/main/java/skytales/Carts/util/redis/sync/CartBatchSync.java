@@ -59,7 +59,6 @@ public class CartBatchSync {
             System.err.println("Error during batch synchronization: " + e.getMessage());
         }
 
-        System.out.println("Finishing");
     }
 }
 

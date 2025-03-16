@@ -1,5 +1,6 @@
 package skytales.Payments.util;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Component
 public class BookStateInitializer implements ApplicationListener<ApplicationReadyEvent> {
 
@@ -28,15 +30,15 @@ public class BookStateInitializer implements ApplicationListener<ApplicationRead
     }
 
     public void fetchBooksOnStartup() {
-        String url = "http://localhost:8080/books";
+        String url = "http://localhost:8085/books";
         try {
             ResponseEntity<BookDetailsDto[]> response = restTemplate.getForEntity(url, BookDetailsDto[].class);
             List<BookDetailsDto> books = Arrays.asList(response.getBody());
             books.forEach(book -> bookState.setBook(book.id, book.quantity));
 
-            System.out.println("Loaded books into BookState.");
+            log.info("Books fetched successfully");
         } catch (Exception e) {
-            System.out.println("Failed to fetch books: " + e.getMessage());
+            log.error(e.getMessage());
         }
     }
 

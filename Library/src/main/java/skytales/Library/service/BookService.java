@@ -1,8 +1,9 @@
 package skytales.Library.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import skytales.Library.util.state_engine.UpdateProducer;
 import skytales.Library.util.state_engine.model.UpdateType;
 import skytales.Library.web.dto.BookData;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class BookService {
 
@@ -44,6 +46,8 @@ public class BookService {
     }
 
 
+
+    @Transactional
     public Book createBook(BookData data) {
 
         BigDecimal price = new BigDecimal(data.price());
@@ -64,6 +68,7 @@ public class BookService {
         elasticSearchService.addBookToElasticsearch(book);
         updateProducer.sendBookUpdate(UpdateType.NEW_BOOK, book);
 
+        log.info("Book created and indexed with title - " + book.getTitle());
         return book;
     }
 }

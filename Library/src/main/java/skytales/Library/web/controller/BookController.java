@@ -36,7 +36,7 @@ public class BookController {
     }
 
     @GetMapping()
-    public ResponseEntity<List<Book>> getBooks(@RequestHeader(value = HttpHeaders.IF_NONE_MATCH, required = false) String ifNoneMatch, HttpServletResponse response) {
+    public ResponseEntity<List<?>> getBooks(@RequestHeader(value = HttpHeaders.IF_NONE_MATCH, required = false) String ifNoneMatch, HttpServletResponse response) {
 
         List<Book> books = bookService.getAllBooks();
         String generatedETag = generateETagForBooks(books);

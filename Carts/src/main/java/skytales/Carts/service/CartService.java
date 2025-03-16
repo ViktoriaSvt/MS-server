@@ -1,5 +1,6 @@
 package skytales.Carts.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.stereotype.Service;
 import skytales.Carts.model.BookItemReference;
@@ -12,6 +13,7 @@ import skytales.Carts.repository.CartRepository;
 import java.util.Set;
 import java.util.UUID;
 
+@Slf4j
 @Service
 public class CartService {
 
@@ -43,14 +45,6 @@ public class CartService {
         String versionKey = "cartVersion:" + cartId;
 
         try {
-            Set<BookItemReference> cachedCart = redisService.get(cartKey);
-            if (cachedCart != null) {
-
-                cachedCart.add(bookItemReference);
-                redisService.set(cartKey, cachedCart);
-                redisService.incrBy(versionKey);
-
-            } else {
                 Cart cart = cartRepository.findById(cartId)
                         .orElseThrow(() -> new RuntimeException("Cart not found"));
 
@@ -59,7 +53,7 @@ public class CartService {
                 redisService.incrBy(versionKey);
 
                 redisService.set(cartKey, cart.getBooks());
-            }
+
         } catch (RedisConnectionFailureException e) {
 
             Cart cart = cartRepository.findById(cartId)
@@ -79,8 +73,6 @@ public class CartService {
         String versionKey = "cartVersion:" + cartId;
 
         try {
-            Set<BookItemReference> cachedCart = redisService.get(cartKey);
-
             Cart cart = cartRepository.findById(cartId)
                     .orElseThrow(() -> new RuntimeException("Cart not found"));
 
@@ -89,6 +81,7 @@ public class CartService {
 
             redisService.set(cartKey, cart.getBooks());
             redisService.incrBy(versionKey);
+            log.info("Cart state saved to cache - add item");
 
         } catch (RedisConnectionFailureException e) {
 
@@ -96,6 +89,8 @@ public class CartService {
                     .orElseThrow(() -> new RuntimeException("Cart not found"));
 
             cart.getBooks().remove(bookItemReference);
+            log.info("Cache unavailable, saving only to disk - add item");
+
             cartRepository.save(cart);
 
         }
@@ -110,12 +105,15 @@ public class CartService {
                     .orElseThrow(() -> new RuntimeException("Cart not found"));
 
             redisService.set(cartKey, cart.getBooks());
+            log.info("Cart state saved to cache - remove item");
+
             return cart.getBooks();
 
         } catch (RedisConnectionFailureException e) {
             Cart cart = cartRepository.findById(cartId)
                     .orElseThrow(() -> new RuntimeException("Cart not found"));
 
+            log.info("Cache unavailable, saving only to disk - remove item");
             return cart.getBooks();
         }
     }
@@ -130,7 +128,7 @@ public class CartService {
             String cartKey = "shopping_cart:" + cart.getId();
             redisService.delete(cartKey);
         } catch (RedisConnectionFailureException _) {
-            System.out.println("Redis clearance miss.");
+            log.info("An error occurred while clearing the cart from cache, redis is currently unavailable.");
         }
 
         System.out.println(cart.getBooks());
@@ -144,7 +142,8 @@ public class CartService {
                 .build();
 
         cartRepository.save(cart);
-        System.out.println("saved cart!");
+        log.info("Cart created for user with id -" + userId);
+
         return cart.getId().toString();
     }
 }
@@ -160,5 +159,12 @@ public class CartService {
 //
 //            if (cachedCart != null) {
 //                return cachedCart;
+//            } else {
+//            if (cachedCart != null) {
+//
+//                cachedCart.add(bookItemReference);
+//                redisService.set(cartKey, cachedCart);
+//                redisService.incrBy(versionKey);
+//
 //            } else {
 

@@ -12,12 +12,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/payments")
 public class
 
-Controller {
+BookStateController {
 
     private final PaymentService paymentService;
     private final BookState bookState;
 
-    public Controller(PaymentService paymentService, BookState bookState) {
+    public BookStateController(PaymentService paymentService, BookState bookState) {
         this.paymentService = paymentService;
         this.bookState = bookState;
     }

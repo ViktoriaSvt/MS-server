@@ -1,6 +1,5 @@
 package skytales.Library.util.state_engine;
 
-
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import skytales.Library.util.state_engine.dto.BookMessage;
@@ -13,6 +12,7 @@ import java.util.UUID;
 
 @Service
 public class UpdateProducer {
+
 
     private final KafkaTemplate<String, KafkaMessage<?>> kafkaTemplate;
 

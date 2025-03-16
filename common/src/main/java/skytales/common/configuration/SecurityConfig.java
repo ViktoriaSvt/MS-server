@@ -31,10 +31,13 @@ public class SecurityConfig {
         http
                 .exceptionHandling(c -> c.authenticationEntryPoint(
                         new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))
-                        .csrf(AbstractHttpConfigurer::disable)
-                        .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(req -> req.anyRequest().permitAll())
-                .logout( logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID"))
+                .csrf(AbstractHttpConfigurer::disable)
+                .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(req -> req
+                        .requestMatchers("/books/**", "/auth/login", "/auth/register").permitAll()
+                        .anyRequest().authenticated()
+                )
+//                .logout( logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID"))
                 .cors(cors ->
                         cors.configurationSource(corsConfigurationSource())
                 )
@@ -49,6 +52,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:9033");
         config.addAllowedOrigin("http://localhost:5173");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");

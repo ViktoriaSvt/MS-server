@@ -6,7 +6,11 @@ import skytales.Library.util.state_engine.dto.BookMessage;
 import skytales.Library.util.state_engine.model.UpdateType;
 
 @Service
-public class BookSyncWorker {
+public class
+
+
+
+BookSyncWorker {
 
     private final KafkaTemplate<UpdateType, KafkaMessage<?>> kafkaTemplate;
 

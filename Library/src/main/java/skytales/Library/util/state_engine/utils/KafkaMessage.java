@@ -1,7 +1,13 @@
 package skytales.Library.util.state_engine.utils;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class KafkaMessage<T> {
+
+    @JsonProperty
     private String type;
+
+    @JsonProperty
     private Object data;
 
     public KafkaMessage(String type, T data) {
