@@ -4,35 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="setup microservices as independent modules 2">
-      <change afterPath="$PROJECT_DIR$/Auth/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/util/fgdfg.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carts/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/state_engine/MessageDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/state_engine/MessageSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/MessageDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/MessageSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Payments/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/state_engine/dto/BookMessage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/state_engine/serializers/MessageDeserializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/state_engine/serializers/MessageSerializer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Questions/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+    <list default="true" id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="Containerised the microservices and their dependencies, fixed kafka state_engine serialisation issues">
+      <change afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/config/CloudinaryConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/events/CartEventConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/events/CartEventConsumer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/sync/CartBatchSync.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/sync/CartBatchSync.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/util/RedisHealthChecker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/redis/util/RedisHealthChecker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/web/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/web/CartController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/UpdateProducer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/UpdateProducer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/BookSyncWorker.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/BookSyncWorker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/KafkaMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/state_engine/utils/KafkaMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/BulkInsert.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/BulkInsert.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/elasticsearch/service/ElasticSearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/util/elasticsearch/service/ElasticSearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/controller/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/controller/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/model/BookState.java" beforeDir="false" afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/model/BookState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/repository/PaymentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/repository/PaymentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/service/PaymentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/service/PaymentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/util/configuration/Beans.java" beforeDir="false" afterPath="$PROJECT_DIR$/Auth/src/main/java/skytales/Auth/util/configuration/AuthBean.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/controller/Payments.java" beforeDir="false" afterPath="$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/controller/Payments.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Questions/src/main/java/skytales/Questions/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/dto/BookData.java" beforeDir="false" afterPath="$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/dto/BookData.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/common/src/main/java/skytales/common/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/skytales/common/configuration/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -250,7 +235,7 @@
       <workItem from="1741804702593" duration="2360000" />
       <workItem from="1741882139893" duration="14094000" />
       <workItem from="1741955970918" duration="496000" />
-      <workItem from="1741957770799" duration="46575000" />
+      <workItem from="1741957770799" duration="61591000" />
     </task>
     <task id="LOCAL-00001" summary="setup microservices as independent modules">
       <option name="closed" value="true" />
@@ -268,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741896476021</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Containerised the microservices and their dependencies, fixed kafka state_engine serialisation issues">
+      <option name="closed" value="true" />
+      <created>1742130402505</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1742130402505</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -277,7 +270,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="setup microservices as independent modules" />
     <MESSAGE value="setup microservices as independent modules 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="setup microservices as independent modules 2" />
+    <MESSAGE value="Containerised the microservices and their dependencies, fixed kafka state_engine serialisation issues" />
+    <option name="LAST_COMMIT_MESSAGE" value="Containerised the microservices and their dependencies, fixed kafka state_engine serialisation issues" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -339,7 +333,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java</url>
-          <line>20</line>
+          <line>21</line>
           <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -351,6 +345,21 @@
           <url>file://$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/util/events/CartEventConsumer.java</url>
           <line>31</line>
           <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Payments/src/main/java/skytales/Payments/web/controller/Payments.java</url>
+          <line>44</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Carts/src/main/java/skytales/Carts/service/CartService.java</url>
+          <line>100</line>
+          <option name="timeStamp" value="38" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Library/src/main/java/skytales/Library/web/controller/BookController.java</url>
+          <line>65</line>
+          <option name="timeStamp" value="43" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

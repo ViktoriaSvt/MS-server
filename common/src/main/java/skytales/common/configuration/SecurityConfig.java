@@ -54,6 +54,7 @@ public class SecurityConfig {
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:9033");
         config.addAllowedOrigin("http://localhost:5173");
+        config.addAllowedOrigin("http://localhost:8081");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
         config.addExposedHeader("ETag");

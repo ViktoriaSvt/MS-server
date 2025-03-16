@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.URL;
+import org.springframework.web.multipart.MultipartFile;
 
 public record BookData(
         @NotNull(message = "Title is mandatory")
@@ -18,9 +19,12 @@ public record BookData(
         @NotNull(message = "Author is mandatory")
         @NotEmpty(message = "Author cannot be empty") String author,
 
-        @URL(message = "Banner image URL must be a valid URL") String bannerImageUrl,
-
-        @URL(message = "Cover image URL must be a valid URL") String coverImageUrl,
+//        @URL(message = "Banner image URL must be a valid URL") String bannerImageUrl,
+//
+//        @URL(message = "Cover image URL must be a valid URL") String coverImageUrl,
+//
+//        MultipartFile bannerImage,  // Changed to MultipartFile
+//        MultipartFile coverImage,
 
         @NotNull(message = "Year is mandatory") String year,
 

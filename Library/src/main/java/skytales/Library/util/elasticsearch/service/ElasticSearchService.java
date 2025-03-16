@@ -21,7 +21,7 @@ public class ElasticSearchService {
     public void addBookToElasticsearch(Book book) {
 
         IndexRequest<Book> request = IndexRequest.of(i -> i
-                .index("library")
+                .index("book-library")
                 .id(book.getId().toString())
                 .document(book)
         );

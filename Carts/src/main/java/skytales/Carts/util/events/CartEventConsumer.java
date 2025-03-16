@@ -33,11 +33,13 @@ public class CartEventConsumer {
         cartService.clearCart(id);
     }
 
+
+    //TODO
     @KafkaListener(topics = "sync-db", groupId = "book-sync")
     public void handleCartSync(KafkaMessage<?> request) {
 
-        String cartIdString = String.valueOf(request);
-        String[] cartIds = cartIdString.split(",");
+//        String cartIdString = String.valueOf(request);
+//        String[] cartIds = cartIdString.split(",");
         cartBatchSync.syncCartsBatch();
     }
 

@@ -61,6 +61,10 @@ public class RedisService {
         redisTemplate.opsForZSet().add(CARTS_ZSET_KEY, versionKey, 0);
     }
 
+    public void delete(String cartKey) {
+        redisTemplate.delete(cartKey);
+    }
+
     @Async
     public void checkAndCleanMemory() {
         if (isMemoryFull()) {
@@ -72,7 +76,6 @@ public class RedisService {
         try {
 
             RedisConnection connection = Objects.requireNonNull(redisTemplate.getConnectionFactory()).getConnection();
-
 
             String memoryInfo = String.valueOf(connection.info("memory"));
 
@@ -90,10 +93,12 @@ public class RedisService {
 
             if( usedMemoryRss > 0.8 * memoryThreshold) {
              boolean cleanup =  checkAndEvictInactiveCarts(50);
+
              if(!cleanup) {
                return  checkAndEvictLeastUsedCarts(50);
              }
-                return cleanup;
+
+             return cleanup;
             }
 
             return false;
@@ -157,8 +162,5 @@ public class RedisService {
         }
     }
 
-    public void delete(String cartKey) {
-        redisTemplate.delete(cartKey);
-    }
 }
 

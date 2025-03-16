@@ -2,6 +2,8 @@ package skytales.Carts.util.redis.sync;
 
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.kafka.annotation.EnableKafka;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.stereotype.Service;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.model.Cart;
@@ -12,6 +14,7 @@ import skytales.Carts.repository.CartRepository;
 import java.util.Set;
 import java.util.UUID;
 
+@EnableAsync
 @Service
 @EnableKafka
 public class CartBatchSync {
@@ -27,6 +30,7 @@ public class CartBatchSync {
         this.redisService = redisService;
     }
 
+    @Async
     public void syncCartsBatch() {
 
         try {

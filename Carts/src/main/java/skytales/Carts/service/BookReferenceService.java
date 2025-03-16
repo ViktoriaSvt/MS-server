@@ -1,12 +1,13 @@
 package skytales.Carts.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import skytales.Carts.web.dto.BookRequest;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.repository.BookItemReferenceRepository;
 import skytales.Carts.util.state_engine.dto.BookMessage;
 
-
+@Slf4j
 @Service
 public class BookReferenceService {
 
@@ -30,6 +31,7 @@ public class BookReferenceService {
                 .build();
 
 
+        log.info("Book added to state in cart MS");
         bookItemReferenceRepository.save(book);
     }
 

@@ -12,9 +12,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import skytales.Library.web.dto.BookData;
+import org.springframework.web.multipart.MultipartFile;
 import skytales.Library.model.Book;
 import skytales.Library.service.BookService;
+import skytales.Library.web.dto.BookData;
 
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/books")
 public class BookController {
 
     private final BookService bookService;
@@ -52,13 +53,18 @@ public class BookController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Book> createBook(@RequestBody @Valid BookData data, BindingResult bindingResult) {
+    public ResponseEntity<Book> createBook(
+            @Valid @ModelAttribute BookData bookData,
+            BindingResult bindingResult,
+            @RequestParam("bannerImage") MultipartFile bannerImage,
+            @RequestParam("coverImage") MultipartFile coverImage)  throws IOException {
 
         if (bindingResult.hasErrors()) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-        Book book = bookService.createBook(data);
+
+        Book book = bookService.createBook(bookData, bannerImage, coverImage);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header(HttpHeaders.CACHE_CONTROL, "no-cache")
                 .body(book);
@@ -69,7 +75,7 @@ public class BookController {
 
         try {
             SearchRequest searchRequest = SearchRequest.of(s -> s
-                    .index("library")
+                    .index("book-library")
                     .query(q -> q
                             .multiMatch(m -> m
                                     .query(query)
@@ -85,8 +91,8 @@ public class BookController {
                     .collect(Collectors.toList());
 
             return new ResponseEntity<>(books, HttpStatus.OK);
-        } catch (IOException e) {
 
+        } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
