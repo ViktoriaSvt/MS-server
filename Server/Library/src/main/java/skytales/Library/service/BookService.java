@@ -56,7 +56,7 @@ public class BookService {
 
 
     @Transactional
-    public Book createBook( BookData data,MultipartFile bannerImage,MultipartFile coverImage) throws IOException {
+    public Book createBook( BookData data,File bannerImage,File coverImage) throws IOException {
 
         BigDecimal price = new BigDecimal(data.price());
         String coverImageUrl = uploadCoverImage(coverImage);
@@ -75,19 +75,46 @@ public class BookService {
                 .build();
 
         bookRepository.save(book);
-        elasticSearchService.addBookToElasticsearch(book);
+//        elasticSearchService.addBookToElasticsearch(book);
         updateProducer.sendBookUpdate(UpdateType.NEW_BOOK, book);
 
         log.info("Book created and indexed with title - " + book.getTitle());
         return book;
     }
 
-    private String uploadCoverImage(MultipartFile coverImage) throws IOException {
-        Map<String, Object> uploadResult = cloudinary.uploader().upload(coverImage.getBytes(),
-                ObjectUtils.asMap("resource_type", "auto"));
+    public String uploadCoverImage(File coverImage) throws IOException {
+
+        String fileName = coverImage.getName();
+        String fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+
+        if (!fileExtension.matches("jpg|jpeg|png|webp")) {
+            throw new IllegalArgumentException("Unsupported file format: " + fileExtension);
+        }
+
+        Map<String, Object> uploadResult = cloudinary.uploader().upload(coverImage,
+                ObjectUtils.asMap(
+                        "resource_type", "auto",
+                        "quality", "auto:good",
+                        "format", fileExtension,
+                        "width", 800,
+                        "crop", "limit"
+                ));
+
         return (String) uploadResult.get("secure_url");
     }
 
+//    private String uploadCoverImage(MultipartFile coverImage) throws IOException {
+//
+//        Map<String, Object> uploadResult = cloudinary.uploader().upload(coverImage.getBytes(),
+//                ObjectUtils.asMap(
+//                        "resource_type", "auto",
+//                        "quality", "auto",
+//                        "format", "auto"
+//                ));
+//
+//        return (String) uploadResult.get("secure_url");
+//    }
+//
 
 
 }

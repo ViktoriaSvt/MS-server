@@ -10,7 +10,6 @@ import skytales.Carts.model.Cart;
 import skytales.Carts.util.redis.RedisService;
 import skytales.Carts.repository.CartRepository;
 
-
 import java.util.Set;
 import java.util.UUID;
 

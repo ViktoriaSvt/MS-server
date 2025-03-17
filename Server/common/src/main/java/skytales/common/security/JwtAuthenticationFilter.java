@@ -33,9 +33,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
             throws ServletException, IOException {
 
-        String token = extractJwtFromRequest(request);
 
-        if (token != null && isTokenValid(token)) {
+        String token = extractJwtFromRequest(request);
+//&& isTokenValid(token)
+        if (token != null) {
             String userId = extractUserId(token);
             String username = extractUsername(token);
             String role = extractRole(token);

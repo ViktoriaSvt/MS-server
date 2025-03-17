@@ -10,10 +10,8 @@ import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 public class AuthService {
@@ -98,6 +96,16 @@ public class AuthService {
                 user.getRole().name(),
                 jwtToken
         );
+    }
+
+    public String createTestToken() {
+
+        String role = "admin";
+        String email = "test@example.com";
+        String username = "testuser";
+        String cartId = String.valueOf(UUID.randomUUID());
+
+      return jwtService.generateToken("a3983b36-6094-4eea-bd37-297f8aee3073",role,email,username,cartId);
     }
 
     public void assignCart(UUID cartId, UUID userId) {

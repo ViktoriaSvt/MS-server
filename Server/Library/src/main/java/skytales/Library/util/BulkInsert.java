@@ -18,7 +18,7 @@
 //import java.util.stream.Collectors;
 //
 //@RestController
-//@RequestMapping("/books")
+//@RequestMapping("api/books")
 //public class BulkInsert {
 //
 //    private final ElasticsearchClient elasticsearchClient;
@@ -33,18 +33,17 @@
 //
 //    private static final String COVER_DIRECTORY = "C:/Covers";
 //    private static final String BACKGROUND_DIRECTORY = "C:/Backgrounds";
-//
+//    int counter =0;
 //
 //    public File getRandomFileFromDirectory(String directoryPath) {
 //        File directory = new File(directoryPath);
-//        File[] files = directory.listFiles((dir, name) -> name.endsWith(".jpg") || name.endsWith(".png"));
+//        File[] files = directory.listFiles((dir, name) -> name.endsWith(".jpg") || name.endsWith(".png") || name.endsWith(".webp") || name.endsWith(".web"));
 //
 //        if (files == null || files.length == 0) {
 //            return null;
 //        }
 //
-//        Random random = new Random();
-//        return files[random.nextInt(files.length)];
+//        return files[counter++];
 //    }
 //
 //    @PostMapping("/bulk-create")
@@ -89,7 +88,7 @@
 //        });
 //
 //        BulkRequest bulkRequest = BulkRequest.of(b -> b
-//                .index("library")
+//                .index("book_records")
 //                .operations(books.stream()
 //                        .map(book -> BulkOperation.of(op -> op
 //                                .index(idx -> idx.document(book))))

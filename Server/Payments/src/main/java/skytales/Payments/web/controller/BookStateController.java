@@ -9,7 +9,7 @@ import skytales.Payments.service.PaymentService;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("api/payments")
 public class
 
 BookStateController {

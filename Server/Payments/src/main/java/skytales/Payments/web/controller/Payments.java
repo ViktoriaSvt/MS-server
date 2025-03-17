@@ -22,7 +22,7 @@ import java.util.UUID;
 
 @Slf4j
 @RestController
-@RequestMapping("/payments")
+@RequestMapping("api/payments")
 public class Payments {
 
     private final PaymentService paymentService;

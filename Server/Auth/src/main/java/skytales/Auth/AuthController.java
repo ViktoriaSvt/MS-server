@@ -2,6 +2,7 @@ package skytales.Auth;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,9 +14,9 @@ import skytales.Auth.model.User;
 import skytales.Auth.service.AuthService;
 import skytales.Auth.service.UserService;
 
-
+@Slf4j
 @RestController
-@RequestMapping("/auth")
+@RequestMapping("api/auth")
 public class AuthController {
 
 
@@ -41,6 +42,7 @@ public class AuthController {
         RegisterResponse registerResponse = authService.generateRegisterResponse(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
+
     }
 
     @PostMapping("/login")

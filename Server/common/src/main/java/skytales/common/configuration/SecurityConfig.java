@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/books/**", "/auth/login", "/auth/register").permitAll()
+                        .requestMatchers("api/books/**", "api/auth/login", "api/auth/register").permitAll()
                         .anyRequest().authenticated()
                 )
 //                .logout( logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID"))
@@ -57,6 +57,7 @@ public class SecurityConfig {
         config.addAllowedOrigin("http://localhost:8081");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
+        config.setMaxAge(86400L);
         config.addExposedHeader("ETag");
         source.registerCorsConfiguration("/**", config);
 

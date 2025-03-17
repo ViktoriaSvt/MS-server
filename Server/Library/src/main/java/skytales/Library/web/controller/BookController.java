@@ -52,30 +52,30 @@ public class BookController {
                 .body(books);
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<Book> createBook(
-            @Valid @ModelAttribute BookData bookData,
-            BindingResult bindingResult,
-            @RequestParam("bannerImage") MultipartFile bannerImage,
-            @RequestParam("coverImage") MultipartFile coverImage)  throws IOException {
-
-        if (bindingResult.hasErrors()) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-
-        Book book = bookService.createBook(bookData, bannerImage, coverImage);
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .header(HttpHeaders.CACHE_CONTROL, "no-cache")
-                .body(book);
-    }
+//    @PostMapping("/create")
+//    public ResponseEntity<Book> createBook(
+//            @Valid @ModelAttribute BookData bookData,
+//            BindingResult bindingResult,
+//            @RequestParam("bannerImage") MultipartFile bannerImage,
+//            @RequestParam("coverImage") MultipartFile coverImage)  throws IOException {
+//
+//        if (bindingResult.hasErrors()) {
+//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+//        }
+//
+//
+//        Book book = bookService.createBook(bookData, bannerImage, coverImage);
+//        return ResponseEntity.status(HttpStatus.CREATED)
+//                .header(HttpHeaders.CACHE_CONTROL, "no-cache")
+//                .body(book);
+//    }
 
     @GetMapping("/search")
     public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
 
         try {
             SearchRequest searchRequest = SearchRequest.of(s -> s
-                    .index("book-library")
+                    .index("book_records")
                     .query(q -> q
                             .multiMatch(m -> m
                                     .query(query)
