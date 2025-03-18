@@ -1,4 +1,4 @@
-package skytales.Library;
+package skytales.Library.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Uploader;
@@ -8,10 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import skytales.Library.model.Book;
 import skytales.Library.repository.BookRepository;
-import skytales.Library.service.BookService;
 import skytales.Library.util.elasticsearch.service.ElasticSearchService;
 import skytales.Library.util.state_engine.UpdateProducer;
 import skytales.Library.util.state_engine.model.UpdateType;

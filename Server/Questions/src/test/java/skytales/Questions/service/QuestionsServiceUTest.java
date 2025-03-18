@@ -1,4 +1,4 @@
-package skytales.Questions;
+package skytales.Questions.service;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,7 +11,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import skytales.Questions.model.Question;
 import skytales.Questions.model.Status;
 import skytales.Questions.repository.QuestionRepository;
-import skytales.Questions.service.QuestionService;
 import skytales.Questions.web.dto.AnswerRequest;
 import skytales.Questions.web.dto.PostQuestionRequest;
 
@@ -25,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class QuestionsServiceTest {
+public class QuestionsServiceUTest {
 
     @Mock
     private QuestionRepository questionRepository;

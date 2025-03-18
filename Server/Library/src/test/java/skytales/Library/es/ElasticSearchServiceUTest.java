@@ -1,4 +1,4 @@
-package skytales.Library;
+package skytales.Library.es;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.IndexRequest;
@@ -22,7 +22,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ElasticSearchServiceTest {
+class ElasticSearchServiceUTest {
 
     @Mock
     private ElasticsearchClient elasticsearchClient;

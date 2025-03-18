@@ -1,4 +1,4 @@
-package skytales.Auth;
+package skytales.Auth.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,8 +15,6 @@ import skytales.Auth.dto.RegisterResponse;
 import skytales.Auth.model.Role;
 import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
-import skytales.Auth.service.AuthService;
-import skytales.Auth.service.JwtService;
 
 
 import java.util.Map;
@@ -28,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-class AuthServiceTest {
+class AuthServiceUTest {
 
     @Mock
     private UserRepository userRepository;

@@ -24,7 +24,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
-public class PaymentServiceTest {
+public class PaymentServiceUTest {
 
     @Mock
     private BookState bookState;

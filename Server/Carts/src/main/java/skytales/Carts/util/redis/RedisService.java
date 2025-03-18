@@ -22,7 +22,7 @@ public class RedisService {
     private final RedisTemplate<String, Object> redisTemplate;
     long TTL_SECONDS = 70;
 
-    static final String CARTS_ZSET_KEY = "cart_terms";
+    private final String CARTS_ZSET_KEY = "cart_terms";
 
     public RedisService(RedisTemplate<String, Object> redisTemplate) {
         this.redisTemplate = redisTemplate;

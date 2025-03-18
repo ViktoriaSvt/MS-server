@@ -1,4 +1,4 @@
-package skytales.Auth;
+package skytales.Auth.service;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
-import skytales.Auth.service.JwtService;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -18,7 +17,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class JwtServiceTests {
+public class JwtServiceUTests {
 
     @InjectMocks
     private JwtService jwtService;

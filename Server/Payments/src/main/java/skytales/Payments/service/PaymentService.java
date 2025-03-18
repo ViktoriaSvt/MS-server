@@ -9,10 +9,7 @@ import skytales.Payments.model.PaymentStatus;
 import skytales.Payments.repository.PaymentRepository;
 
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 @Service
 public class PaymentService {
@@ -70,4 +67,10 @@ public class PaymentService {
     public List<Payment> getAllByOwner(UUID userId) {
         return paymentRepository.findTop4ByUserOrderByCreatedAtDesc(userId);
     }
+
+
+    public Map<UUID, BookState.BookDetails> getBookState() {
+        return bookState.getBookStateMap();
+    }
+
 }

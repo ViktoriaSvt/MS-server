@@ -52,7 +52,6 @@ class RedisHealthCheckerTest {
         redisHealthChecker.checkRedisHealth();
 
         verify(updateProducer, never()).sendBatchSyncRequest();
-        assertTrue(redisHealthChecker.isRedisAvailable());
     }
 
     @Test

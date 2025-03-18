@@ -1,27 +1,24 @@
-package skytales.Carts.redis;
+package skytales.Carts.util.redis;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.MockitoAnnotations;
+import org.springframework.data.redis.RedisConnectionFailureException;
+import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
+import org.springframework.data.redis.core.script.RedisScript;
 import skytales.Carts.model.BookItemReference;
-import skytales.Carts.util.redis.RedisService;
 
-
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@ExtendWith(MockitoExtension.class)
 class RedisServiceTest {
 
     @Mock
@@ -36,69 +33,82 @@ class RedisServiceTest {
     @InjectMocks
     private RedisService redisService;
 
-    private BookItemReference bookItemReference;
-    private Set<BookItemReference> bookItemReferences;
-    private String key;
-    private String versionKey;
+    private static final long TTL_SECONDS = 70;
+    private static final String CARTS_ZSET_KEY = "cart_terms";
 
     @BeforeEach
     void setUp() {
-        bookItemReference = new BookItemReference();
-        bookItemReferences = new HashSet<>(Collections.singletonList(bookItemReference));
-        key = "testKey";
-        versionKey = "testVersionKey";
-
-        lenient().when(redisTemplate.opsForValue()).thenReturn(valueOperations);
-        lenient().when(redisTemplate.opsForZSet()).thenReturn(zSetOperations);
+        MockitoAnnotations.openMocks(this);
+        when(redisTemplate.opsForValue()).thenReturn(valueOperations);
+        when(redisTemplate.opsForZSet()).thenReturn(zSetOperations);
     }
 
     @Test
-    void get() {
-        when(valueOperations.get(key)).thenReturn(bookItemReferences);
+    void testGet() {
+        String key = "testKey";
+        Set<BookItemReference> expectedSet = new HashSet<>(Arrays.asList(new BookItemReference(), new BookItemReference()));
+        when(valueOperations.get(key)).thenReturn(expectedSet);
 
         Set<BookItemReference> result = redisService.get(key);
 
-        assertEquals(bookItemReferences, result);
+        assertEquals(expectedSet, result);
     }
 
     @Test
-    void set() {
-        redisService.set(key, bookItemReferences);
+    void testSet() {
+        String key = "testKey";
+        Set<BookItemReference> value = new HashSet<>(Arrays.asList(new BookItemReference(), new BookItemReference()));
 
-        verify(valueOperations, times(1)).set(key, bookItemReferences);
+        redisService.set(key, value);
 
+        verify(valueOperations).set(key, value);
+        verify(redisTemplate).expire(key, TTL_SECONDS, TimeUnit.SECONDS);
     }
 
     @Test
-    void getTerm() {
-        when(zSetOperations.score("cart_terms", versionKey)).thenReturn(1.0);
+    void testGetTerm() {
+        String versionKey = "versionKey";
+        when(zSetOperations.score(CARTS_ZSET_KEY, versionKey)).thenReturn(5.0);
 
-        int term = redisService.getTerm(versionKey);
+        int result = redisService.getTerm(versionKey);
 
-        assertEquals(1, term);
+        assertEquals(5, result);
     }
 
     @Test
-    void incrBy() {
-        when(zSetOperations.score("cart_terms", versionKey)).thenReturn(null);
+    void testIncrBy() {
+        String versionKey = "versionKey";
+        when(zSetOperations.score(CARTS_ZSET_KEY, versionKey)).thenReturn(null);
 
         redisService.incrBy(versionKey);
 
-        verify(zSetOperations, times(1)).add("cart_terms", versionKey, 0);
-        verify(zSetOperations, times(1)).incrementScore("cart_terms", versionKey, 1);
+        verify(zSetOperations).add(CARTS_ZSET_KEY, versionKey, 0);
+        verify(zSetOperations).incrementScore(CARTS_ZSET_KEY, versionKey, 1);
     }
 
     @Test
-    void reset() {
+    void testReset() {
+        String versionKey = "versionKey";
+
         redisService.reset(versionKey);
 
-        verify(zSetOperations, times(1)).add("cart_terms", versionKey, 0);
+        verify(zSetOperations).add(CARTS_ZSET_KEY, versionKey, 0);
     }
 
     @Test
-    void delete() {
-        redisService.delete(key);
+    void testDelete() {
+        String cartKey = "cartKey";
 
-        verify(redisTemplate, times(1)).delete(key);
+        redisService.delete(cartKey);
+
+        verify(redisTemplate).delete(cartKey);
+    }
+
+    @Test
+    void testCheckAndCleanMemory() {
+        RedisService spyService = spy(redisService);
+        doReturn(true).when(spyService).isMemoryFull();
+
+        assertThrows(RedisConnectionFailureException.class, spyService::checkAndCleanMemory);
     }
 }

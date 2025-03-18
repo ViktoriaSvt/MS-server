@@ -1,7 +1,6 @@
 package skytales.Carts;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,12 +13,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import skytales.Carts.config.TestConfig;
+import skytales.Carts.repository.BookItemReferenceRepository;
+import skytales.Carts.repository.CartRepository;
 import skytales.Carts.service.CartService;
 import skytales.Carts.web.CartController;
 
 import skytales.common.configuration.SecurityConfig;
+import skytales.common.security.JwtAuthenticationFilter;
 import skytales.common.security.SessionResponse;
-import skytales.common.security.SessionService;
 
 import java.util.Collections;
 import java.util.Map;
@@ -31,8 +33,8 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
+@Import({SecurityConfig.class, TestConfig.class})
 @ExtendWith(MockitoExtension.class)
-@Import(SecurityConfig.class)
 @WebMvcTest(CartController.class)
 public class CartControllerTest {
 
@@ -42,8 +44,17 @@ public class CartControllerTest {
     @MockitoBean
     private CartService cartService;
 
+    @MockitoBean
+    private CartRepository cartRepository;
+
+    @MockitoBean
+    private BookItemReferenceRepository bookItemReferenceRepository;
+
     @InjectMocks
     private CartController cartController;
+
+    @MockitoBean
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
     @Autowired
     private ObjectMapper objectMapper;

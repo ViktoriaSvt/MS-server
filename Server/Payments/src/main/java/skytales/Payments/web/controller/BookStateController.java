@@ -6,6 +6,8 @@ import skytales.Payments.web.dto.StockChange;
 import skytales.Payments.model.BookState;
 import skytales.Payments.service.PaymentService;
 
+import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
@@ -30,12 +32,7 @@ BookStateController {
     }
 
     @GetMapping("/check_local_state")
-    public ResponseEntity<String> getBookStateResponse() {
-
-        String bookStateString = bookState.getBookStateMap().entrySet().stream()
-                .map(entry -> "Book ID: " + entry.getKey() + ", Quantity: " + entry.getValue().getQuantity())
-                .collect(Collectors.joining("\n"));
-
-        return ResponseEntity.ok(bookStateString);
+    public ResponseEntity<Map<UUID, BookState.BookDetails>> getBookState() {
+        return ResponseEntity.ok(paymentService.getBookState());
     }
 }
