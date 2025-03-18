@@ -15,7 +15,8 @@ This server is designed with a **microservice architecture** aimed at **resilien
 - **Search**: ![Elasticsearch](https://img.shields.io/badge/Elasticsearch-005571?style=flat&logo=elasticsearch&logoColor=white)
 - **Containerization**: ![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat&logo=docker&logoColor=white)
 - **Database**:![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white) ![Hibernate](https://img.shields.io/badge/Hibernate-59666C?style=flat&logo=hibernate&logoColor=white)
-- **Testing**: ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=flat&logo=junit&logoColor=white) ![Mockito](https://img.shields.io/badge/Mockito-00D6B1?style=flat&logo=mockito&logoColor=white)
+- **Testing**:![JMeter](https://img.shields.io/badge/JMeter-F0A120?style=flat&logo=apache-jmeter&logoColor=white) ![JUnit](https://img.shields.io/badge/JUnit-25A162?style=flat&logo=junit&logoColor=white) ![Mockito](https://img.shields.io/badge/Mockito-00D6B1?style=flat&logo=mockito&logoColor=white)
+
 
 
 
