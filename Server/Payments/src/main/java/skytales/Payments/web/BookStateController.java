@@ -1,4 +1,4 @@
-package skytales.Payments.web.controller;
+package skytales.Payments.web;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,7 +8,6 @@ import skytales.Payments.service.PaymentService;
 
 import java.util.Map;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/payments")

@@ -1,4 +1,4 @@
-package skytales.Carts.util.redis;
+package skytales.Carts.redis;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -6,12 +6,12 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.data.redis.RedisConnectionFailureException;
-import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
-import org.springframework.data.redis.core.script.RedisScript;
+
 import skytales.Carts.model.BookItemReference;
+import skytales.Carts.util.redis.RedisService;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;

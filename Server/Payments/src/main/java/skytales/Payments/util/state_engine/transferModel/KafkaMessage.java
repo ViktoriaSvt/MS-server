@@ -1,4 +1,5 @@
 package skytales.Payments.util.state_engine.transferModel;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

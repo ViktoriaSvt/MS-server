@@ -1,4 +1,4 @@
-package skytales.Auth.dto;
+package skytales.Auth.web.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Min;

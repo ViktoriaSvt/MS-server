@@ -4,9 +4,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.stereotype.Service;
 
-import java.util.UUID;
-
-
 @Service
 public class SessionService {
     public SessionResponse getSessionData(HttpServletRequest request) {

@@ -1,2 +1,2 @@
-package skytales.Auth.dto;
+package skytales.Auth.web.dto;
 public record LoginResponse(String userId, String username, String role, String jwtToken) {}

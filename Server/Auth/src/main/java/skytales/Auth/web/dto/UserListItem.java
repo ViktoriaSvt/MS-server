@@ -1,4 +1,4 @@
-package skytales.Auth.dto;
+package skytales.Auth.web.dto;
 
 public record UserListItem(
         String id,

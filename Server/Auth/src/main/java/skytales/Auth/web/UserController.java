@@ -1,9 +1,10 @@
-package skytales.Auth;
+package skytales.Auth.web;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import skytales.Auth.dto.UserListItem;
+
+import skytales.Auth.web.dto.UserListItem;
 import skytales.Auth.model.User;
 import skytales.Auth.service.AuthService;
 import skytales.Auth.service.UserService;

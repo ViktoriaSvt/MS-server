@@ -20,7 +20,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import skytales.Library.config.TestConfigLib;
 import skytales.Library.model.Book;
 import skytales.Library.service.BookService;
-import skytales.Library.web.controller.BookController;
+import skytales.Library.web.BookController;
 import skytales.Library.web.dto.BookData;
 import skytales.common.configuration.SecurityConfig;
 import skytales.common.security.SessionResponse;

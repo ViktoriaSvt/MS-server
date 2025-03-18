@@ -1,8 +1,10 @@
 package skytales.Carts.service;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.stereotype.Service;
+
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.model.Cart;
 import skytales.Carts.util.redis.RedisService;

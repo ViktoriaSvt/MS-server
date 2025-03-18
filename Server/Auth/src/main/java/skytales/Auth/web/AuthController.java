@@ -1,18 +1,21 @@
-package skytales.Auth;
+package skytales.Auth.web;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.session.SessionAuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import skytales.Auth.dto.*;
+
 import skytales.Auth.model.User;
 import skytales.Auth.service.AuthService;
 import skytales.Auth.service.UserService;
+import skytales.Auth.web.dto.*;
 
 @Slf4j
 @RestController

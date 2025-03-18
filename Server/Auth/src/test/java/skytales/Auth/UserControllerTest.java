@@ -1,26 +1,25 @@
 package skytales.Auth;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import skytales.Auth.dto.SessionResponse;
+import skytales.Auth.web.dto.SessionResponse;
 import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
 import skytales.Auth.service.JwtService;
 import skytales.Auth.service.UserService;
+import skytales.Auth.web.UserController;
 import skytales.common.configuration.SecurityConfig;
 import skytales.common.security.JwtAuthenticationFilter;
 import skytales.common.security.SessionService;

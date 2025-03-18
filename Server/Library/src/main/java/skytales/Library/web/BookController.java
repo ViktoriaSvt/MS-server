@@ -1,22 +1,20 @@
-package skytales.Library.web.controller;
+package skytales.Library.web;
 
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
+
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.Valid;
+
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+
 import skytales.Library.model.Book;
 import skytales.Library.service.BookService;
-import skytales.Library.web.dto.BookData;
-
 
 import java.io.IOException;
 import java.util.List;

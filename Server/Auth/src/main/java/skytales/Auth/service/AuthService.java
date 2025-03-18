@@ -4,10 +4,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import skytales.Auth.dto.*;
 import skytales.Auth.model.Role;
 import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
+import skytales.Auth.web.dto.LoginRequest;
+import skytales.Auth.web.dto.LoginResponse;
+import skytales.Auth.web.dto.RegisterRequest;
+import skytales.Auth.web.dto.RegisterResponse;
 
 import java.util.HashMap;
 import java.util.Map;

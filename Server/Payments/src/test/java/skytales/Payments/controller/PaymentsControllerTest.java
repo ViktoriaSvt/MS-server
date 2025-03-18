@@ -21,7 +21,7 @@ import skytales.Payments.service.PaymentService;
 import skytales.Payments.service.StripeService;
 import skytales.Payments.util.exception.PaymentFailedException;
 import skytales.Payments.util.state_engine.UpdateProducer;
-import skytales.Payments.web.controller.Payments;
+import skytales.Payments.web.PaymentController;
 import skytales.Payments.web.dto.BookItem;
 import skytales.Payments.web.dto.PaymentRequest;
 import skytales.common.configuration.SecurityConfig;
@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @Import({SecurityConfig.class, TestConfig.class})
 @ExtendWith(MockitoExtension.class)
-@WebMvcTest(Payments.class)
+@WebMvcTest(PaymentController.class)
 public class PaymentsControllerTest {
 
     @Autowired

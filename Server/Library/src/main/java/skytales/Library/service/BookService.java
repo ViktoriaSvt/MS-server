@@ -2,18 +2,19 @@ package skytales.Library.service;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
+
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
+
 import skytales.Library.util.state_engine.UpdateProducer;
 import skytales.Library.util.state_engine.model.UpdateType;
 import skytales.Library.web.dto.BookData;
 import skytales.Library.util.elasticsearch.service.ElasticSearchService;
 import skytales.Library.model.Book;
 import skytales.Library.repository.BookRepository;
-
 
 import java.io.File;
 import java.io.IOException;

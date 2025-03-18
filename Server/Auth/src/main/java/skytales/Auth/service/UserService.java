@@ -3,11 +3,10 @@ package skytales.Auth.service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import skytales.Auth.dto.*;
 import skytales.Auth.model.Role;
 import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
-
+import skytales.Auth.web.dto.UserListItem;
 
 import java.util.*;
 import java.util.stream.Collectors;

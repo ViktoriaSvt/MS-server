@@ -1,4 +1,4 @@
-package skytales.Payments.web.controller;
+package skytales.Payments.web;
 
 
 import com.stripe.exception.StripeException;
@@ -23,13 +23,13 @@ import java.util.UUID;
 @Slf4j
 @RestController
 @RequestMapping("api/payments")
-public class Payments {
+public class PaymentController {
 
     private final PaymentService paymentService;
     private final StripeService stripeService;
     private final UpdateProducer updateProducer;
 
-    public Payments(PaymentService paymentService, StripeService stripeService, UpdateProducer updateProducer) {
+    public PaymentController(PaymentService paymentService, StripeService stripeService, UpdateProducer updateProducer) {
 
         this.paymentService = paymentService;
         this.stripeService = stripeService;
