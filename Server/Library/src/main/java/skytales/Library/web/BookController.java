@@ -68,12 +68,24 @@ public class BookController {
 //                .body(book);
 //    }
 
+    @DeleteMapping("/delete")
+    public ResponseEntity<?> deleteBooks(@RequestBody List<String> bookIds) {
+
+        if (bookIds == null || bookIds.isEmpty()) {
+            return ResponseEntity.badRequest().body("Book ID list cannot be empty.");
+        }
+
+        bookService.deleteBooks(bookIds);
+
+        return ResponseEntity.ok("Books deleted successfully.");
+    }
+
     @GetMapping("/search")
     public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
 
         try {
             SearchRequest searchRequest = SearchRequest.of(s -> s
-                    .index("book_records")
+                    .index("general-search")
                     .query(q -> q
                             .multiMatch(m -> m
                                     .query(query)

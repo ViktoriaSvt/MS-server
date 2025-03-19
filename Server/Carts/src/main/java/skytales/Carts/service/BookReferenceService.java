@@ -4,7 +4,6 @@ import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.stereotype.Service;
 
-import skytales.Carts.web.dto.BookRequest;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.repository.BookItemReferenceRepository;
 import skytales.Carts.util.state_engine.dto.BookMessage;
@@ -19,7 +18,7 @@ public class BookReferenceService {
         this.bookItemReferenceRepository = bookItemReferenceRepository;
     }
 
-    public void addBookToState( BookMessage bookRequest) {
+    public void addBookToState(BookMessage bookRequest) {
 
         BookItemReference book = BookItemReference.builder()
                 .author(bookRequest.author())
@@ -37,17 +36,13 @@ public class BookReferenceService {
         bookItemReferenceRepository.save(book);
     }
 
-    public void removeBookFromState(BookRequest BookRequest) {
+    public void removeBookFromState(BookMessage BookRequest) {
 
-        BookItemReference book = bookItemReferenceRepository.findById(BookRequest.id()).orElse(null);
+        BookItemReference book = bookItemReferenceRepository
+                .findById(BookRequest.id())
+                .orElseThrow(() -> new NullPointerException("Book was not found"));
 
-        if (book != null) {
-            bookItemReferenceRepository.delete(book);
-        }
-
+        bookItemReferenceRepository.delete(book);
     }
 
-    public void updateBookStock(BookMessage bookRequest) {
-
-    }
 }

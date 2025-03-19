@@ -35,8 +35,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
 
         String token = extractJwtFromRequest(request);
-//&& isTokenValid(token)
-        if (token != null) {
+
+        if (token != null && isTokenValid(token)) {
             String userId = extractUserId(token);
             String username = extractUsername(token);
             String role = extractRole(token);

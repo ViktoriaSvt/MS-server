@@ -55,6 +55,23 @@ public class BookService {
     }
 
 
+    @Transactional
+    public void deleteBooks(List<String> bookIds) {
+
+            bookIds.forEach(bookId -> {
+                try {
+
+                    Book book = bookRepository.getReferenceById(UUID.fromString(bookId));
+
+                    updateProducer.sendBookUpdate(UpdateType.REMOVE_BOOK, book);
+                    bookRepository.delete(book);
+                    elasticSearchService.deleteBookFromElasticsearch(bookId);
+
+                } catch (Exception e) {
+                    throw new RuntimeException("Failed to delete book with ID: " + bookId, e);
+                }
+            });
+    }
 
     @Transactional
     public Book createBook( BookData data,File bannerImage,File coverImage) throws IOException {
@@ -76,7 +93,7 @@ public class BookService {
                 .build();
 
         bookRepository.save(book);
-//        elasticSearchService.addBookToElasticsearch(book);
+        elasticSearchService.addBookToElasticsearch(book);
         updateProducer.sendBookUpdate(UpdateType.NEW_BOOK, book);
 
         log.info("Book created and indexed with title - " + book.getTitle());

@@ -25,14 +25,7 @@ public class ModelChangeConsumer {
 
     @KafkaListener(topics = "book-remove", groupId = "book-sync")
     public void handleRemoveBook(KafkaMessage<?> message) {
-
-        BookRequest bookRequest = (BookRequest) message.getData();
-        bookReferenceService.removeBookFromState(bookRequest);
-    }
-
-    @KafkaListener(topics = "book-stock-update", groupId = "book-sync")
-    public void handleStockUpdate(BookMessage bookMessage) {
-        bookReferenceService.updateBookStock(bookMessage);
+        bookReferenceService.removeBookFromState((BookMessage) message.getData());
     }
 
 }
