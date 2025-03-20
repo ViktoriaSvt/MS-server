@@ -82,7 +82,7 @@ public class AuthService {
 
         return new LoginResponse(
                 user.getId().toString(),
-                user.getUsername(),
+                user.getEmail(),
                 user.getRole().name(),
                 jwtToken
         );

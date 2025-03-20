@@ -1,5 +1,6 @@
 package skytales.Questions.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
@@ -23,7 +24,7 @@ public class TranslationService {
         this.objectMapper = objectMapper;
     }
 
-    public Map<String, String> loadTranslations(String translationFile, String lang) throws IOException {
+    public Map<String, Object> loadTranslations(String translationFile, String lang) throws IOException {
         String language = lang != null ? lang : defaultLanguage;
         String filePath = "translations/" + translationFile;
 
@@ -31,7 +32,10 @@ public class TranslationService {
         InputStream inputStream = resource.getInputStream();
         String content = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
-        Map<String, Map<String, String>> translations = objectMapper.readValue(content, Map.class);
+        Map<String, Map<String, Object>> translations = objectMapper.readValue(content, new TypeReference<>() {});
+
         return translations.getOrDefault(language, translations.get(defaultLanguage));
     }
+
+
 }

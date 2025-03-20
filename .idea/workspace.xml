@@ -4,32 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4e1e687-e138-453f-97ef-dc8dc3ffdd52" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/service/TranslationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Questions/src/main/resources/translations/faqTranslations.json" afterDir="false" />
+    <list default="true" id="a4e1e687-e138-453f-97ef-dc8dc3ffdd52" name="Changes" comment="Adjusted cartMS to work with proxy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/AuthService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/TranslationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/TranslationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/dto/NewCartRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/model/BookItemReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/model/BookItemReference.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/CartService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/OnRedisAvailableCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/OnRedisAvailableCondition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/RedisConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/util/RedisMessageSubscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/util/RedisMessageSubscriber.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/web/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/web/CartController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/test/java/skytales/Carts/service/CartServiceUTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/test/java/skytales/Carts/service/CartServiceUTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/service/BookService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/BulkInsert.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/BulkInsert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/web/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/web/BookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/state_engine/transferModel/KafkaMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/state_engine/transferModel/KafkaMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/dto/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/dto/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/dto/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/dto/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/service/TranslationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/service/TranslationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/web/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/web/QuestionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Questions/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Questions/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/common/src/main/java/skytales/common/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/common/src/main/java/skytales/common/configuration/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -146,6 +127,7 @@
     "Spring Boot.CartsApplication.executor": "Run",
     "Spring Boot.LibraryApplication.executor": "Run",
     "Spring Boot.PaymentsApplication.executor": "Run",
+    "Spring Boot.QuestionsApplication.executor": "Debug",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/PC/Desktop/Skytales_eBooks",
@@ -319,7 +301,7 @@
       <updated>1742145000970</updated>
       <workItem from="1742145002004" duration="36102000" />
       <workItem from="1742392254804" duration="15871000" />
-      <workItem from="1742468790012" duration="12248000" />
+      <workItem from="1742468790012" duration="17879000" />
     </task>
     <task id="LOCAL-00001" summary="Changed folder structure to accommodate client package">
       <option name="closed" value="true" />
@@ -377,7 +359,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742400770192</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Adjusted cartMS to work with proxy">
+      <option name="closed" value="true" />
+      <created>1742486718636</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1742486718636</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -389,7 +379,8 @@
     <MESSAGE value="Added api tests" />
     <MESSAGE value="Documentation" />
     <MESSAGE value="Added delete functionality over a book item, state management across microservices included" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added delete functionality over a book item, state management across microservices included" />
+    <MESSAGE value="Adjusted cartMS to work with proxy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adjusted cartMS to work with proxy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -438,6 +429,16 @@
           <url>file://$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/web/CartController.java</url>
           <line>47</line>
           <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/web/QuestionController.java</url>
+          <line>84</line>
+          <option name="timeStamp" value="43" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/AuthService.java</url>
+          <line>105</line>
+          <option name="timeStamp" value="44" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

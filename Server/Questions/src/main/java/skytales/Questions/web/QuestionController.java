@@ -18,6 +18,7 @@ import skytales.Questions.service.QuestionService;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -79,9 +80,9 @@ public class QuestionController {
     }
 
     @GetMapping("/translate/faq")
-    public ResponseEntity<Map<String, String>> getRegisterTranslation(@RequestParam(value = "lang", required = false) String lang) {
+    public ResponseEntity<Map<String, Object>> getRegisterTranslation(@RequestParam(value = "lang", required = false) String lang) {
         try {
-            Map<String, String> translations = translationService.loadTranslations("faqTranslations.json", lang);
+            Map<String, Object> translations = translationService.loadTranslations("faqTranslations.json", lang);
             return ResponseEntity.ok(translations);
         } catch (IOException e) {
             return ResponseEntity.internalServerError().body(Map.of("error", "Translation file not found"));
