@@ -58,6 +58,23 @@ In case Redis becomes unavailable, the database can continue functioning to ensu
 
 ---
 
+## Performance Testing Results (JMeter)
+
+Below are the results of load testing using **JMeter**, simulating high traffic conditions:
+- (please note that the error rate is originating from a misplaced id in the dataset)
+
+| Metric            | Value        |
+|------------------|------------|
+| **Total Requests (# Samples)** | 667,127      |
+| **Average Response Time (ms)** | 69          |
+| **Min Response Time (ms)** | 0           |
+| **Max Response Time (ms)** | 704         |
+| **Standard Deviation (ms)** | 83.20       |
+| **Error Rate (%)** | 4.104%      |
+| **Throughput (requests/sec)** | 2,195.54    |
+
+
+
 ## Server Components
 
 The server is built with **five microservices**, each focused on a specific category:
