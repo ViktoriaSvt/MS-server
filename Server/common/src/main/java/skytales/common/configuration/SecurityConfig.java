@@ -34,7 +34,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(c -> c.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("api/books/**", "api/auth/**", "api/auth/**").permitAll()
+                        .requestMatchers("api/books/**", "api/auth/**", "api/auth/**", "api/cart/createCart").permitAll()
                         .anyRequest().authenticated()
                 )
 //                .logout( logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID"))

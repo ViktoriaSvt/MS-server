@@ -4,24 +4,32 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a4e1e687-e138-453f-97ef-dc8dc3ffdd52" name="Changes" comment="Documentation">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/TranslationService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/TranslationController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Auth/src/main/resources/translations/loginTranslations.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/Auth/src/main/resources/translations/registerTranslations.json" afterDir="false" />
+    <list default="true" id="a4e1e687-e138-453f-97ef-dc8dc3ffdd52" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/service/TranslationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Server/Questions/src/main/resources/translations/faqTranslations.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/AuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/AuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/TranslationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/TranslationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/dto/NewCartRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/model/BookItemReference.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/model/BookItemReference.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/BookReferenceService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/events/ModelChangeConsumer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/events/ModelChangeConsumer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/CartService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/CartService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/RedisService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/OnRedisAvailableCondition.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/OnRedisAvailableCondition.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/RedisConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/config/RedisConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/util/RedisMessageSubscriber.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/util/redis/util/RedisMessageSubscriber.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/web/CartController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/web/CartController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Carts/src/test/java/skytales/Carts/service/CartServiceUTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Carts/src/test/java/skytales/Carts/service/CartServiceUTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/service/BookService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/service/BookService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/BulkInsert.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/BulkInsert.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/elasticsearch/service/ElasticSearchService.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/elasticsearch/service/ElasticSearchService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/web/BookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/web/BookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/BookStateInitializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/state_engine/transferModel/KafkaMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Payments/src/main/java/skytales/Payments/util/state_engine/transferModel/KafkaMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/web/QuestionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Questions/src/main/java/skytales/Questions/web/QuestionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/Questions/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/Questions/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/common/src/main/java/skytales/common/configuration/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/common/src/main/java/skytales/common/configuration/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/common/src/main/java/skytales/common/security/JwtAuthenticationFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/common/src/main/java/skytales/common/security/JwtAuthenticationFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/images/Server.drawio" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,11 +58,6 @@
     &quot;accountId&quot;: &quot;78a3b1e4-ab43-4ab0-a03c-18fcbd6eaada&quot;
   }
 }</component>
-  <component name="JavaAutoRunManager">
-    <enabled-run-configurations>
-      <run-configuration type="JUnit" name="UserControllerTest.testGetUser_Success" />
-    </enabled-run-configurations>
-  </component>
   <component name="KubernetesApiPersistence">{}</component>
   <component name="KubernetesApiProvider">{
   &quot;isMigrated&quot;: true
@@ -139,12 +142,13 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "Spring Boot.AuthApplication.executor": "Debug",
-    "Spring Boot.CartsApplication.executor": "Debug",
+    "Spring Boot.AuthApplication.executor": "Run",
+    "Spring Boot.CartsApplication.executor": "Run",
     "Spring Boot.LibraryApplication.executor": "Run",
+    "Spring Boot.PaymentsApplication.executor": "Run",
     "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/PC/Desktop/Skytales_eBooks/Server/Carts/src/test/java/skytales/Carts/kafka",
+    "last_opened_file_path": "C:/Users/PC/Desktop/Skytales_eBooks",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -173,6 +177,7 @@
       <recent name="skytales.Carts.service" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="skytales.Questions.service" />
       <recent name="skytales.Questions" />
       <recent name="skytales.Payments" />
       <recent name="skytales.Library" />
@@ -189,26 +194,11 @@
       </set>
     </option>
   </component>
-  <component name="RunManager" selected="JUnit.Carts in Carts">
+  <component name="RunManager" selected="JUnit.Questions in Questions">
     <configuration name="Auth in Auth" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="Auth" />
       <option name="TEST_OBJECT" value="directory" />
       <dir value="$PROJECT_DIR$/Server/Auth/src/test/java/skytales/Auth" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BookStateControllerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="Payments" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="skytales.Payments.controller.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="skytales.Payments.controller" />
-      <option name="MAIN_CLASS_NAME" value="skytales.Payments.controller.BookStateControllerTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -241,6 +231,14 @@
       <module name="Payments" />
       <option name="TEST_OBJECT" value="directory" />
       <dir value="$PROJECT_DIR$/Server/Payments/src/test/java/skytales/Payments" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Questions in Questions" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Questions" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/Server/Questions/src/test/java/skytales/Questions" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -295,11 +293,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.Questions in Questions" />
         <item itemvalue="JUnit.Carts in Carts" />
         <item itemvalue="JUnit.Auth in Auth" />
         <item itemvalue="JUnit.Payments in Payments" />
         <item itemvalue="JUnit.BookStateControllerTest.testGetBookStateResponse" />
-        <item itemvalue="JUnit.BookStateControllerTest" />
       </list>
     </recent_temporary>
   </component>
@@ -320,7 +318,8 @@
       <option name="presentableId" value="Default" />
       <updated>1742145000970</updated>
       <workItem from="1742145002004" duration="36102000" />
-      <workItem from="1742392254804" duration="5932000" />
+      <workItem from="1742392254804" duration="15871000" />
+      <workItem from="1742468790012" duration="12248000" />
     </task>
     <task id="LOCAL-00001" summary="Changed folder structure to accommodate client package">
       <option name="closed" value="true" />
@@ -370,7 +369,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742323795684</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Added delete functionality over a book item, state management across microservices included">
+      <option name="closed" value="true" />
+      <created>1742400770192</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742400770192</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -381,24 +388,20 @@
     <MESSAGE value="Finished unit tests for every service and util." />
     <MESSAGE value="Added api tests" />
     <MESSAGE value="Documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Documentation" />
+    <MESSAGE value="Added delete functionality over a book item, state management across microservices included" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added delete functionality over a book item, state management across microservices included" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/service/CartService.java</url>
-          <line>148</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/service/BookService.java</url>
-          <line>104</line>
+          <line>103</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/service/BookService.java</url>
-          <line>78</line>
+          <line>77</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -421,12 +424,27 @@
           <line>40</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/Library/src/main/java/skytales/Library/util/state_engine/UpdateProducer.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/Auth/src/main/java/skytales/Auth/web/AuthController.java</url>
+          <line>39</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Server/Carts/src/main/java/skytales/Carts/web/CartController.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/Skytales_eBooks$Carts_in_Carts.ic" NAME="Carts in Carts Coverage Results" MODIFIED="1742321006441" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
-    <SUITE FILE_PATH="coverage/Skytales_eBooks$Questions_in_Questions.ic" NAME="Questions in Questions Coverage Results" MODIFIED="1742238409512" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/Skytales_eBooks$Questions_in_Questions.ic" NAME="Questions in Questions Coverage Results" MODIFIED="1742470063036" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/Skytales_eBooks$Payments_in_Payments.ic" NAME="Payments in Payments Coverage Results" MODIFIED="1742320822671" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/Skytales_eBooks$CartControllerTest.ic" NAME="CartControllerTest Coverage Results" MODIFIED="1742318885838" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
       <FILTER>skytales.Carts.*</FILTER>

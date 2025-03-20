@@ -18,11 +18,9 @@ import skytales.Library.repository.BookRepository;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.Map;
-import java.util.NoSuchElementException;
-import java.util.UUID;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -56,12 +54,13 @@ public class BookService {
 
 
     @Transactional
-    public void deleteBooks(List<String> bookIds) {
+    public void deleteBooks(ArrayList<String> bookIds) {
 
             bookIds.forEach(bookId -> {
                 try {
 
-                    Book book = bookRepository.getReferenceById(UUID.fromString(bookId));
+                    UUID uuid = UUID.fromString(bookId);
+                    Book book = bookRepository.findById(uuid).orElseThrow(() -> new NoSuchElementException("No book found with id " + bookId));
 
                     updateProducer.sendBookUpdate(UpdateType.REMOVE_BOOK, book);
                     bookRepository.delete(book);

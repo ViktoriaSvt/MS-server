@@ -30,7 +30,7 @@ public class BookStateInitializer implements ApplicationListener<ApplicationRead
     }
 
     public void fetchBooksOnStartup() {
-        String url = "http://localhost:8085/books";
+        String url = "http://localhost:8085/api/books";
         try {
             ResponseEntity<BookDetailsDto[]> response = restTemplate.getForEntity(url, BookDetailsDto[].class);
             List<BookDetailsDto> books = Arrays.asList(response.getBody());

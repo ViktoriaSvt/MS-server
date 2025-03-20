@@ -118,7 +118,7 @@ public class AuthService {
     }
 
     public UUID createCartForUser(UUID userId) {
-        String url = "http://localhost:8080/cart/createCart";
+        String url = "http://localhost:8086/api/cart/createCart";
 
         Map<String, String> requestBody = new HashMap<>();
         requestBody.put("userId", userId.toString());

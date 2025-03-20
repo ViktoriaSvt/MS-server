@@ -28,7 +28,7 @@ public class BookReferenceService {
                 .genre(bookRequest.genre())
                 .quantity(bookRequest.quantity())
                 .coverImageUrl(bookRequest.coverImageUrl())
-                .bookId(bookRequest.id())
+                .id(bookRequest.id())
                 .build();
 
 

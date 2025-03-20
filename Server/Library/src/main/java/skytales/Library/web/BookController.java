@@ -17,6 +17,7 @@ import skytales.Library.model.Book;
 import skytales.Library.service.BookService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -69,7 +70,7 @@ public class BookController {
 //    }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteBooks(@RequestBody List<String> bookIds) {
+    public ResponseEntity<?> deleteBooks(@RequestBody ArrayList<String> bookIds) {
 
         if (bookIds == null || bookIds.isEmpty()) {
             return ResponseEntity.badRequest().body("Book ID list cannot be empty.");

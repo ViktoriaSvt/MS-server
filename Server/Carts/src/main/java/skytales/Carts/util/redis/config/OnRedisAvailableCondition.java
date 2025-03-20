@@ -12,8 +12,10 @@ public class OnRedisAvailableCondition implements Condition {
         try {
             RedisClient redisClient = RedisClient.create("redis://localhost:6379");
             StatefulRedisConnection<String, String> connection = redisClient.connect();
+
             boolean isConnected = connection.isOpen();
             connection.close();
+
             return isConnected;
         } catch (Exception e) {
             return false;

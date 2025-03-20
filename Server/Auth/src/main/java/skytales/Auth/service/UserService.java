@@ -3,6 +3,7 @@ package skytales.Auth.service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
 import skytales.Auth.model.Role;
 import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
@@ -15,16 +16,10 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final JwtService jwtService;
-    private final RestTemplate restTemplate;
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public UserService(UserRepository userRepository, JwtService jwtService, RestTemplate restTemplate, BCryptPasswordEncoder bCryptPasswordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.jwtService = jwtService;
-        this.restTemplate = restTemplate;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
 
     }
 

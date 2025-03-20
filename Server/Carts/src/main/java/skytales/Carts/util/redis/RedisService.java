@@ -1,5 +1,7 @@
 package skytales.Carts.util.redis;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.data.redis.RedisConnectionFailureException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,11 +35,16 @@ public class RedisService {
     }
 
     public Set<BookItemReference> get(String key) {
-
         Object data = redisTemplate.opsForValue().get(key);
-        if (data == null) return new HashSet<>();
+        if (data == null) return null;
+
+        if (data instanceof LinkedHashMap) {
+            return new HashSet<>();
+        }
+
         return new HashSet<>((Collection<? extends BookItemReference>) data);
     }
+
 
     public void set(String key, Set<BookItemReference> value) {
         redisTemplate.opsForValue().set(key, value);

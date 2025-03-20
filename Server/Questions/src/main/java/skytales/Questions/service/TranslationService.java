@@ -1,18 +1,15 @@
-package skytales.Auth.service;
+package skytales.Questions.service;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-
-
 import java.util.Map;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.springframework.util.StreamUtils;
 
 @Service
 public class TranslationService {

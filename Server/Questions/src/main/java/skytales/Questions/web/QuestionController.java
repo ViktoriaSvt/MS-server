@@ -8,13 +8,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import skytales.Questions.service.TranslationService;
 import skytales.Questions.web.dto.AnswerRequest;
 import skytales.Questions.web.dto.PostQuestionRequest;
 import skytales.Questions.model.Question;
 import skytales.Questions.service.QuestionService;
 
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -22,9 +25,11 @@ import java.util.UUID;
 public class QuestionController {
 
     private final QuestionService questionService;
+    private final TranslationService translationService;
 
-    public QuestionController(QuestionService questionService) {
+    public QuestionController(QuestionService questionService, TranslationService translationService) {
         this.questionService = questionService;
+        this.translationService = translationService;
     }
 
     @GetMapping("/all")
@@ -71,5 +76,15 @@ public class QuestionController {
         questionService.sendAnswer(questionId, answerRequest, adminId);
 
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/translate/faq")
+    public ResponseEntity<Map<String, String>> getRegisterTranslation(@RequestParam(value = "lang", required = false) String lang) {
+        try {
+            Map<String, String> translations = translationService.loadTranslations("faqTranslations.json", lang);
+            return ResponseEntity.ok(translations);
+        } catch (IOException e) {
+            return ResponseEntity.internalServerError().body(Map.of("error", "Translation file not found"));
+        }
     }
 }

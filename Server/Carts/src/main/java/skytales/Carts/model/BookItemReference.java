@@ -16,7 +16,7 @@ import java.util.UUID;
 public class BookItemReference {
 
     @Id
-    private UUID bookId;
+    private UUID id;
 
     private String title;
 
@@ -35,21 +35,16 @@ public class BookItemReference {
     @Column(nullable = false)
     private BigDecimal price;
 
-    @ManyToOne
-    @JoinColumn(name = "cart_id", referencedColumnName = "id")
-    private Cart cart;
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         BookItemReference that = (BookItemReference) o;
-        return Objects.equals(bookId, that.bookId);
+        return Objects.equals(id, that.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(bookId);
+        return Objects.hash(id);
     }
 }

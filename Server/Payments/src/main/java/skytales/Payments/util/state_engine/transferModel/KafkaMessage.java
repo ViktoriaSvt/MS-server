@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class KafkaMessage<T> {
+
     private String type;
     private Object data;
 
@@ -18,14 +19,6 @@ public class KafkaMessage<T> {
 
     public KafkaMessage(T data) {
         this.data = data;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public Object getData() {
-        return data;
     }
 
     public void setType(String type) {

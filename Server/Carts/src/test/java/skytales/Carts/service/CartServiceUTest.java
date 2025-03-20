@@ -1,5 +1,6 @@
 package skytales.Carts.service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -64,7 +65,7 @@ class CartServiceUTest {
     }
 
     @Test
-    void testAddToCart() {
+    void testAddToCart() throws JsonProcessingException {
         UUID cartId = UUID.randomUUID();
         UUID bookId = UUID.randomUUID();
         BookItemReference bookItemReference = new BookItemReference();

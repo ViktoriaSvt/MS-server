@@ -1,5 +1,6 @@
 package skytales.Carts.util.redis.util;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.model.Cart;
@@ -34,7 +35,9 @@ public class RedisMessageSubscriber {
         }
     }
 
-    private void syncCart(String cartId) {
+
+    @Async
+    protected void syncCart(String cartId) {
         try {
             String versionKey = "cartVersion:" + cartId;
 
