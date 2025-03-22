@@ -1,4 +1,4 @@
-package skytales.common.configuration;
+package skytales.Carts.util.config.security;
 
 
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ import org.springframework.security.web.authentication.HttpStatusEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import skytales.common.security.JwtAuthenticationFilter;
+
 
 @Configuration
 public class SecurityConfig {
@@ -37,7 +37,6 @@ public class SecurityConfig {
                         .requestMatchers("api/books/**", "api/auth/**", "api/auth/**", "api/cart/createCart").permitAll()
                         .anyRequest().authenticated()
                 )
-//                .logout( logout -> logout.logoutUrl("/logout").invalidateHttpSession(true).deleteCookies("JSESSIONID"))
                 .cors(cors ->
                         cors.configurationSource(corsConfigurationSource())
                 )
@@ -50,6 +49,7 @@ public class SecurityConfig {
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration config = new CorsConfiguration();
+
 
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:9033");

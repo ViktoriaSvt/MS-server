@@ -16,9 +16,9 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import skytales.Payments.config.TestConfig;
 import skytales.Payments.model.BookState;
 import skytales.Payments.service.PaymentService;
+import skytales.Payments.util.config.security.SecurityConfig;
 import skytales.Payments.web.BookStateController;
 import skytales.Payments.web.dto.StockChange;
-import skytales.common.configuration.SecurityConfig;
 
 import java.util.Map;
 import java.util.UUID;

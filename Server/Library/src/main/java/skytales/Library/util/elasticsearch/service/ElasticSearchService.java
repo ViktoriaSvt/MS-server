@@ -35,9 +35,8 @@ public class ElasticSearchService {
             IndexResponse response = elasticsearchClient.index(request);
             log.info("Indexed with version " + response.version());
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("Es indexing went wrong");
         }
-
     }
 
     public void deleteBookFromElasticsearch(String bookId) {

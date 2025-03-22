@@ -16,7 +16,7 @@ public class EsConfig {
     @Bean
     public RestClient restClient() {
         return RestClient.builder(
-                new HttpHost("localhost", 9200, "http")
+                new HttpHost("elasticsearch", 9200, "http")
         ).build();
     }
 

@@ -7,10 +7,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 
 @EnableAsync
 @SpringBootApplication
-@ComponentScan(basePackages = {
-		"skytales.Carts",
-		"skytales.common"
-})
 public class CartsApplication {
 
 	public static void main(String[] args) {

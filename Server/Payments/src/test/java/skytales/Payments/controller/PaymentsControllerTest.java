@@ -24,7 +24,6 @@ import skytales.Payments.util.state_engine.UpdateProducer;
 import skytales.Payments.web.PaymentController;
 import skytales.Payments.web.dto.BookItem;
 import skytales.Payments.web.dto.PaymentRequest;
-import skytales.common.configuration.SecurityConfig;
 
 import java.math.BigDecimal;
 import java.util.List;

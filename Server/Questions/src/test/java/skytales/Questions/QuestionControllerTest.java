@@ -20,12 +20,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.validation.BindingResult;
 
+import skytales.Questions.config.security.SecurityConfig;
 import skytales.Questions.model.Question;
 import skytales.Questions.service.QuestionService;
 import skytales.Questions.web.QuestionController;
 import skytales.Questions.web.dto.AnswerRequest;
 import skytales.Questions.web.dto.PostQuestionRequest;
-import skytales.common.configuration.SecurityConfig;
+
 
 import java.util.Arrays;
 import java.util.List;
