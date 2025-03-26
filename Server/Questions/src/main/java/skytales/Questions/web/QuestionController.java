@@ -14,7 +14,6 @@ import skytales.Questions.web.dto.PostQuestionRequest;
 import skytales.Questions.model.Question;
 import skytales.Questions.service.QuestionService;
 
-
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +70,7 @@ public class QuestionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        UUID adminId = (UUID) request.getAttribute("userId");
+        UUID adminId = UUID.fromString( request.getAttribute("userId").toString());
         UUID questionId = UUID.fromString(id);
         questionService.sendAnswer(questionId, answerRequest, adminId);
 

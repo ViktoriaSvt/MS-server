@@ -27,7 +27,14 @@ public class TranslationService {
     }
 
     public Map<String, String> loadTranslations(String translationFile, String lang) throws IOException {
-        String language = lang != null ? lang : defaultLanguage;
+
+        String language;
+        if (lang != null && !lang.isEmpty()) {
+            language = lang;
+        } else {
+            language = defaultLanguage;
+        }
+
         String filePath = "translations/" + translationFile;
 
         ClassPathResource resource = new ClassPathResource(filePath);
@@ -35,6 +42,6 @@ public class TranslationService {
         String content = StreamUtils.copyToString(inputStream, StandardCharsets.UTF_8);
 
         Map<String, Map<String, String>> translations = objectMapper.readValue(content, Map.class);
-        return translations.getOrDefault(language, translations.get(defaultLanguage));
+        return translations.get(language);
     }
 }

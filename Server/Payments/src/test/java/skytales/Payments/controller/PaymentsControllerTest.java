@@ -19,6 +19,7 @@ import skytales.Payments.model.Payment;
 import skytales.Payments.model.PaymentStatus;
 import skytales.Payments.service.PaymentService;
 import skytales.Payments.service.StripeService;
+import skytales.Payments.util.config.security.SecurityConfig;
 import skytales.Payments.util.exception.PaymentFailedException;
 import skytales.Payments.util.state_engine.UpdateProducer;
 import skytales.Payments.web.PaymentController;
@@ -59,7 +60,7 @@ public class PaymentsControllerTest {
     @BeforeEach
     void setUp() {
         userId = UUID.fromString("73fded46-c09b-49cf-b581-8ed145a887fe");
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiJlZjZlMjk4Ny03ZGU0LTQ1NzAtYTBhYS01MDgwZDRhNDdmYTEiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjIzNDkyNiwiZXhwIjoxNzQyMzIxMzI2fQ.1nJBH-ei2BCs7HOUJmCnu1-wbQhRfij2qfbBYbTZFok";
+        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiIzYzExYzNlNi1hNzllLTQ2N2EtYWJhZi0yOGQ0OGQxZjdiM2IiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjczMjUzMSwiZXhwIjoxNzQyNzM3Nzg3fQ.eNG2LyyvCpR8DPFE6rEFWi3vUFoi5pdmXtOa8rzNOgs";
         paymentRequest = new PaymentRequest("pm_card_visa", 1000L, List.of(new BookItem("BookId", "Title1", BigDecimal.valueOf(30))));
 
         Mockito.doNothing().when(paymentService).createPaymentRecord(Mockito.any(UUID.class), Mockito.anyLong(), Mockito.anyString(), Mockito.any(PaymentStatus.class), Mockito.anyList());

@@ -21,8 +21,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -204,4 +203,27 @@ class AuthServiceUTest {
         assertNotNull(result);
         assertEquals(cartId, result);
     }
+
+    @Test
+    void testLogin_WrongEmail() {
+        LoginRequest loginRequest = new LoginRequest("wrongemail@example.com", "password");
+
+        when(userRepository.findByEmail(loginRequest.email())).thenReturn(null);
+        assertThrows(Error.class, () -> authService.login(loginRequest), "wrong email");
+    }
+
+    @Test
+    void testLogin_WrongPassword() {
+        LoginRequest loginRequest = new LoginRequest("test@example.com", "wrongpassword");
+        User user = new User();
+        user.setEmail(loginRequest.email());
+        user.setPassword("encodedPassword");
+
+        when(userRepository.findByEmail(loginRequest.email())).thenReturn(user);
+        when(bCryptPasswordEncoder.matches(loginRequest.password(), user.getPassword())).thenReturn(false);
+
+        assertThrows(Error.class, () -> authService.login(loginRequest), "wrong password");
+    }
+
+
 }

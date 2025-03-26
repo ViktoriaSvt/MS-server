@@ -40,7 +40,7 @@ public class BookReferenceService {
 
         BookItemReference book = bookItemReferenceRepository
                 .findById(BookRequest.id())
-                .orElseThrow(() -> new NullPointerException("Book was not found"));
+                .orElseThrow(() -> new RuntimeException("Book was not found"));
 
         bookItemReferenceRepository.delete(book);
     }

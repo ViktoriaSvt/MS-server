@@ -32,10 +32,6 @@ public class UserController {
         UUID userId = UUID.fromString(id);
         User user = userService.getById(userId);
 
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User not found");
-        }
-
         return ResponseEntity.ok(user);
     }
 

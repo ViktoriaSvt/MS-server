@@ -26,7 +26,7 @@ public class MessageDeserializer implements Deserializer<KafkaMessage<?>> {
     }
 
 
-    private Class<?> getClassForType(String type) {
+    public Class<?> getClassForType(String type) {
         return switch (type) {
             case "book-new", "book-stock-update", "book-remove", "book-updates" -> BookMessage.class;
             default -> String.class;

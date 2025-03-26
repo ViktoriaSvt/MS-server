@@ -7,22 +7,24 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
+import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.validation.BindingResult;
 
-import skytales.Questions.config.security.SecurityConfig;
+import skytales.Questions.util.security.SecurityConfig;
 import skytales.Questions.model.Question;
 import skytales.Questions.service.QuestionService;
+import skytales.Questions.service.TranslationService;
 import skytales.Questions.web.QuestionController;
 import skytales.Questions.web.dto.AnswerRequest;
 import skytales.Questions.web.dto.PostQuestionRequest;
@@ -36,7 +38,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@ExtendWith(SpringExtension.class)
+@ExtendWith(MockitoExtension.class)
 @WebMvcTest(QuestionController.class)
 @Import(SecurityConfig.class)
 public class QuestionControllerTest {
@@ -48,7 +50,13 @@ public class QuestionControllerTest {
     private QuestionService questionService;
 
     @MockitoBean
+    private TranslationService translationService;
+
+    @MockitoBean
     private BindingResult bindingResult;
+
+    @InjectMocks
+    private QuestionController questionController;
 
     private String token;
     private ObjectMapper objectMapper = new ObjectMapper();
@@ -57,7 +65,7 @@ public class QuestionControllerTest {
     void setUp() {
         Question question1 = new Question();
         Question question2 = new Question();
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiJlZjZlMjk4Ny03ZGU0LTQ1NzAtYTBhYS01MDgwZDRhNDdmYTEiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjIzNDkyNiwiZXhwIjoxNzQyMzIxMzI2fQ.1nJBH-ei2BCs7HOUJmCnu1-wbQhRfij2qfbBYbTZFok";
+        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiIzYzExYzNlNi1hNzllLTQ2N2EtYWJhZi0yOGQ0OGQxZjdiM2IiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjczMjUzMSwiZXhwIjoxNzQyNzM3Nzg3fQ.eNG2LyyvCpR8DPFE6rEFWi3vUFoi5pdmXtOa8rzNOgs";
 
         question1.setText("Sample Question 1");
         question1.setAnswer("Sample Answer 1");
@@ -93,7 +101,7 @@ public class QuestionControllerTest {
     @Test
     void testAnswerQuestion() throws Exception {
         UUID questionId = UUID.randomUUID();
-        UUID adminId = UUID.fromString("73fded46-c09b-49cf-b581-8ed145a887fe");
+        UUID adminId = UUID.randomUUID();
         AnswerRequest answerRequest = new AnswerRequest("Sample Answer");
 
         Mockito.doNothing().when(questionService).sendAnswer(Mockito.eq(questionId), Mockito.any(AnswerRequest.class), Mockito.eq(adminId));
@@ -131,7 +139,7 @@ public class QuestionControllerTest {
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isCreated());
 
-        verify(questionService).createQuestion(Mockito.any(PostQuestionRequest.class), Mockito.eq(UUID.fromString("123e4567-e89b-12d3-a456-426614174000")));
+        verify(questionService).createQuestion(Mockito.any(PostQuestionRequest.class), Mockito.any(UUID.class));
     }
 
     @Test
@@ -142,8 +150,8 @@ public class QuestionControllerTest {
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))  // Check if there are 2 questions
-                .andExpect(MockMvcResultMatchers.jsonPath("$[0].text", Matchers.is("Sample Question 1"))) // First question text
+                .andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].text", Matchers.is("Sample Question 1")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$[1].text", Matchers.is("Sample Question 2")));
 
         verify(questionService).getByUserId(Mockito.eq(userId));

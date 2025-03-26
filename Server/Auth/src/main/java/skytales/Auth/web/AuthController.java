@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import skytales.Auth.model.User;
 import skytales.Auth.service.AuthService;
+import skytales.Auth.service.JwtService;
 import skytales.Auth.service.UserService;
 import skytales.Auth.web.dto.*;
 
@@ -26,12 +27,14 @@ public class AuthController {
     private final UserService userService;
     private final BCryptPasswordEncoder passwordEncoder;
     private final AuthService authService;
+    private final JwtService jwtService;
 
 
-    public AuthController(UserService userService, BCryptPasswordEncoder passwordEncoder, AuthService authService) {
+    public AuthController(UserService userService, BCryptPasswordEncoder passwordEncoder, AuthService authService, JwtService jwtService) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
         this.authService = authService;
+        this.jwtService = jwtService;
     }
 
     @PostMapping("/register")
@@ -45,7 +48,6 @@ public class AuthController {
         RegisterResponse registerResponse = authService.generateRegisterResponse(user);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(registerResponse);
-
     }
 
     @PostMapping("/login")

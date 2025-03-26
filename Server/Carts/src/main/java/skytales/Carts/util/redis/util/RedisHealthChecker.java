@@ -24,14 +24,14 @@ public class RedisHealthChecker {
 
     private final RedisService redisService;
 
-    private UpdateProducer updateProducer;
+    private final UpdateProducer updateProducer;
 
     private volatile boolean redisAvailable = false;
 
-    public RedisHealthChecker(RedisTemplate<String, Object> redisTemplate, RedisService redisService) {
-
+    public RedisHealthChecker(RedisTemplate<String, Object> redisTemplate, RedisService redisService, UpdateProducer updateProducer) {
         this.redisTemplate = redisTemplate;
         this.redisService = redisService;
+        this.updateProducer = updateProducer;
     }
 
     @Async
@@ -47,7 +47,6 @@ public class RedisHealthChecker {
 
             updateProducer.sendBatchSyncRequest();
             redisService.checkAndCleanMemory();
-
         } catch (Exception e) {
 
             if (redisAvailable) {

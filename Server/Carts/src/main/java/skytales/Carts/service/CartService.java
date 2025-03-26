@@ -86,6 +86,9 @@ public class CartService {
         String cartKey = "shopping_cart:" + cartId;
         String versionKey = "cartVersion:" + cartId;
 
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+
         try {
 
 //            if (cachedCart != null) {
@@ -96,8 +99,6 @@ public class CartService {
 //
 //            } else {
 
-                Cart cart = cartRepository.findById(cartId)
-                        .orElseThrow(() -> new RuntimeException("Cart not found"));
 
                 cart.getBooks().remove(bookItemReference);
                 cartRepository.save(cart);
@@ -108,8 +109,6 @@ public class CartService {
 
         } catch (RedisConnectionFailureException e) {
 
-            Cart cart = cartRepository.findById(cartId)
-                    .orElseThrow(() -> new RuntimeException("Cart not found"));
 
             cart.getBooks().remove(bookItemReference);
             log.info("Cache unavailable, saving only to disk - add item");
@@ -123,6 +122,10 @@ public class CartService {
 
         String cartKey = "shopping_cart:" + cartId;
 
+
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new RuntimeException("Cart not found"));
+
         try {
 
 
@@ -131,8 +134,6 @@ public class CartService {
 //                return cachedCart;
 //            } else {
 
-                Cart cart = cartRepository.findById(cartId)
-                        .orElseThrow(() -> new RuntimeException("Cart not found"));
 
                 redisService.set(cartKey, cart.getBooks());
                 log.info("Cart state saved to cache - remove item");
@@ -140,8 +141,6 @@ public class CartService {
                 return cart.getBooks();
 
         } catch (RedisConnectionFailureException e) {
-            Cart cart = cartRepository.findById(cartId)
-                    .orElseThrow(() -> new RuntimeException("Cart not found"));
 
             log.info("Cache unavailable, saving only to disk - remove item");
             return cart.getBooks();

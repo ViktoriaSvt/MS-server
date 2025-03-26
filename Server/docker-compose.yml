@@ -58,7 +58,6 @@ services:
     networks:
       - server_default
 
-
   payments:
     build:
       context: ./Payments
@@ -173,7 +172,20 @@ services:
     volumes:
       - es-data:/usr/share/elasticsearch/data
 
-
+  openresty:
+    image: openresty/openresty:alpine
+    container_name: openresty
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./openresty/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./lua:/usr/local/openresty/lua
+      - ~/.luarocks/share/lua/5.1:/usr/local/openresty/lua
+      - ~/.luarocks/lib/lua/5.1:/usr/local/openresty/lua_lib
+    environment:
+      - LUA_PATH=/usr/local/openresty/lua/?.lua;;/usr/local/openresty/lua_lib/?.so;;
+    networks:
+      - server_default
 
 
 networks:

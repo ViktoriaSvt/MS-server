@@ -1,8 +1,7 @@
 package skytales.Auth.service;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
+
 
 import skytales.Auth.model.Role;
 import skytales.Auth.model.User;
@@ -59,7 +58,7 @@ public class UserService {
 
     public List<UserListItem> convertUsersToUserListRequest(List<User> users) {
         return users.stream()
-                .map(user -> new UserListItem( user.getId().toString() ,user.getUsername(), user.getEmail(), user.getRole().toString()))
+                .map(user -> new UserListItem(user.getId().toString(), user.getUsername(), user.getEmail(), user.getRole().toString()))
                 .collect(Collectors.toList());
     }
 

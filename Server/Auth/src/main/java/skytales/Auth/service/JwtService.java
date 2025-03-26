@@ -5,6 +5,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
+@NoArgsConstructor
 @Setter
 @Service
 public class JwtService {
@@ -22,7 +24,7 @@ public class JwtService {
     @Value("${security.jwt.secretKey}")
     private String secretKey;
 
-    @Value("${security.jwt.expirationTime}")
+    @Value("5256000")
     private long jwtExpiration;
 
     public String extractUsername(String token) {
@@ -57,6 +59,7 @@ public class JwtService {
             return false;
         }
     }
+
 
     public boolean isTokenExpired(String token) {
         return extractExpiration(token).before(new Date());

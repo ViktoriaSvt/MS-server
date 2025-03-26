@@ -116,17 +116,16 @@ public class RedisService {
 
     public boolean checkAndEvictInactiveCarts(int limit) {
         String luaScript =
-                "local limit = ARGV[1]  -- Get the limit for the number of carts to evict\n" +
-                        "local evictedCarts = {}  -- Track evicted carts\n" +
-                        "-- Fetch a limited number of cart IDs from the 'cart_activity' ZSET in ascending order\n" +
+                "local limit = ARGV[1]\n" +
+                        "local evictedCarts = {}\n" +
                         "local inactiveCarts = redis.call('ZRANGE', 'cart_activity', 0, limit - 1)\n" +
                         "for _, cartId in ipairs(inactiveCarts) do\n" +
                         "    local cartKey = 'shopping_cart:' .. cartId\n" +
-                        "    local versionKey = 'cartVersion:' .. cartId  -- Version tracking key\n" +
+                        "    local versionKey = 'cartVersion:' .. cartId\n" +
                         "    local term = tonumber(redis.call('GET', versionKey)) or 0\n" +
                         "    if term == 0 then\n" +
-                        "        redis.call('DEL', cartKey)  -- Evict cart\n" +
-                        "        redis.call('ZREM', 'cart_activity', cartId)  -- Remove from ZSET\n" +
+                        "        redis.call('DEL', cartKey)\n" +
+                        "        redis.call('ZREM', 'cart_activity', cartId)\n" +
                         "        table.insert(evictedCarts, cartId)\n" +
                         "    end\n" +
                         "end\n" +
