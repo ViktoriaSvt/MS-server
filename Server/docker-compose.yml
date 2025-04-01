@@ -73,9 +73,11 @@ services:
       spring.jpa.properties.hibernate.dialect: org.hibernate.dialect.MySQL8Dialect
       spring.jpa.hibernate.ddl-auto: update
       spring.datasource.driverClassName: com.mysql.cj.jdbc.Driver
+      spring.kafka.bootstrap-servers: kafka:9092
       stripe.secret.key: sk_test_51QcrYKJdrx2Bl88huhlvnfqPxrqBmfo9BM6wxg0mlYJugCMEpw9CHlspF8I9tTEzL0gq9NeWcFTNCEoLgDjMTbfu00idvkIYJK
     depends_on:
       - mysql
+      - kafka
     networks:
       - server_default
 
@@ -124,6 +126,8 @@ services:
     container_name: redis
     ports:
       - "6379:6379"
+    volumes:
+      - ./conf/redis.conf:/usr/local/etc/redis/redis.conf
     networks:
       - server_default
 
@@ -173,25 +177,27 @@ services:
       - es-data:/usr/share/elasticsearch/data
 
   openresty:
-    image: openresty/openresty:alpine
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: openresty
     ports:
       - "8081:8081"
     volumes:
-      - ./openresty/conf/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - ./lua:/usr/local/openresty/lua
-      - ~/.luarocks/share/lua/5.1:/usr/local/openresty/lua
-      - ~/.luarocks/lib/lua/5.1:/usr/local/openresty/lua_lib
-    environment:
-      - LUA_PATH=/usr/local/openresty/lua/?.lua;;/usr/local/openresty/lua_lib/?.so;;
+      - ./openresty/luarocks/.luarocks/share/lua/5.1:/usr/local/openresty/lua
+      - ./openresty/luarocks/.luarocks/lib/lua/5.1:/usr/local/openresty/lua_lib
+      - ./openresty/luarocks/.luarocks/share/lua/5.1/resty/jwt:/usr/local/openresty/lua/resty/jwt
+      - ./openresty/conf/lua:/usr/local/openresty/lua
+    depends_on:
+       - redis
     networks:
-      - server_default
+       - server_default
+
 
 
 networks:
   server_default:
     driver: bridge
-
 
 volumes:
   mysql-data:

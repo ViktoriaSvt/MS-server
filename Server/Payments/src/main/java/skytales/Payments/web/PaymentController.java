@@ -42,6 +42,8 @@ public class PaymentController {
         UUID userId = UUID.fromString(request.getAttribute("userId").toString());
         PaymentIntent paymentIntent;
 
+        log.info("books: {}", paymentRequest.books());
+
         paymentService.sufficientQuantity(paymentRequest.books());
 
         try {

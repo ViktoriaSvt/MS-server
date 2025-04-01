@@ -10,7 +10,13 @@ import org.springframework.stereotype.Service;
 import skytales.Library.model.Book;
 
 
+import co.elastic.clients.elasticsearch.core.SearchRequest;
+import co.elastic.clients.elasticsearch.core.SearchResponse;
+import co.elastic.clients.elasticsearch.core.search.Hit;
+
 import java.io.IOException;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -26,7 +32,7 @@ public class ElasticSearchService {
     public void addBookToElasticsearch(Book book) {
 
         IndexRequest<Book> request = IndexRequest.of(i -> i
-                .index("general-search")
+                .index("library_collection")
                 .id(book.getId().toString())
                 .document(book)
         );
@@ -41,7 +47,7 @@ public class ElasticSearchService {
 
     public void deleteBookFromElasticsearch(String bookId) {
         DeleteRequest request = DeleteRequest.of(d -> d
-                .index("general-search")
+                .index("library_collection")
                 .id(bookId)
         );
 
@@ -51,6 +57,24 @@ public class ElasticSearchService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public List<Book> searchBooks(String query) throws IOException {
+        SearchRequest searchRequest = SearchRequest.of(s -> s
+                .index("library_collection")
+                .query(q -> q
+                        .multiMatch(m -> m
+                                .query(query)
+                                .fields("title^3", "author^2", "description")
+                                .fuzziness("AUTO")
+                        ))
+        );
+
+        SearchResponse<Book> searchResponse = elasticsearchClient.search(searchRequest, Book.class);
+
+        return searchResponse.hits().hits().stream()
+                .map(Hit::source)
+                .collect(Collectors.toList());
     }
 
 

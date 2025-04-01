@@ -12,19 +12,13 @@ import org.springframework.stereotype.Service;
 
 import skytales.Payments.web.dto.PaymentRequest;
 import skytales.Payments.util.exception.PaymentFailedException;
-import skytales.Payments.model.BookState;
 
 
 @Service
 public class StripeService {
 
-    private final BookState bookState;
     @Value("${stripe.secret.key}")
     private String secretKey;
-
-    public StripeService(BookState bookState) {
-        this.bookState = bookState;
-    }
 
     @PostConstruct
     public void init() {

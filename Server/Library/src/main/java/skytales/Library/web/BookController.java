@@ -7,14 +7,19 @@ import co.elastic.clients.elasticsearch.core.search.Hit;
 
 import jakarta.servlet.http.HttpServletResponse;
 
+import jakarta.validation.Valid;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import org.springframework.web.multipart.MultipartFile;
 import skytales.Library.model.Book;
 import skytales.Library.service.BookService;
+import skytales.Library.util.elasticsearch.service.ElasticSearchService;
+import skytales.Library.web.dto.BookData;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,10 +34,12 @@ public class BookController {
 
     private final BookService bookService;
     private final ElasticsearchClient elasticsearchClient;
+    private final ElasticSearchService elasticSearchService;
 
-    public BookController(BookService bookService, ElasticsearchClient elasticsearchClient) {
+    public BookController(BookService bookService, ElasticsearchClient elasticsearchClient, ElasticSearchService elasticSearchService) {
         this.bookService = bookService;
         this.elasticsearchClient = elasticsearchClient;
+        this.elasticSearchService = elasticSearchService;
     }
 
     @GetMapping()
@@ -51,23 +58,23 @@ public class BookController {
                 .body(books);
     }
 
-//    @PostMapping("/create")
-//    public ResponseEntity<Book> createBook(
-//            @Valid @ModelAttribute BookData bookData,
-//            BindingResult bindingResult,
-//            @RequestParam("bannerImage") MultipartFile bannerImage,
-//            @RequestParam("coverImage") MultipartFile coverImage)  throws IOException {
-//
-//        if (bindingResult.hasErrors()) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//
-//
-//        Book book = bookService.createBook(bookData, bannerImage, coverImage);
-//        return ResponseEntity.status(HttpStatus.CREATED)
-//                .header(HttpHeaders.CACHE_CONTROL, "no-cache")
-//                .body(book);
-//    }
+    @PostMapping("/create")
+    public ResponseEntity<Book> createBook(
+            @Valid @ModelAttribute BookData bookData,
+            BindingResult bindingResult,
+            @RequestParam("bannerImage") MultipartFile bannerImage,
+            @RequestParam("coverImage") MultipartFile coverImage)  throws IOException {
+
+        if (bindingResult.hasErrors()) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+
+        Book book = bookService.createBook(bookData, bannerImage, coverImage);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .header(HttpHeaders.CACHE_CONTROL, "no-cache")
+                .body(book);
+    }
 
     @DeleteMapping("/delete")
     public ResponseEntity<?> deleteBooks(@RequestBody ArrayList<String> bookIds) {
@@ -82,30 +89,16 @@ public class BookController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) throws IOException {
 
-        try {
-            SearchRequest searchRequest = SearchRequest.of(s -> s
-                    .index("general-search")
-                    .query(q -> q
-                            .multiMatch(m -> m
-                                    .query(query)
-                                    .fields("title^3", "author^2", "description")
-                                    .fuzziness("AUTO")
-                            ))
-            );
+            List<Book> books = elasticSearchService.searchBooks(query);
 
-            SearchResponse<Book> searchResponse = elasticsearchClient.search(searchRequest, Book.class);
-
-            List<Book> books = searchResponse.hits().hits().stream()
-                    .map(Hit::source)
-                    .collect(Collectors.toList());
+            if(books == null || books.isEmpty()) {
+                return new ResponseEntity<>(books, HttpStatus.NOT_FOUND);
+            }
 
             return new ResponseEntity<>(books, HttpStatus.OK);
 
-        } catch (IOException e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
     }
 
     @GetMapping("/{bookId}")

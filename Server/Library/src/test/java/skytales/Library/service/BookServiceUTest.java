@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.web.multipart.MultipartFile;
 import skytales.Library.model.Book;
 import skytales.Library.repository.BookRepository;
 import skytales.Library.util.elasticsearch.service.ElasticSearchService;
@@ -102,29 +103,38 @@ class BookServiceUTest {
 
     @Test
     void createBook_ShouldSaveBookAndSendUpdates() throws IOException {
-        BookData bookData = new BookData("Test Book", "Test Author", "cover.jpg", "2007", "224", "233", "Some kind of description is here");
+        BookData bookData = new BookData("Test Book", "Test Author", "Some kind of description is here", "2007", "19", "10", "Some Description");
         when(cloudinary.uploader()).thenReturn(uploader);
 
-        when(uploader.upload(any(File.class), any(Map.class)))
+        when(uploader.upload(any(byte[].class), any(Map.class)))
                 .thenAnswer(invocation -> {
-                    File file = invocation.getArgument(0);
                     Map<String, Object> result = new HashMap<>();
-
                     result.put("secure_url", "http://example.com/cover.jpg");
-                    result.put("secure_url", "http://example.com/default.jpg");
-
                     return result;
                 });
 
-        Book book = new Book();
-        when(bookRepository.save(any(Book.class))).thenReturn(book);
+        Book book = Book.builder()
+                .title("Test Book")
+                .author("Test Author")
+                .coverImageUrl("http://example.com/cover.jpg")
+                .bannerImageUrl("http://example.com/banner.jpg")
+                .price(new BigDecimal("19.99"))
+                .description("Some kind of description is here")
+                .year(2007)
+                .genre("Fiction")
+                .quantity(10)
+                .build();
 
+        when(bookRepository.save(any(Book.class))).thenReturn(book);
         doNothing().when(updateProducer).sendBookUpdate(eq(UpdateType.NEW_BOOK), any(Book.class));
 
-        File bannerImage = mock(File.class);
-        File coverImage = mock(File.class);
-        when(coverImage.getName()).thenReturn("cover.jpg");
-        when(bannerImage.getName()).thenReturn("banner.jpg");
+        MultipartFile bannerImage = mock(MultipartFile.class);
+        MultipartFile coverImage = mock(MultipartFile.class);
+
+        when(coverImage.getOriginalFilename()).thenReturn("cover.jpg");
+        when(bannerImage.getOriginalFilename()).thenReturn("banner.jpg");
+        when(coverImage.getBytes()).thenReturn("coverImageContent".getBytes());
+        when(bannerImage.getBytes()).thenReturn("bannerImageContent".getBytes());
 
         Book createdBook = bookService.createBook(bookData, bannerImage, coverImage);
 
@@ -133,8 +143,7 @@ class BookServiceUTest {
 
         verify(bookRepository, times(1)).save(any(Book.class));
         verify(updateProducer, times(1)).sendBookUpdate(eq(UpdateType.NEW_BOOK), any(Book.class));
-        verify(uploader, times(2)).upload(any(File.class), any(Map.class));
+        verify(uploader, times(2)).upload(any(byte[].class), any(Map.class));
     }
-
 
 }

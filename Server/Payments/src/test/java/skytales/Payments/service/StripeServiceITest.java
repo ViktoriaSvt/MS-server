@@ -11,7 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import skytales.Payments.util.exception.PaymentFailedException;
 import skytales.Payments.web.dto.BookItem;
 import skytales.Payments.web.dto.PaymentRequest;
-import skytales.Payments.model.BookState;
+
 
 import java.util.Collections;
 import java.util.List;
@@ -30,7 +30,7 @@ public class StripeServiceITest {
     @BeforeEach
     void setUp() {
         Stripe.apiKey = testSecretKey;
-        stripeService = new StripeService(new BookState());
+        stripeService = new StripeService();
     }
 
     @Test

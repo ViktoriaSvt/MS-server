@@ -65,7 +65,7 @@ public class QuestionControllerTest {
     void setUp() {
         Question question1 = new Question();
         Question question2 = new Question();
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiIzYzExYzNlNi1hNzllLTQ2N2EtYWJhZi0yOGQ0OGQxZjdiM2IiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjczMjUzMSwiZXhwIjoxNzQyNzM3Nzg3fQ.eNG2LyyvCpR8DPFE6rEFWi3vUFoi5pdmXtOa8rzNOgs";
+        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImNhcnRJZCI6IjU1MjYxNzEzLTY0ZDMtNDhhMy04ZWFiLWViNWU3YWU4MjU1NiIsInVzZXJJZCI6ImRlZTAwZGQ5LWQzMWUtNGUxNi1iZWFlLTc4OWNlMzM4OTNmMiIsImVtYWlsIjoidGVzdGVtYWlsQGFidi5iZyIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJzdWIiOiJ0ZXN0ZW1haWxAYWJ2LmJnIiwiaWF0IjoxNzQzMzQ3NTQzLCJleHAiOjE3NDMzNTAxMzV9.f84j-KD9aQFetidEy_ShHd3qSyDzlMUQQn_NnejGA1g";
 
         question1.setText("Sample Question 1");
         question1.setAnswer("Sample Answer 1");

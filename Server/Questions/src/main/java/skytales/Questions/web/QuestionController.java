@@ -70,7 +70,8 @@ public class QuestionController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
-        UUID adminId = UUID.fromString( request.getAttribute("userId").toString());
+        String attribute = request.getAttribute("userId").toString();
+        UUID adminId = UUID.fromString( attribute);
         UUID questionId = UUID.fromString(id);
         questionService.sendAnswer(questionId, answerRequest, adminId);
 

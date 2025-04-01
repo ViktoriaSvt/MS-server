@@ -75,7 +75,7 @@ public class UserControllerTest {
 
     @BeforeEach
     void setUp() {
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiIzYzExYzNlNi1hNzllLTQ2N2EtYWJhZi0yOGQ0OGQxZjdiM2IiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjczMjUzMSwiZXhwIjoxNzQyNzM3Nzg3fQ.eNG2LyyvCpR8DPFE6rEFWi3vUFoi5pdmXtOa8rzNOgs";
+        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImNhcnRJZCI6IjYzMDQ2OThkLTlmMzQtNDQ4ZC1iM2VlLWRjNzQ1ZWNkYmJiNSIsInVzZXJJZCI6IjI2YTAwMTY1LWRhYmUtNDgyYS1iOGE1LThiMDlmNTY1NGQyNSIsImVtYWlsIjoidGVzdGVtYWlsQGFidi5iZyIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJzdWIiOiJ0ZXN0ZW1haWxAYWJ2LmJnIiwiaWF0IjoxNzQzMTg1NTU0LCJleHAiOjE3NDMxODgxNDZ9.RzlQIC9pOvI0bGVcSiSfCsV6C_HcRQDoeowJo0F2dUk";
 
         userId = UUID.fromString("73fded46-c09b-49cf-b581-8ed145a887fe");
         user = new User();

@@ -3,6 +3,7 @@ package skytales.Carts.util.redis.util;
 import lombok.Getter;
 import lombok.Setter;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 import skytales.Carts.util.redis.RedisService;
 import skytales.Carts.util.state_engine.UpdateProducer;
 
+@Slf4j
 @EnableAsync
 @Getter
 @Setter
@@ -32,10 +34,11 @@ public class RedisHealthChecker {
         this.redisTemplate = redisTemplate;
         this.redisService = redisService;
         this.updateProducer = updateProducer;
+
     }
 
     @Async
-    @Scheduled(fixedRate = 120000)
+    @Scheduled(fixedRate = 60000)
     public void checkRedisHealth() {
 
         try {
@@ -52,6 +55,9 @@ public class RedisHealthChecker {
             if (redisAvailable) {
                 redisAvailable = false;
             }
+            log.info("something went wrong...");
+            throw new RuntimeException(e);
+
 
         }
     }

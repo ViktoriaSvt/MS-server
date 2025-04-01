@@ -3,8 +3,10 @@ package skytales.Payments.service;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import skytales.Payments.model.Stock;
+import skytales.Payments.repository.StockRepository;
+import skytales.Payments.util.state_engine.dto.BookMessage;
 import skytales.Payments.web.dto.BookItem;
-import skytales.Payments.model.BookState;
 import skytales.Payments.model.Payment;
 import skytales.Payments.model.PaymentStatus;
 import skytales.Payments.repository.PaymentRepository;
@@ -15,35 +17,32 @@ import java.util.*;
 @Service
 public class PaymentService {
 
-    private final BookState bookState;
+
     private final PaymentRepository paymentRepository;
+    private final StockRepository stockRepository;
 
-    public PaymentService(BookState bookState, PaymentRepository paymentRepository) {
-        this.bookState = bookState;
+    public PaymentService(PaymentRepository paymentRepository, StockRepository stockRepository) {
+
         this.paymentRepository = paymentRepository;
-    }
-
-    public void addBookToState(UUID id, int quantity) {
-        bookState.addBook(id, quantity);
+        this.stockRepository = stockRepository;
     }
 
     @Transactional
     public void sufficientQuantity(List<BookItem> books) {
 
-        if (books.isEmpty()) {
-            throw new RuntimeException("Nothing to purchase!");
-        }
+        books.forEach((book) -> {
 
-        for (BookItem book : books) {
-            UUID bookId = UUID.fromString(book.bookId());
-            BookState.BookDetails bookDetails = bookState.getById(bookId);
+            Stock stock = stockRepository.findByBookId(UUID.fromString(book.id()));
+            int quantity = stock.getQuantity();
 
-            if (bookDetails == null || bookDetails.getQuantity() <= 0) {
-                throw new RuntimeException("Insufficient stock for book: " + book.title());
+            if ( quantity < 1) {
+                throw new RuntimeException("Insufficient quantity");
             }
 
-            bookState.setBook(bookId, bookDetails.getQuantity() - 1);
-        }
+            stock.setQuantity(quantity - 1);
+
+        });
+
 
     }
 
@@ -69,9 +68,17 @@ public class PaymentService {
         return paymentRepository.findTop4ByUserOrderByCreatedAtDesc(userId);
     }
 
-
-    public Map<UUID, BookState.BookDetails> getBookState() {
-        return bookState.getBookStateMap();
+    public void getBookState() {
+        stockRepository.findAll();
     }
 
+    public void addBookToState(BookMessage data) {
+
+        Stock stock = Stock.builder()
+                .bookId(data.id())
+                .quantity(data.quantity())
+                .build();
+
+        stockRepository.save(stock);
+    }
 }

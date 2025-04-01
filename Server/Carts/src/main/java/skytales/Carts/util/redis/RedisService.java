@@ -137,7 +137,6 @@ public class RedisService {
             List<String> evictedCarts = redisTemplate.execute(script, Collections.singletonList("cart_activity"), limit);
             return evictedCarts == null;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }
@@ -163,7 +162,6 @@ public class RedisService {
             List<String> evictedCarts = redisTemplate.execute(script,  List.of(CARTS_ZSET_KEY), limit);
             return evictedCarts == null;
         } catch (Exception e) {
-            e.printStackTrace();
             return false;
         }
     }

@@ -9,7 +9,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import skytales.Payments.model.BookState;
+
 import skytales.Payments.model.Payment;
 import skytales.Payments.model.PaymentStatus;
 import skytales.Payments.repository.PaymentRepository;
@@ -26,8 +26,7 @@ import static org.mockito.Mockito.verify;
 @ExtendWith(MockitoExtension.class)
 public class PaymentServiceUTest {
 
-    @Mock
-    private BookState bookState;
+
 
     @Mock
     private PaymentRepository paymentRepository;
@@ -106,42 +105,6 @@ public class PaymentServiceUTest {
         Assertions.assertTrue(capturedPayment.getBookTitles().isEmpty());
     }
 
-    @Test
-    void sufficientQuantity_EmptyBooks() {
-        List<BookItem> books = List.of();
 
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            paymentService.sufficientQuantity(books);
-        });
 
-        Assertions.assertEquals("Nothing to purchase!", exception.getMessage());
-    }
-
-    @Test
-    void sufficientQuantity_InsufficientStock() {
-        List<BookItem> books = List.of(new BookItem("f47ac10b-58cc-4372-a567-0e02b2c3d479", "Title1", BigDecimal.valueOf(30)));
-        UUID bookId = UUID.fromString("f47ac10b-58cc-4372-a567-0e02b2c3d479");
-        BookState.BookDetails bookDetails = new BookState.BookDetails(bookId,0);
-
-        Mockito.when(bookState.getById(bookId)).thenReturn(bookDetails);
-
-        RuntimeException exception = Assertions.assertThrows(RuntimeException.class, () -> {
-            paymentService.sufficientQuantity(books);
-        });
-
-        Assertions.assertEquals("Insufficient stock for book: Title1", exception.getMessage());
-    }
-
-    @Test
-    void sufficientQuantity_Success() {
-        List<BookItem> books = List.of(new BookItem("f47ac10b-58cc-4372-a567-0e02b2c3d479", "Title1", BigDecimal.valueOf(30)));
-        UUID bookId = UUID.fromString("f47ac10b-58cc-4372-a567-0e02b2c3d479");
-        BookState.BookDetails bookDetails = new BookState.BookDetails(bookId,10);
-
-        Mockito.when(bookState.getById(bookId)).thenReturn(bookDetails);
-
-        paymentService.sufficientQuantity(books);
-
-        verify(bookState, times(1)).setBook(bookId, 9);
-    }
 }

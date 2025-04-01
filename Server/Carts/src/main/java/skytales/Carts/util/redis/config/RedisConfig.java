@@ -18,7 +18,7 @@ import skytales.Carts.util.redis.util.RedisMessageSubscriber;
 @Configuration
 public class RedisConfig {
 
-    @Value("${redis.host:127.0.0.1}")
+    @Value("${redis.host:redis}")
     private String redisHost;
 
     @Value("${redis.port:6379}")

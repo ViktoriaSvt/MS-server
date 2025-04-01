@@ -18,6 +18,8 @@ import skytales.Auth.service.JwtService;
 import skytales.Auth.service.UserService;
 import skytales.Auth.web.dto.*;
 
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequestMapping("api/auth")

@@ -10,6 +10,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.data.redis.core.ZSetOperations;
 
+import org.springframework.data.redis.core.script.RedisScript;
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.util.redis.RedisService;
 
@@ -52,6 +53,18 @@ class RedisServiceUTest {
         Set<BookItemReference> result = redisService.get(key);
 
         assertEquals(expectedSet, result);
+    }
+
+    @Test
+    void testGetWithLinkedHashMap() {
+        String key = "testKey";
+        LinkedHashMap<String, Object> linkedHashMap = new LinkedHashMap<>();
+        when(valueOperations.get(key)).thenReturn(linkedHashMap);
+
+        Set<BookItemReference> result = redisService.get(key);
+
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
     }
 
     @Test
@@ -116,6 +129,18 @@ class RedisServiceUTest {
 
         verify(spyService, never()).checkAndEvictInactiveCarts(anyInt());
         verify(spyService, never()).checkAndEvictLeastUsedCarts(anyInt());
+    }
+
+    @Test
+    void testCheckAndEvictInactiveCartsThrowsException() {
+        int limit = 10;
+        RedisService spyService = spy(redisService);
+
+        doThrow(new RedisConnectionFailureException("Connection failure")).when(redisTemplate).execute(any(RedisScript.class), anyList(), anyInt());
+
+        boolean result = spyService.checkAndEvictInactiveCarts(limit);
+
+        assertFalse(result);
     }
 
 

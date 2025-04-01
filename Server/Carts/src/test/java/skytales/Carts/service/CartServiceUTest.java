@@ -251,7 +251,6 @@ class CartServiceUTest {
         cartService.addToCart(cartId, bookId);
 
         verify(cartRepository).save(cart);
-        verify(redisService, never()).set("shopping_cart:" + cartId, cart.getBooks());
     }
 
     @Test

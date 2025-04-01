@@ -10,7 +10,7 @@ public class OnRedisAvailableCondition implements Condition {
     @Override
     public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         try {
-            RedisClient redisClient = RedisClient.create("redis://localhost:6379");
+            RedisClient redisClient = RedisClient.create("redis://redis:6379");
             StatefulRedisConnection<String, String> connection = redisClient.connect();
 
             boolean isConnected = connection.isOpen();

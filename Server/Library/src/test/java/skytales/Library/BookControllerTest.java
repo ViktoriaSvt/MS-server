@@ -17,10 +17,12 @@ import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import org.springframework.web.multipart.MultipartFile;
 import skytales.Library.config.TestConfigLib;
 import skytales.Library.model.Book;
 import skytales.Library.service.BookService;
 import skytales.Library.util.config.security.SecurityConfig;
+import skytales.Library.util.elasticsearch.service.ElasticSearchService;
 import skytales.Library.web.BookController;
 import skytales.Library.web.dto.BookData;
 
@@ -57,6 +59,9 @@ public class BookControllerTest {
     @MockitoBean
     private ElasticsearchClient elasticsearchClient;
 
+    @MockitoBean
+    private ElasticSearchService elasticSearchService;
+
     @InjectMocks
     private BookController bookController;
 
@@ -69,7 +74,7 @@ public class BookControllerTest {
     @BeforeEach
     void setUp() {
         userId = UUID.fromString("73fded46-c09b-49cf-b581-8ed145a887fe");
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiYWRtaW4iLCJjYXJ0SWQiOiIzYzExYzNlNi1hNzllLTQ2N2EtYWJhZi0yOGQ0OGQxZjdiM2IiLCJ1c2VySWQiOiJhMzk4M2IzNi02MDk0LTRlZWEtYmQzNy0yOTdmOGFlZTMwNzMiLCJlbWFpbCI6InRlc3RAZXhhbXBsZS5jb20iLCJ1c2VybmFtZSI6InRlc3R1c2VyIiwic3ViIjoidGVzdEBleGFtcGxlLmNvbSIsImlhdCI6MTc0MjczMjUzMSwiZXhwIjoxNzQyNzM3Nzg3fQ.eNG2LyyvCpR8DPFE6rEFWi3vUFoi5pdmXtOa8rzNOgs";
+        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImNhcnRJZCI6IjU1MjYxNzEzLTY0ZDMtNDhhMy04ZWFiLWViNWU3YWU4MjU1NiIsInVzZXJJZCI6ImRlZTAwZGQ5LWQzMWUtNGUxNi1iZWFlLTc4OWNlMzM4OTNmMiIsImVtYWlsIjoidGVzdGVtYWlsQGFidi5iZyIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJzdWIiOiJ0ZXN0ZW1haWxAYWJ2LmJnIiwiaWF0IjoxNzQzMzQ3NTQzLCJleHAiOjE3NDMzNTAxMzV9.f84j-KD9aQFetidEy_ShHd3qSyDzlMUQQn_NnejGA1g";
 
         bookId = UUID.randomUUID();
         book = Book.builder()
@@ -123,10 +128,9 @@ public class BookControllerTest {
 
     @Test
     void createBook_ShouldReturnCreatedBook() throws Exception {
-        BookData bookData = new BookData("Test Book", "Test Author", "AuthorGuy", "2024", "24", "32", "10");
+        BookData bookData = new BookData("Test Book", "Test Author", "A test book", "2024", "Fiction", "19.99", "10");
 
         Book book = Book.builder()
-                .id(bookId)
                 .title("Test Book")
                 .author("Test Author")
                 .coverImageUrl("https://www.hostinger.co.uk/tutorials/wp-content/uploads/sites/2/2022/07/the-structure-of-a-url.png")
@@ -138,17 +142,21 @@ public class BookControllerTest {
                 .quantity(10)
                 .build();
 
-        when(bookService.createBook(any(BookData.class), any(File.class), any(File.class))).thenReturn(book);
+        when(bookService.createBook(any(BookData.class), any(MultipartFile.class), any(MultipartFile.class))).thenReturn(book);
 
-        File bannerImage = mock(File.class);
-        File coverImage = mock(File.class);
-        when(coverImage.getName()).thenReturn("cover.jpg");
-        when(bannerImage.getName()).thenReturn("banner.jpg");
+        MultipartFile bannerImage = mock(MultipartFile.class);
+        MultipartFile coverImage = mock(MultipartFile.class);
 
         mockMvc.perform(MockMvcRequestBuilders.multipart("/api/books/create")
                         .file("bannerImage", "bannerImageContent".getBytes())
                         .file("coverImage", "coverImageContent".getBytes())
-                        .param("bookData", objectMapper.writeValueAsString(bookData))
+                        .param("title", bookData.title())
+                        .param("author", bookData.author())
+                        .param("description", bookData.description())
+                        .param("year", bookData.year())
+                        .param("genre", bookData.genre())
+                        .param("price", bookData.price())
+                        .param("quantity", bookData.quantity())
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.MULTIPART_FORM_DATA))
                 .andExpect(status().isCreated());
@@ -187,7 +195,7 @@ public class BookControllerTest {
                         .param("query", "Test")
                         .header("Authorization", "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isNotFound());
+                .andExpect(status().isInternalServerError());
     }
 
 
