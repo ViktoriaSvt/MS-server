@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This server is designed with a **microservice architecture** aimed at **resilience**, **scalability**, and **responsiveness** to high traffic. The system primarily focuses on the **cart functionality**, which is a critical point for every e-commerce platform. It works closely with mechanisms to efficiently manage high traffic while ensuring data consistency and security.
+This server is designed with a **microservice architecture** aimed at **resilience**, **scalability**, and **responsiveness** . The system primarily focuses on the **cart functionality**, which is a critical point for every e-commerce platform. It works closely with mechanisms to efficiently manage high traffic while ensuring data consistency and availability.
 
 ## Technologies Used
 
@@ -34,15 +34,15 @@ The server integrates **Redis** and **Nginx** (with Lua scripts via OpenResty) t
 
 ### Caching Algorithm
 
-Initially, the algorithm was based within the server, but it was later integrated into a reverse proxy (Nginx) with an extension for Lua scripts (OpenResty). Here's a breakdown of how the system works:
+At first, the algorithm was based within the server, but it was later integrated into a reverse proxy (Nginx) with an extension for Lua scripts (OpenResty). Here's a breakdown of how the system works:
 
 1. **User Interaction**: A new user begins interacting with the server. Initially, the server handles this user’s requests.
 2. **Redis Cache**: The system checks the cache and notes that the user has interacted. 
-3. **Proxy Handling**: Once the user is identified, all subsequent cart interactions (read or write) are handled by the reverse proxy until user is no longer qualified for a spot in the cache.
+3. **Proxy Handling**: Once the user is identified, all subsequent cart interactions (read or write) are handled by the reverse proxy until user is no longer qualified for a spot.
 4. **User Categorization**: Users are categorized into two groups:
    - High-frequency request users ("active").
    - Low-frequency request users ("calm").
-5. **Cache Eviction**: The cache decides which users to serve and which ones to discard by using terms and TTL.
+5. **Cache Eviction**: The cache decides which users to serve and which ones to discard by using terms, TTL and eviction policies.
 6. **Data Clearance**: Inactive users are cleaned up to prevent memory overflow. A Lua-based mechanism operates in two phases:
    - **Phase 1**: Clears users with no cart changes (term = 0).
    - **Phase 2**: Deletes the least active users if further space is needed (uses events to call a batch synch operation for the evicted carts).
@@ -74,7 +74,7 @@ Below are the results of load testing using **JMeter**, simulating high traffic 
 | **Throughput (requests/sec)** | 2,195.54    |
 
 
-
+Subsequent tests were done for spike rushes and  system with the proxy cut off .
 ## Server Components
 
 The server is built with **five microservices**, each focused on a specific category:
@@ -100,7 +100,7 @@ The server uses **JWT (JSON Web Token)** and **Spring Security** for secure user
 
 ### Dockerization
 
-The server is **fully Dockerized** for easy deployment and scalability. The server's core components (Kafka, Redis, Elasticsearch, Nginx) are also containerized, but are still being configured.
+The server is **fully Dockerized** for easy deployment and scalability.
 
 ---
 
