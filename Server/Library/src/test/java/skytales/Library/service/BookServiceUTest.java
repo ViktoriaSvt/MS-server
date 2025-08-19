@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 import skytales.Library.model.Book;
 import skytales.Library.repository.BookRepository;
 import skytales.Library.util.elasticsearch.service.ElasticSearchService;
+import skytales.Library.util.exceptions.BookNotFoundException;
 import skytales.Library.util.state_engine.UpdateProducer;
 import skytales.Library.util.state_engine.model.UpdateType;
 import skytales.Library.web.dto.BookData;
@@ -92,14 +93,20 @@ class BookServiceUTest {
     }
 
     @Test
-    void getBookById_ShouldReturnNull_WhenBookDoesNotExist() {
+    void getBookById_ShouldThrowException_WhenBookDoesNotExist() {
+
+        UUID bookId = UUID.randomUUID();
         when(bookRepository.findById(bookId)).thenReturn(Optional.empty());
 
-        Book foundBook = bookService.getBookById(bookId);
+        BookNotFoundException exception = assertThrows(
+                BookNotFoundException.class,
+                () -> bookService.getBookById(bookId)
+        );
 
-        assertNull(foundBook);
+        assertEquals("No book found with id " + bookId, exception.getMessage());
         verify(bookRepository, times(1)).findById(bookId);
     }
+
 
     @Test
     void createBook_ShouldSaveBookAndSendUpdates() throws IOException {
