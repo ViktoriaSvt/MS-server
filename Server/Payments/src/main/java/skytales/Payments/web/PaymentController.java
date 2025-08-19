@@ -26,57 +26,26 @@ import java.util.UUID;
 public class PaymentController {
 
     private final PaymentService paymentService;
-    private final StripeService stripeService;
-    private final UpdateProducer updateProducer;
 
-    public PaymentController(PaymentService paymentService, StripeService stripeService, UpdateProducer updateProducer) {
+    public PaymentController(PaymentService paymentService) {
 
         this.paymentService = paymentService;
-        this.stripeService = stripeService;
-        this.updateProducer = updateProducer;
     }
 
-    @PostMapping()
+    @PostMapping
     public ResponseEntity<?> processPayment(@RequestBody PaymentRequest paymentRequest, HttpServletRequest request) throws StripeException {
-
         UUID userId = UUID.fromString(request.getAttribute("userId").toString());
-        PaymentIntent paymentIntent;
 
-        log.info("books: {}", paymentRequest.books());
-
-        paymentService.sufficientQuantity(paymentRequest.books());
-
-        try {
-            paymentIntent = stripeService.createPaymentIntent(paymentRequest);
-        } catch (PaymentFailedException e) {
-            paymentService.createPaymentRecord(userId, paymentRequest.amount(), null, PaymentStatus.DENIED, paymentRequest.books());
-            log.info("Payment failed: {}", e.getMessage());
-
-            return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(e.getMessage());
-        }
+        PaymentIntent paymentIntent = paymentService.processPayment(userId, paymentRequest);
 
         if ("requires_action".equals(paymentIntent.getStatus()) || "requires_source_action".equals(paymentIntent.getStatus())) {
-            paymentService.createPaymentRecord(userId, paymentRequest.amount(), paymentIntent.getId(), PaymentStatus.PENDING, paymentRequest.books());
-            log.info("Payment with id requires action: {}", paymentIntent.getId());
-
-            return ResponseEntity.ok().body(Map.of(
-                    "error", "payment failed",
+            return ResponseEntity.ok(Map.of(
                     "requiresAction", true,
                     "paymentIntentClientSecret", paymentIntent.getClientSecret()
             ));
         }
 
-        if ("requires_payment_method".equals(paymentIntent.getStatus())) {
-            paymentService.createPaymentRecord(userId, paymentRequest.amount(), paymentIntent.getId(), PaymentStatus.DENIED, paymentRequest.books());
-            log.info("Payment with id requires payment method: {}", paymentIntent.getId());
-
-            return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(Map.of("error", "Payment failed. Authentication or payment method issue."));
-        }
-
-        updateProducer.clearCartForUser(String.valueOf(userId));
-        paymentService.createPaymentRecord(userId, paymentRequest.amount(), paymentIntent.getId(), PaymentStatus.SUCCEEDED, paymentRequest.books());
-
-        return ResponseEntity.ok().body(Map.of("success", true));
+        return ResponseEntity.ok(Map.of("success", true));
     }
 
     @GetMapping("/{userId}/history")
