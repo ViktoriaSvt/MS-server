@@ -9,9 +9,10 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import skytales.Payments.config.TestConfig;
@@ -33,6 +34,7 @@ import java.util.UUID;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+@WithMockUser(username = "testuser", roles = {"USER"})
 @Import({SecurityConfig.class, TestConfig.class})
 @ExtendWith(MockitoExtension.class)
 @WebMvcTest(PaymentController.class)
@@ -41,31 +43,32 @@ public class PaymentsControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-    @MockBean
+    @MockitoBean
     private PaymentService paymentService;
 
-    @MockBean
+    @MockitoBean
     private StripeService stripeService;
 
-    @MockBean
+    @MockitoBean
     private UpdateProducer updateProducer;
 
     @Autowired
     private ObjectMapper objectMapper;
 
     private UUID userId;
-    private String token;
     private PaymentRequest paymentRequest;
 
     @BeforeEach
     void setUp() {
         userId = UUID.fromString("73fded46-c09b-49cf-b581-8ed145a887fe");
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImNhcnRJZCI6IjU1MjYxNzEzLTY0ZDMtNDhhMy04ZWFiLWViNWU3YWU4MjU1NiIsInVzZXJJZCI6ImRlZTAwZGQ5LWQzMWUtNGUxNi1iZWFlLTc4OWNlMzM4OTNmMiIsImVtYWlsIjoidGVzdGVtYWlsQGFidi5iZyIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJzdWIiOiJ0ZXN0ZW1haWxAYWJ2LmJnIiwiaWF0IjoxNzQzMzQ3NTQzLCJleHAiOjE3NDMzNTAxMzV9.f84j-KD9aQFetidEy_ShHd3qSyDzlMUQQn_NnejGA1g";
-        paymentRequest = new PaymentRequest("pm_card_visa", 1000L, List.of(new BookItem("BookId", "Title1", BigDecimal.valueOf(30))));
 
-        Mockito.doNothing().when(paymentService).createPaymentRecord(Mockito.any(UUID.class), Mockito.anyLong(), Mockito.anyString(), Mockito.any(PaymentStatus.class), Mockito.anyList());
+        paymentRequest = new PaymentRequest(
+                "pm_card_visa",
+                1000L,
+                List.of(new BookItem("BookId", "Title1", BigDecimal.valueOf(30)))
+        );
+
         Mockito.doNothing().when(updateProducer).clearCartForUser(Mockito.anyString());
-        Mockito.doNothing().when(paymentService).sufficientQuantity(Mockito.anyList());
     }
 
     @Test
@@ -74,6 +77,9 @@ public class PaymentsControllerTest {
         paymentIntent.setId("pi_1GqIC8HYgolSBA35x8q2x8bV");
         paymentIntent.setStatus("succeeded");
 
+        Mockito.when(paymentService.processPayment(Mockito.any(UUID.class), Mockito.any(PaymentRequest.class)))
+                .thenReturn(paymentIntent);
+
         Mockito.when(stripeService.createPaymentIntent(Mockito.any(PaymentRequest.class))).thenReturn(paymentIntent);
 
         String paymentRequestJson = objectMapper.writeValueAsString(paymentRequest);
@@ -81,7 +87,6 @@ public class PaymentsControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/payments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(paymentRequestJson)
-                        .header("Authorization", "Bearer " + token)
                         .requestAttr("userId", userId))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"success\":true}"));
@@ -89,7 +94,7 @@ public class PaymentsControllerTest {
 
     @Test
     void testProcessPayment_Failed() throws Exception {
-        Mockito.when(stripeService.createPaymentIntent(Mockito.any(PaymentRequest.class)))
+        Mockito.when(paymentService.processPayment(Mockito.any(UUID.class), Mockito.any(PaymentRequest.class)))
                 .thenThrow(new PaymentFailedException("Payment failed due to insufficient funds."));
 
         String paymentRequestJson = objectMapper.writeValueAsString(paymentRequest);
@@ -97,7 +102,6 @@ public class PaymentsControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/payments")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(paymentRequestJson)
-                        .header("Authorization", "Bearer " + token)
                         .requestAttr("userId", userId))
                 .andExpect(status().isPaymentRequired())
                 .andExpect(content().string("Payment failed due to insufficient funds."));
@@ -109,8 +113,7 @@ public class PaymentsControllerTest {
 
         Mockito.when(paymentService.getAllByOwner(Mockito.any(UUID.class))).thenReturn(payments);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/payments/{userId}/history", userId.toString())
-                        .header("Authorization", "Bearer " + token))
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/payments/{userId}/history", userId.toString()))
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(payments)));
     }
