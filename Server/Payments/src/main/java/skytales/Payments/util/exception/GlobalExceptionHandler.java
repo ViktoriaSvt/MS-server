@@ -1,4 +1,4 @@
-package skytales.common.exceptions;
+package skytales.Payments.util.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +9,11 @@ import java.util.NoSuchElementException;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(PaymentFailedException.class)
+    public ResponseEntity<String> handlePaymentFailed(PaymentFailedException ex) {
+        return ResponseEntity.status(HttpStatus.PAYMENT_REQUIRED).body(ex.getMessage());
+    }
 
     @ExceptionHandler(IllegalArgumentException.class)
     public ResponseEntity<String> handleIllegalArgument(IllegalArgumentException ex) {

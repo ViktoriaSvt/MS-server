@@ -50,7 +50,7 @@ public class BookService {
 
     public List<Book> getNewestBooks(int year) {
         return bookRepository.findBooksByYearAfter(year)
-                .orElseThrow(() -> new NoSuchElementException("No books found after the year " + year));
+                .orElseThrow(() -> new NoSuchElementException("No books found after the year -" + year));
     }
 
 

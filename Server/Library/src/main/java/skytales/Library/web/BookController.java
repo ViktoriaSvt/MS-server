@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
@@ -35,6 +34,7 @@ public class BookController {
     private final BookService bookService;
     private final ElasticsearchClient elasticsearchClient;
     private final ElasticSearchService elasticSearchService;
+
 
     public BookController(BookService bookService, ElasticsearchClient elasticsearchClient, ElasticSearchService elasticSearchService) {
         this.bookService = bookService;
