@@ -35,6 +35,7 @@ public class BookController {
     private final ElasticsearchClient elasticsearchClient;
     private final ElasticSearchService elasticSearchService;
 
+
     public BookController(BookService bookService, ElasticsearchClient elasticsearchClient, ElasticSearchService elasticSearchService) {
         this.bookService = bookService;
         this.elasticsearchClient = elasticsearchClient;
