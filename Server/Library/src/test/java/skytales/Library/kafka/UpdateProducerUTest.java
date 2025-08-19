@@ -58,14 +58,14 @@ public class UpdateProducerUTest {
 
         assertInstanceOf(BookMessage.class, capturedMessage.getData());
         BookMessage bookMessage = (BookMessage) capturedMessage.getData();
-        assertEquals(book.getId(), bookMessage.id());
-        assertEquals("The Great Adventure", bookMessage.title());
-        assertEquals("Adventure", bookMessage.genre());
-        assertEquals("John Doe", bookMessage.author());
-        assertEquals("http://example.com/cover.jpg", bookMessage.coverImageUrl());
-        assertEquals(2023, bookMessage.year());
-        assertEquals(BigDecimal.valueOf(19.99), bookMessage.price());
-        assertEquals(100, bookMessage.quantity());
+        assertEquals(book.getId(), bookMessage.getId());
+        assertEquals("The Great Adventure", bookMessage.getTitle());
+        assertEquals("Adventure", bookMessage.getGenre());
+        assertEquals("John Doe", bookMessage.getAuthor());
+        assertEquals("http://example.com/cover.jpg", bookMessage.getCoverImageUrl());
+        assertEquals(2023, bookMessage.getYear());
+        assertEquals(BigDecimal.valueOf(19.99), bookMessage.getPrice());
+        assertEquals(100, bookMessage.getQuantity());
         assertEquals(updateType.toString(), capturedMessage.getType());
     }
 
