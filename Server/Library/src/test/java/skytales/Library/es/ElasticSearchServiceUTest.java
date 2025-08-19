@@ -12,12 +12,15 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import skytales.Library.model.Book;
 import skytales.Library.util.elasticsearch.service.ElasticSearchService;
+import skytales.Library.util.exceptions.BookSearchException;
 
 
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -58,8 +61,12 @@ class ElasticSearchServiceUTest {
     void addBookToElasticsearch_ShouldHandleIOException() throws IOException {
         doThrow(IOException.class).when(elasticsearchClient).index(any(IndexRequest.class));
 
-        elasticSearchService.addBookToElasticsearch(book);
+        BookSearchException exception = assertThrows(
+                BookSearchException.class,
+                () -> elasticSearchService.addBookToElasticsearch(book)
+        );
 
+        assertTrue(exception.getMessage().contains("Failed to index book"));
         verify(elasticsearchClient, times(1)).index(any(IndexRequest.class));
     }
 }
