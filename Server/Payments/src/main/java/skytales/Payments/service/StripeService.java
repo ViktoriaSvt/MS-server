@@ -38,18 +38,17 @@ public class StripeService {
                             .setAutomaticPaymentMethods(
                                     PaymentIntentCreateParams.AutomaticPaymentMethods.builder().setEnabled(true).build()
                             )
-                            .setReturnUrl("http://localhost:5173/cart")
+                            .setReturnUrl("${stripe.returnUrl}")
                             .build()
             );
 
         } catch (StripeException e) {
-            if ("card_declined".equals(e.getCode())) {
-                throw new PaymentFailedException("Payment failed due to insufficient funds.");
-            } else {
-                throw new PaymentFailedException(e.getMessage());
-            }
+            throw new PaymentFailedException(e.getCode().equals("card_declined")
+                    ? "Payment failed due to insufficient funds"
+                    : e.getMessage());
         }
     }
+
 
 
 }
