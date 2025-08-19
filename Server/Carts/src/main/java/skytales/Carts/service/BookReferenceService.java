@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.repository.BookItemReferenceRepository;
+import skytales.Carts.util.exceptions.BookItemNotFoundException;
 import skytales.Carts.util.state_engine.dto.BookMessage;
 
 @Slf4j
@@ -20,6 +21,21 @@ public class BookReferenceService {
 
     public void addBookToState(BookMessage bookRequest) {
 
+        BookItemReference book = buildItem(bookRequest);
+
+        bookItemReferenceRepository.save(book);
+        log.info("Book added to state in cart MS");
+    }
+    public void removeBookFromState(BookMessage BookRequest) {
+
+        BookItemReference book = bookItemReferenceRepository
+                .findById(BookRequest.id())
+                .orElseThrow(() -> new BookItemNotFoundException("Book was not found"));
+
+        bookItemReferenceRepository.delete(book);
+    }
+
+    private static BookItemReference buildItem(BookMessage bookRequest) {
         BookItemReference book = BookItemReference.builder()
                 .author(bookRequest.author())
                 .title(bookRequest.title())
@@ -30,19 +46,8 @@ public class BookReferenceService {
                 .coverImageUrl(bookRequest.coverImageUrl())
                 .id(bookRequest.id())
                 .build();
-
-
-        log.info("Book added to state in cart MS");
-        bookItemReferenceRepository.save(book);
+        return book;
     }
 
-    public void removeBookFromState(BookMessage BookRequest) {
-
-        BookItemReference book = bookItemReferenceRepository
-                .findById(BookRequest.id())
-                .orElseThrow(() -> new RuntimeException("Book was not found"));
-
-        bookItemReferenceRepository.delete(book);
-    }
 
 }

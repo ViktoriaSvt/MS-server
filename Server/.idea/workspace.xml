@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="Added cloudinary support for faster lookup on book files (images) and support for uploading files from user end">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="32358c4e-d422-4528-9378-76ab3fb3ce37" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,10 +33,10 @@
     &quot;accountId&quot;: &quot;78a3b1e4-ab43-4ab0-a03c-18fcbd6eaada&quot;
   }
 }</component>
-  <component name="KubernetesApiPersistence"><![CDATA[{}]]></component>
-  <component name="KubernetesApiProvider"><![CDATA[{
-  "isMigrated": true
-}]]></component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
   <component name="MavenImportPreferences">
     <option name="generalSettings">
       <MavenGeneralSettings>
@@ -98,7 +96,7 @@
     "git-widget-placeholder": "main",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/PC/Desktop/Server/Payments/src/main/java/skytales/Payments/util/state_engine",
+    "last_opened_file_path": "C:/Users/PC/Desktop/skytales/MS-server/Server",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -223,6 +221,7 @@
       <workItem from="1741882139893" duration="14094000" />
       <workItem from="1741955970918" duration="496000" />
       <workItem from="1741957770799" duration="63330000" />
+      <workItem from="1755610479792" duration="55000" />
     </task>
     <task id="LOCAL-00001" summary="setup microservices as independent modules">
       <option name="closed" value="true" />

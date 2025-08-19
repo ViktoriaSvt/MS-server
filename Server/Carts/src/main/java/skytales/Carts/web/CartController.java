@@ -19,7 +19,6 @@ public class CartController {
     private final CartService cartService;
 
     public CartController(CartService cartService) {
-
         this.cartService = cartService;
     }
 
@@ -55,10 +54,6 @@ public class CartController {
     public ResponseEntity<Map<String, String>> createCart(@RequestBody Map<String, String> requestBody) {
 
         String userId = requestBody.get("userId");
-
-        if (userId == null || userId.isEmpty()) {
-            return ResponseEntity.badRequest().body(Collections.singletonMap("error", "User ID is required"));
-        }
         String cartId = cartService.createCartForUser(userId);
 
         return ResponseEntity.ok(Collections.singletonMap("cartId", cartId));

@@ -71,20 +71,16 @@ public class QuestionController {
         }
 
         String attribute = request.getAttribute("userId").toString();
-        UUID adminId = UUID.fromString( attribute);
+        UUID adminId = UUID.fromString(attribute);
         UUID questionId = UUID.fromString(id);
         questionService.sendAnswer(questionId, answerRequest, adminId);
 
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @GetMapping("/translate/faq")
+    @GetMapping("/translations/faq")
     public ResponseEntity<Map<String, Object>> getRegisterTranslation(@RequestParam(value = "lang", required = false) String lang) {
-        try {
-            Map<String, Object> translations = translationService.loadTranslations("faqTranslations.json", lang);
-            return ResponseEntity.ok(translations);
-        } catch (IOException e) {
-            return ResponseEntity.internalServerError().body(Map.of("error", "Translation file not found"));
-        }
+        Map<String, Object> translations = translationService.loadTranslations("faqTranslations.json", lang);
+        return ResponseEntity.ok(translations);
     }
 }

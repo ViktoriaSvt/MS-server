@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="IU-242.23726.103">
+    <data-source name="0@&quot;127.0.0.1&quot;" uuid="137d4e04-bff4-46c7-a59c-57142a400a54">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="REDIS" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="SkytalesOfficial@localhost" uuid="b258a3de-16c6-44ba-9fb8-c9432fff4fdf">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="SkytalesOfficial@localhost" uuid="e25d3924-1242-4f7a-8727-148c08b3f6cc">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="SkytalesOfficial@localhost" uuid="370854ad-c42f-4f74-ae70-287f4c7c853d">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="SkytalesOfficial@localhost" uuid="a298a2be-0059-4a36-bc92-eaed9579c08a">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="SkytalesOfficial@localhost" uuid="7a8ca65d-ac8a-4189-8f81-6197d87be790">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <schema-mapping />
+    </data-source>
+    <data-source name="SkytalesOfficial@localhost" uuid="b066200d-49a4-4d10-8fcb-cc7d2e1aa157">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" dbms="MYSQL" />
+      <schema-mapping />
+    </data-source>
+  </component>
+</project>

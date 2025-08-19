@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/books")
@@ -35,6 +34,7 @@ public class BookController {
     private final BookService bookService;
     private final ElasticsearchClient elasticsearchClient;
     private final ElasticSearchService elasticSearchService;
+
 
     public BookController(BookService bookService, ElasticsearchClient elasticsearchClient, ElasticSearchService elasticSearchService) {
         this.bookService = bookService;
@@ -69,7 +69,6 @@ public class BookController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-
         Book book = bookService.createBook(bookData, bannerImage, coverImage);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .header(HttpHeaders.CACHE_CONTROL, "no-cache")
@@ -77,40 +76,21 @@ public class BookController {
     }
 
     @DeleteMapping("/delete")
-    public ResponseEntity<?> deleteBooks(@RequestBody ArrayList<String> bookIds) {
-
-        if (bookIds == null || bookIds.isEmpty()) {
-            return ResponseEntity.badRequest().body("Book ID list cannot be empty.");
-        }
-
+    public ResponseEntity<?> deleteBooks(@RequestBody List<String> bookIds) {
         bookService.deleteBooks(bookIds);
-
         return ResponseEntity.ok("Books deleted successfully.");
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) throws IOException {
-
-            List<Book> books = elasticSearchService.searchBooks(query);
-
-            if(books == null || books.isEmpty()) {
-                return new ResponseEntity<>(books, HttpStatus.NOT_FOUND);
-            }
-
-            return new ResponseEntity<>(books, HttpStatus.OK);
-
+    public ResponseEntity<List<Book>> searchBooks(@RequestParam String query) {
+        List<Book> books = elasticSearchService.searchBooks(query);
+        return ResponseEntity.ok(books);
     }
 
     @GetMapping("/{bookId}")
     public ResponseEntity<Book> getBook(@PathVariable String bookId) {
-
         Book book = bookService.getBookById(UUID.fromString(bookId));
-
-        if (book == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<>(book, HttpStatus.OK);
+        return ResponseEntity.ok(book);
     }
 
     @GetMapping("/newest")

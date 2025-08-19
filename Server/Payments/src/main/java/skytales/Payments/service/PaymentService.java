@@ -1,15 +1,20 @@
 package skytales.Payments.service;
 
+import com.stripe.exception.StripeException;
+import com.stripe.model.PaymentIntent;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import skytales.Payments.model.Stock;
 import skytales.Payments.repository.StockRepository;
+import skytales.Payments.util.exception.PaymentFailedException;
+import skytales.Payments.util.state_engine.UpdateProducer;
 import skytales.Payments.util.state_engine.dto.BookMessage;
 import skytales.Payments.web.dto.BookItem;
 import skytales.Payments.model.Payment;
 import skytales.Payments.model.PaymentStatus;
 import skytales.Payments.repository.PaymentRepository;
+import skytales.Payments.web.dto.PaymentRequest;
 
 
 import java.util.*;
@@ -17,33 +22,61 @@ import java.util.*;
 @Service
 public class PaymentService {
 
-
     private final PaymentRepository paymentRepository;
     private final StockRepository stockRepository;
+    private final StripeService stripeService;
+    private final UpdateProducer updateProducer;
 
-    public PaymentService(PaymentRepository paymentRepository, StockRepository stockRepository) {
-
+    public PaymentService(PaymentRepository paymentRepository, StockRepository stockRepository,
+                          StripeService stripeService, UpdateProducer updateProducer) {
         this.paymentRepository = paymentRepository;
         this.stockRepository = stockRepository;
+        this.stripeService = stripeService;
+        this.updateProducer = updateProducer;
     }
 
     @Transactional
-    public void sufficientQuantity(List<BookItem> books) {
+    public PaymentIntent processPayment(UUID userId, PaymentRequest paymentRequest) throws PaymentFailedException, StripeException {
 
-        books.forEach((book) -> {
+        checkStock(paymentRequest.books());
 
+        PaymentIntent paymentIntent = stripeService.createPaymentIntent(paymentRequest);
+
+        handlePaymentRecord(userId, paymentRequest, paymentIntent);
+
+        return paymentIntent;
+    }
+
+    private void checkStock(List<BookItem> books) {
+        for (BookItem book : books) {
             Stock stock = stockRepository.findByBookId(UUID.fromString(book.id()));
-            int quantity = stock.getQuantity();
-
-            if ( quantity < 1) {
-                throw new RuntimeException("Insufficient quantity");
+            if (stock == null || stock.getQuantity() < 1) {
+                throw new RuntimeException("Insufficient quantity for book: " + book.title());
             }
+            stock.setQuantity(stock.getQuantity() - 1);
+            stockRepository.save(stock);
+        }
+    }
 
-            stock.setQuantity(quantity - 1);
+    private void handlePaymentRecord(UUID userId, PaymentRequest paymentRequest, PaymentIntent paymentIntent) {
+        PaymentStatus status;
 
-        });
+        switch (paymentIntent.getStatus()) {
+            case "succeeded":
+                status = PaymentStatus.SUCCEEDED;
+                updateProducer.clearCartForUser(userId.toString());
+                break;
+            case "requires_action":
+            case "requires_source_action":
+                status = PaymentStatus.PENDING;
+                break;
+            case "requires_payment_method":
+            default:
+                status = PaymentStatus.DENIED;
+                break;
+        }
 
-
+        createPaymentRecord(userId, paymentRequest.amount(), paymentIntent.getId(), status, paymentRequest.books());
     }
 
     @Transactional
@@ -68,17 +101,9 @@ public class PaymentService {
         return paymentRepository.findTop4ByUserOrderByCreatedAtDesc(userId);
     }
 
-    public void getBookState() {
-        stockRepository.findAll();
-    }
-
     public void addBookToState(BookMessage data) {
-
-        Stock stock = Stock.builder()
-                .bookId(data.id())
-                .quantity(data.quantity())
-                .build();
-
+        Stock stock = Stock.builder().bookId(data.id()).quantity(data.quantity()).build();
         stockRepository.save(stock);
     }
 }
+

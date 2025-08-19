@@ -50,14 +50,14 @@ public class MessageDeserializerUTest {
 
         assertInstanceOf(BookMessage.class, result.getData());
         BookMessage resultData = (BookMessage) result.getData();
-        assertEquals(bookMessage.id(), resultData.id());
-        assertEquals(bookMessage.title(), resultData.title());
-        assertEquals(bookMessage.genre(), resultData.genre());
-        assertEquals(bookMessage.author(), resultData.author());
-        assertEquals(bookMessage.coverImageUrl(), resultData.coverImageUrl());
-        assertEquals(bookMessage.year(), resultData.year());
-        assertEquals(bookMessage.price(), resultData.price());
-        assertEquals(bookMessage.quantity(), resultData.quantity());
+        assertEquals(bookMessage.getId(), resultData.getId());
+        assertEquals(bookMessage.getTitle(), resultData.getTitle());
+        assertEquals(bookMessage.getGenre(), resultData.getGenre());
+        assertEquals(bookMessage.getAuthor(), resultData.getAuthor());
+        assertEquals(bookMessage.getCoverImageUrl(), resultData.getCoverImageUrl());
+        assertEquals(bookMessage.getYear(), resultData.getYear());
+        assertEquals(bookMessage.getPrice(), resultData.getPrice());
+        assertEquals(bookMessage.getQuantity(), resultData.getQuantity());
     }
 
 }

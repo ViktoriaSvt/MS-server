@@ -45,7 +45,6 @@ public class RedisService {
         return new HashSet<>((Collection<? extends BookItemReference>) data);
     }
 
-
     public void set(String key, Set<BookItemReference> value) {
         redisTemplate.opsForValue().set(key, value);
         redisTemplate.expire(key, TTL_SECONDS, TimeUnit.SECONDS);

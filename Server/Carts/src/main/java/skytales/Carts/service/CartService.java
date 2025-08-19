@@ -5,15 +5,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 
 import org.springframework.data.redis.RedisConnectionFailureException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import skytales.Carts.model.BookItemReference;
 import skytales.Carts.model.Cart;
+import skytales.Carts.util.exceptions.BookItemNotFoundException;
+import skytales.Carts.util.exceptions.CartNotFoundException;
 import skytales.Carts.util.redis.RedisService;
 import skytales.Carts.repository.BookItemReferenceRepository;
 import skytales.Carts.repository.CartRepository;
 
 
+import java.util.Collections;
 import java.util.Set;
 import java.util.UUID;
 
@@ -24,50 +28,45 @@ public class CartService {
     private final CartRepository cartRepository;
     private final BookItemReferenceRepository bookItemReferenceRepository;
     private final RedisService redisService;
-    private final ObjectMapper jacksonObjectMapper;
 
-    public CartService(CartRepository cartRepository, BookItemReferenceRepository bookItemReferenceRepository, RedisService redisService, ObjectMapper jacksonObjectMapper) {
+    public CartService(CartRepository cartRepository, BookItemReferenceRepository bookItemReferenceRepository, RedisService redisService) {
         this.cartRepository = cartRepository;
         this.bookItemReferenceRepository = bookItemReferenceRepository;
         this.redisService = redisService;
-        this.jacksonObjectMapper = jacksonObjectMapper;
+
     }
 
     public Cart getCartByUserId(UUID id) {
         return cartRepository.findCartByOwner(id)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new CartNotFoundException("Cart not found"));
     }
 
     public BookItemReference getByBookId(UUID id) {
         return bookItemReferenceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Book not found"));
+                .orElseThrow(() -> new BookItemNotFoundException("Book not found"));
 
     }
 
     public void addToCart(UUID cartId, UUID bookId) throws JsonProcessingException {
 
-        BookItemReference bookItemReference = getByBookId(bookId);
-        String cartKey = "shopping_cart:" + cartId;
-        String versionKey = "cartVersion:" + cartId;
+        BookItemReference bookItem = getByBookId(bookId);
+
+        Cart cart = cartRepository.findById(cartId)
+                .orElseThrow(() -> new CartNotFoundException("Cart not found"));
+
+        cart.getBooks().add(bookItem);
+        cartRepository.save(cart);
 
         try {
-            Cart cart = cartRepository.findById(cartId)
-                    .orElseThrow(() -> new RuntimeException("Cart not found"));
-
-            cart.getBooks().add(bookItemReference);
-            cartRepository.save(cart);
+            String cartKey = "shopping_cart:" + cartId;
+            String versionKey = "cartVersion:" + cartId;
             redisService.incrBy(versionKey);
             redisService.set(cartKey, cart.getBooks());
             log.info("Cart state saved to cache - add item");
 
         } catch (RedisConnectionFailureException e) {
-
-            Cart cart = cartRepository.findById(cartId)
-                    .orElseThrow(() -> new RuntimeException("Cart not found"));
-
-            cart.getBooks().add(bookItemReference);
+            log.info("Cache unavailable, adding only to db - add item");
             cartRepository.save(cart);
-
         }
     }
 
@@ -75,12 +74,11 @@ public class CartService {
 
         BookItemReference bookItemReference = getByBookId(bookId);
 
-        String cartKey = "shopping_cart:" + cartId;
-        String versionKey = "cartVersion:" + cartId;
-
         Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new CartNotFoundException("Cart not found"));
 
+        cart.getBooks().remove(bookItemReference);
+        cartRepository.save(cart);
         try {
 //            Set<BookItemReference> cachedCart = redisService.get(cartKey);
 //
@@ -92,44 +90,34 @@ public class CartService {
 //
 //            } else {
 
-
-            cart.getBooks().remove(bookItemReference);
-            cartRepository.save(cart);
+            String cartKey = "shopping_cart:" + cartId;
+            String versionKey = "cartVersion:" + cartId;
 
             redisService.set(cartKey, cart.getBooks());
             redisService.incrBy(versionKey);
             log.info("Cart state saved to cache - remove item");
 
         } catch (RedisConnectionFailureException e) {
-
-
-            cart.getBooks().remove(bookItemReference);
-            log.info("Cache unavailable, saving only to disk - add item");
-
+            log.info("Cache unavailable, removing only from db - add item");
             cartRepository.save(cart);
-
         }
     }
 
     public Set<BookItemReference> getCartItems(UUID cartId) {
 
-        String cartKey = "shopping_cart:" + cartId;
-
-
         Cart cart = cartRepository.findById(cartId)
-                .orElseThrow(() -> new RuntimeException("Cart not found"));
+                .orElseThrow(() -> new CartNotFoundException("Cart not found"));
 
         try {
-
+            String cartKey = "shopping_cart:" + cartId;
             redisService.set(cartKey, cart.getBooks());
             log.info("Cart state saved to cache - get item");
 
-            return cart.getBooks();
         } catch (RedisConnectionFailureException e) {
-
             log.info("Cache unavailable, saving only to disk - remove item");
-            return cart.getBooks();
         }
+
+        return cart.getBooks();
     }
 
     public void clearCart(UUID id) {
@@ -144,11 +132,14 @@ public class CartService {
         } catch (RedisConnectionFailureException _) {
             log.info("An error occurred while clearing the cart from cache, redis is currently unavailable.");
         }
-
-        System.out.println(cart.getBooks());
     }
 
     public String createCartForUser(String userId) {
+
+        if (userId == null || userId.isEmpty()) {
+            throw new IllegalArgumentException("UserId should not be empty");
+        }
+
         UUID identityForUser = UUID.fromString(userId);
 
         Cart cart = Cart.builder()

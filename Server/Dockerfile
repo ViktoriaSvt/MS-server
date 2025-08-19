@@ -14,7 +14,6 @@ RUN luarocks install lua-resty-jwt
 
 
 COPY ./openresty/luarocks/.luarocks/share/lua/5.1 /usr/local/openresty/lua
-COPY ./openresty/luarocks/.luarocks/lib/lua/5.1 /usr/local/openresty/lua_lib
 
 
 COPY ./openresty/conf/nginx.conf /usr/local/openresty/nginx/conf/nginx.conf
@@ -24,7 +23,6 @@ COPY ./openresty/conf/lua/cart_remove.lua /usr/local/openresty/lua/cart_remove.l
 
 
 ENV LUA_PATH="/usr/local/openresty/lua/?.lua;;"
-ENV LUA_CPATH="/usr/local/openresty/lua_lib/?.so;;"
 
 EXPOSE 8081
 

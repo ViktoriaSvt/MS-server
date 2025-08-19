@@ -13,6 +13,7 @@ import skytales.Library.model.Book;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
+import skytales.Library.util.exceptions.BookSearchException;
 
 import java.io.IOException;
 import java.util.List;
@@ -22,7 +23,7 @@ import java.util.stream.Collectors;
 @Service
 public class ElasticSearchService {
 
-   private final ElasticsearchClient elasticsearchClient;
+    private final ElasticsearchClient elasticsearchClient;
 
     public ElasticSearchService(ElasticsearchClient elasticsearchClient) {
         this.elasticsearchClient = elasticsearchClient;
@@ -30,7 +31,6 @@ public class ElasticSearchService {
 
 
     public void addBookToElasticsearch(Book book) {
-
         IndexRequest<Book> request = IndexRequest.of(i -> i
                 .index("library_collection")
                 .id(book.getId().toString())
@@ -41,7 +41,7 @@ public class ElasticSearchService {
             IndexResponse response = elasticsearchClient.index(request);
             log.info("Indexed with version " + response.version());
         } catch (IOException e) {
-            log.error("Es indexing went wrong");
+            throw new BookSearchException("Failed to index book: " + book.getTitle(), e);
         }
     }
 
@@ -55,26 +55,38 @@ public class ElasticSearchService {
             DeleteResponse response = elasticsearchClient.delete(request);
             log.info("Deleted book with ID: " + bookId + " Response: " + response.result());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new BookSearchException("Failed to delete book from Elasticsearch: " + bookId, e);
         }
     }
 
-    public List<Book> searchBooks(String query) throws IOException {
-        SearchRequest searchRequest = SearchRequest.of(s -> s
-                .index("library_collection")
-                .query(q -> q
-                        .multiMatch(m -> m
-                                .query(query)
-                                .fields("title^3", "author^2", "description")
-                                .fuzziness("AUTO")
-                        ))
-        );
+    public List<Book> searchBooks(String query) {
+        try {
+            SearchRequest searchRequest = SearchRequest.of(s -> s
+                    .index("library_collection")
+                    .query(q -> q
+                            .multiMatch(m -> m
+                                    .query(query)
+                                    .fields("title^3", "author^2", "description")
+                                    .fuzziness("AUTO")
+                            )
+                    )
+            );
 
-        SearchResponse<Book> searchResponse = elasticsearchClient.search(searchRequest, Book.class);
+            SearchResponse<Book> searchResponse = elasticsearchClient.search(searchRequest, Book.class);
 
-        return searchResponse.hits().hits().stream()
-                .map(Hit::source)
-                .collect(Collectors.toList());
+            List<Book> books = searchResponse.hits().hits().stream()
+                    .map(Hit::source)
+                    .collect(Collectors.toList());
+
+            if (books.isEmpty()) {
+                throw new BookSearchException("No books found for query: " + query);
+            }
+
+            return books;
+
+        } catch (IOException e) {
+            throw new BookSearchException("Failed to search books for query: " + query, e);
+        }
     }
 
 
