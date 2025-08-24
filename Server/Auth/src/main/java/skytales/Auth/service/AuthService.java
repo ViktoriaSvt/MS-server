@@ -1,5 +1,6 @@
 package skytales.Auth.service;
 
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -7,13 +8,14 @@ import org.springframework.web.client.RestTemplate;
 import skytales.Auth.model.Role;
 import skytales.Auth.model.User;
 import skytales.Auth.repository.UserRepository;
-import skytales.Auth.web.dto.LoginRequest;
-import skytales.Auth.web.dto.LoginResponse;
-import skytales.Auth.web.dto.RegisterRequest;
-import skytales.Auth.web.dto.RegisterResponse;
+import skytales.Auth.util.exceptions.InvalidCredentialsException;
+import skytales.Auth.util.exceptions.UserAlreadyExistsException;
+import skytales.Auth.util.exceptions.UserNotFoundException;
+import skytales.Auth.web.dto.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @Service
@@ -24,7 +26,6 @@ public class AuthService {
     private final RestTemplate restTemplate;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
     public AuthService(UserRepository userRepository, JwtService jwtService, RestTemplate restTemplate, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.jwtService = jwtService;
@@ -32,12 +33,9 @@ public class AuthService {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public User register(RegisterRequest registerRequest, BCryptPasswordEncoder bCryptPasswordEncoder) {
-
-        User exists = isEmailTaken(registerRequest.email());
-
-        if (exists != null) {
-            throw new Error("user already exists!");
+    public RegisterResponse register(RegisterRequest registerRequest) {
+        if (userRepository.existsByEmail(registerRequest.email())) {
+            throw new UserAlreadyExistsException("User with this email already exists!");
         }
 
         User user = User.builder()
@@ -55,19 +53,53 @@ public class AuthService {
         UUID cartId = createCartForUser(user.getId());
         assignCart(cartId, user.getId());
 
-        return user;
-
+        return generateRegisterResponse(user);
     }
 
-    public User login(LoginRequest loginRequest) {
-
-        User user = userRepository.findByEmail(loginRequest.email());
-        if (user == null) {
-            throw new Error("wrong email");
-        }
+    public LoginResponse login(LoginRequest loginRequest) {
+        User user = userRepository.findByEmail(loginRequest.email())
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
 
         if (!bCryptPasswordEncoder.matches(loginRequest.password(), user.getPassword())) {
-            throw new Error("wrong password");
+            throw new InvalidCredentialsException("Invalid email or password");
+        }
+
+        return generateLoginResponse(user);
+    }
+
+    public SessionResponse getSession(HttpServletRequest request) {
+        String userId = Objects.requireNonNull((String) request.getAttribute("userId"), "userId is missing");
+        String username = Objects.requireNonNull((String) request.getAttribute("username"), "username is missing");
+        String email = Objects.requireNonNull((String) request.getAttribute("email"), "email is missing");
+        String role = Objects.requireNonNull((String) request.getAttribute("role"), "role is missing");
+        String cartId = Objects.requireNonNull((String) request.getAttribute("cartId"), "cartId is missing");
+
+        return new SessionResponse(email, username, userId, role, cartId);
+    }
+
+    public void assignCart(UUID cartId, UUID userId) {
+        User user = getById(userId);
+        user.setCartId(cartId);
+        userRepository.save(user);
+    }
+
+    //Temporary value: "http://carts:8086/api/cart/createCart";
+    public UUID createCartForUser(UUID userId) {
+        String url = "http://localhost:8086/api/cart/createCart";
+
+        Map<String, String> requestBody = new HashMap<>();
+        requestBody.put("userId", userId.toString());
+
+        ResponseEntity<Map> response = restTemplate.postForEntity(url, requestBody, Map.class);
+        String cartIdStr = (String) response.getBody().get("cartId");
+
+        return UUID.fromString(cartIdStr);
+    }
+
+    public User getById(UUID id) {
+        User user = userRepository.findById(id).orElse(null);
+        if (user == null) {
+            throw new UserNotFoundException("User not found");
         }
         return user;
     }
@@ -76,10 +108,8 @@ public class AuthService {
         return "user_" + UUID.randomUUID().toString().substring(0, 8);
     }
 
-    public LoginResponse generateLoginResponse(User user) {
-
+    private LoginResponse generateLoginResponse(User user) {
         String jwtToken = createToken(user);
-
         return new LoginResponse(
                 user.getId().toString(),
                 user.getEmail(),
@@ -88,11 +118,8 @@ public class AuthService {
         );
     }
 
-    public RegisterResponse generateRegisterResponse(User user) {
-
-        System.out.println("Started token token");
+    private RegisterResponse generateRegisterResponse(User user) {
         String jwtToken = createToken(user);
-
         return new RegisterResponse(
                 user.getEmail(),
                 user.getId().toString(),
@@ -101,29 +128,7 @@ public class AuthService {
         );
     }
 
-
-    public void assignCart(UUID cartId, UUID userId) {
-        User user = getById(userId);
-        user.setCartId(cartId);
-        userRepository.save(user);
-    }
-
-    public UUID createCartForUser(UUID userId) {
-        String url = "http://carts:8086/api/cart/createCart";
-
-        Map<String, String> requestBody = new HashMap<>();
-        requestBody.put("userId", userId.toString());
-
-        ResponseEntity<Map> response = restTemplate.postForEntity(url, requestBody, Map.class);
-        String cartIdStr = (String) response.getBody().get("cartId");
-
-        UUID cartId = UUID.fromString(cartIdStr);
-
-        return cartId;
-    }
-
-    public String createToken(User user) {
-
+    private String createToken(User user) {
         return jwtService.generateToken(
                 user.getId().toString(),
                 user.getRole().name(),
@@ -132,13 +137,4 @@ public class AuthService {
                 String.valueOf(user.getCartId())
         );
     }
-
-    public User getById(UUID id) {
-        return userRepository.findById(id).orElse(null);
-    }
-
-    public User isEmailTaken(String email) {
-        return userRepository.findByEmail(email);
-    }
-
 }
