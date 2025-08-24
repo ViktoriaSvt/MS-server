@@ -8,6 +8,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.client.RestTemplate;
+import skytales.Auth.util.exceptions.InvalidCredentialsException;
 import skytales.Auth.web.dto.LoginRequest;
 import skytales.Auth.web.dto.LoginResponse;
 import skytales.Auth.web.dto.RegisterRequest;
@@ -62,20 +63,6 @@ class AuthServiceUTest {
     }
 
     @Test
-    void testIsEmailTaken() {
-        String email = "test@example.com";
-        User user = new User();
-        user.setEmail(email);
-
-        when(userRepository.findByEmail(email)).thenReturn(user);
-
-        User result = authService.isEmailTaken(email);
-
-        assertNotNull(result);
-        assertEquals(email, result.getEmail());
-    }
-
-    @Test
     void testRegister() {
         RegisterRequest registerRequest = new RegisterRequest("test@example.com", "password123", "password123");
 
@@ -92,88 +79,43 @@ class AuthServiceUTest {
         doReturn(UUID.randomUUID()).when(spyUserService).createCartForUser(any(UUID.class));
         doNothing().when(spyUserService).assignCart(any(UUID.class), any(UUID.class));
 
-        User result = spyUserService.register(registerRequest, bCryptPasswordEncoder);
+        RegisterResponse result = spyUserService.register(registerRequest);
 
         assertNotNull(result);
-        assertEquals(registerRequest.email(), result.getEmail());
-        assertNotNull(result.getId());
+        assertEquals(registerRequest.email(), result.email());
+        assertNotNull(result.userId());
 
-        verify(spyUserService, times(1)).createCartForUser(result.getId());
-        verify(spyUserService, times(1)).assignCart(any(UUID.class), eq(result.getId()));
+        verify(spyUserService, times(1)).createCartForUser(any(UUID.class));
+        verify(spyUserService, times(1)).assignCart(any(UUID.class), any(UUID.class));
     }
 
     @Test
     void testLogin() {
+
         LoginRequest loginRequest = new LoginRequest("test@example.com", "password");
         User user = new User();
+        user.setId(UUID.randomUUID());
         user.setEmail(loginRequest.email());
+        user.setUsername("testuser");
+        user.setRole(Role.USER);
         user.setPassword("encodedPassword");
 
-        when(userRepository.findByEmail(loginRequest.email())).thenReturn(user);
+        when(userRepository.findByEmail(loginRequest.email())).thenReturn(Optional.of(user));
         when(bCryptPasswordEncoder.matches(loginRequest.password(), user.getPassword())).thenReturn(true);
+        when(jwtService.generateToken(
+                anyString(), anyString(), anyString(), anyString(), anyString()
+        )).thenReturn("jwtToken");
 
-        User result = authService.login(loginRequest);
+        LoginResponse result = authService.login(loginRequest);
 
         assertNotNull(result);
-        assertEquals(loginRequest.email(), result.getEmail());
+        assertEquals(user.getEmail(), result.email());
+        assertEquals(user.getId().toString(), result.userId());
+        assertEquals(user.getRole().name(), result.role());
+        assertEquals("jwtToken", result.jwtToken());
     }
 
-    @Test
-    void testGenerateLoginResponse() {
-        User user = new User();
-        user.setId(UUID.fromString("a3983b36-6094-4eea-bd37-297f8aee3073"));
-        user.setRole(Role.USER);
-        user.setEmail("test@example.com");
-        user.setUsername("testuser");
 
-        when(jwtService.generateToken(anyString(), anyString(), anyString(), anyString(), anyString()))
-                .thenReturn("jwtToken");
-
-        LoginResponse response = authService.generateLoginResponse(user);
-
-        assertNotNull(response);
-        assertEquals(user.getId().toString(), response.userId());
-        assertEquals(user.getRole().name(), response.role());
-        assertEquals("jwtToken", response.jwtToken());
-    }
-
-    @Test
-    void testGenerateRegisterResponse() {
-        User user = new User();
-        user.setEmail("test@example.com");
-        user.setId(UUID.randomUUID());
-        user.setRole(Role.USER);
-        user.setUsername("testuser");
-
-        when(jwtService.generateToken(anyString(), anyString(), anyString(), anyString(), anyString()))
-                .thenReturn("jwtToken");
-
-        RegisterResponse response = authService.generateRegisterResponse(user);
-
-        assertNotNull(response);
-        assertEquals("test@example.com", response.email());
-        assertEquals(user.getId().toString(), response.userId());
-        assertEquals(user.getRole().name(), response.role());
-        assertEquals("jwtToken", response.jwtToken());
-    }
-
-    @Test
-    void testCreateToken() {
-        User user = new User();
-        user.setId(UUID.randomUUID());
-        user.setRole(Role.USER);
-        user.setEmail("test@example.com");
-        user.setUsername("testuser");
-        user.setCartId(UUID.randomUUID());
-
-        when(jwtService.generateToken(anyString(), anyString(), anyString(), anyString(), anyString()))
-                .thenReturn("jwtToken");
-
-        String token = authService.createToken(user);
-
-        assertNotNull(token);
-        assertEquals("jwtToken", token);
-    }
 
     @Test
     void testAssignCart() {
@@ -212,6 +154,7 @@ class AuthServiceUTest {
         assertThrows(Error.class, () -> authService.login(loginRequest), "wrong email");
     }
 
+
     @Test
     void testLogin_WrongPassword() {
         LoginRequest loginRequest = new LoginRequest("test@example.com", "wrongpassword");
@@ -219,11 +162,13 @@ class AuthServiceUTest {
         user.setEmail(loginRequest.email());
         user.setPassword("encodedPassword");
 
-        when(userRepository.findByEmail(loginRequest.email())).thenReturn(user);
+        when(userRepository.findByEmail(loginRequest.email())).thenReturn(Optional.of(user));
         when(bCryptPasswordEncoder.matches(loginRequest.password(), user.getPassword())).thenReturn(false);
 
-        assertThrows(Error.class, () -> authService.login(loginRequest), "wrong password");
+
+        assertThrows(InvalidCredentialsException.class, () -> authService.login(loginRequest));
     }
+
 
 
 }

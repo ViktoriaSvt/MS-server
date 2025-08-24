@@ -1,7 +1,6 @@
-package skytales.Auth.web;
+package skytales.Auth.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.servlet.http.HttpServletRequest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -9,21 +8,19 @@ import org.mockito.InjectMocks;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.junit.jupiter.MockitoSettings;
 import org.mockito.quality.Strictness;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.web.client.RestTemplate;
-import skytales.Auth.util.config.security.JwtAuthenticationFilter;
-import skytales.Auth.util.config.security.SecurityConfig;
-import skytales.Auth.model.User;
-import skytales.Auth.repository.UserRepository;
+
 import skytales.Auth.service.AuthService;
-import skytales.Auth.service.JwtService;
-import skytales.Auth.service.UserService;
+import skytales.Auth.util.config.security.SecurityConfig;
+import skytales.Auth.web.AuthController;
 import skytales.Auth.web.dto.*;
 
 import java.util.UUID;
@@ -38,99 +35,71 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(AuthController.class)
 public class AuthControllerTest {
 
-    @MockitoBean
-    private JwtService jwtService;
 
-    @MockitoBean
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @MockitoBean private RestTemplate restTemplate;
+    @MockitoBean private AuthService authService;
 
-    @MockitoBean
-    private RestTemplate restTemplate;
+    @Autowired private MockMvc mockMvc;
 
-    @MockitoBean
-    private UserRepository userRepository;
-
-    @MockitoBean
-    private AuthService authService;
-
-    @MockitoBean
-    private JwtAuthenticationFilter jwtAuthenticationFilter;
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockitoBean
-    private UserService userService;
-
-    @InjectMocks
-    private AuthController authController;
+    @InjectMocks private AuthController authController;
 
     private ObjectMapper objectMapper = new ObjectMapper();
-    private String token;
 
     @BeforeEach
-    public void setUp() throws Exception {
-        token = "eyJhbGciOiJIUzI1NiJ9.eyJyb2xlIjoiVVNFUiIsImNhcnRJZCI6IjYzMDQ2OThkLTlmMzQtNDQ4ZC1iM2VlLWRjNzQ1ZWNkYmJiNSIsInVzZXJJZCI6IjI2YTAwMTY1LWRhYmUtNDgyYS1iOGE1LThiMDlmNTY1NGQyNSIsImVtYWlsIjoidGVzdGVtYWlsQGFidi5iZyIsInVzZXJuYW1lIjoidXNlcm5hbWUiLCJzdWIiOiJ0ZXN0ZW1haWxAYWJ2LmJnIiwiaWF0IjoxNzQzMTg1NTU0LCJleHAiOjE3NDMxODgxNDZ9.RzlQIC9pOvI0bGVcSiSfCsV6C_HcRQDoeowJo0F2dUk";
+    public void setUp() {
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"USER"})
     void testRegister() throws Exception {
         RegisterRequest registerRequest = new RegisterRequest("testuser", "test@example.com", "password");
-        User user = new User();
-        user.setId(UUID.randomUUID());
-        user.setUsername("testuser");
-        user.setEmail("test@example.com");
-        RegisterResponse registerResponse = new RegisterResponse(user.getId().toString(), user.getUsername(), user.getEmail(), "token");
+        RegisterResponse registerResponse = new RegisterResponse(
+                UUID.randomUUID().toString(),
+                "testuser",
+                "test@example.com",
+                "token"
+        );
 
-        when(authService.register(any(RegisterRequest.class), any(BCryptPasswordEncoder.class))).thenReturn(user);
-        when(authService.generateRegisterResponse(any(User.class))).thenReturn(registerResponse);
+        when(authService.register(any(RegisterRequest.class))).thenReturn(registerResponse);
 
         mockMvc.perform(post("/api/auth/register")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + token)
                         .content(objectMapper.writeValueAsString(registerRequest)))
-                .andExpect(status().isOk());
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.email").value("test@example.com"))
+                .andExpect(jsonPath("$.username").value("testuser"));
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"USER"})
     void testLogin() throws Exception {
         LoginRequest loginRequest = new LoginRequest("testuser", "password");
-        User user = new User();
-        user.setId(UUID.randomUUID());
-        user.setUsername("testuser");
-        user.setEmail("test@example.com");
-        LoginResponse loginResponse = new LoginResponse(user.getId().toString(), user.getUsername(), user.getEmail(), "token");
+        LoginResponse loginResponse = new LoginResponse(
+                UUID.randomUUID().toString(),
+                "testuser",
+                "test@example.com",
+                "token"
+        );
 
-        when(authService.login(any(LoginRequest.class))).thenReturn(user);
-        when(authService.generateLoginResponse(any(User.class))).thenReturn(loginResponse);
+        when(authService.login(any(LoginRequest.class))).thenReturn(loginResponse);
 
-        String response = mockMvc.perform(post("/api/auth/login")
+        mockMvc.perform(post("/api/auth/login")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .header("Authorization", "Bearer " + token)
                         .content(objectMapper.writeValueAsString(loginRequest)))
-                .andExpect(status().isOk())
-                .andReturn().getResponse().getContentAsString();
-
-        System.out.println("Response JSON: " + response);
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.username").value("testuser"))
+                .andExpect(jsonPath("$.email").value("test@example.com"));
     }
 
     @Test
+    @WithMockUser(username = "testuser", roles = {"ADMIN"})
     void testGetSession() throws Exception {
-        HttpServletRequest request = mock(HttpServletRequest.class);
-        when(request.getAttribute("userId")).thenReturn("123e4567-e89b-12d3-a456-426614174000");
-        when(request.getAttribute("username")).thenReturn("testuser");
-        when(request.getAttribute("email")).thenReturn("test@example.com");
-        when(request.getAttribute("role")).thenReturn("admin");
-        when(request.getAttribute("cartId")).thenReturn("cart123");
-
         mockMvc.perform(get("/api/auth/session")
-                        .header("Authorization", "Bearer " + token)
                         .requestAttr("userId", "123e4567-e89b-12d3-a456-426614174000")
                         .requestAttr("username", "testuser")
                         .requestAttr("email", "test@example.com")
                         .requestAttr("role", "admin")
                         .requestAttr("cartId", "cart123"))
                 .andExpect(status().isOk());
-
     }
 }
