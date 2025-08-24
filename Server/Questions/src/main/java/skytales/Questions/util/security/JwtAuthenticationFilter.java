@@ -8,6 +8,7 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,8 +19,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.security.Key;
 import java.util.Date;
-import java.util.function.Function;
-
 
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
@@ -27,28 +26,25 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Value("yJhY2zA6WxVr8PqWNxQtbk5U4v3iSz1A7ghz6j9kPZJXy9U2w")
     private String secretKey;
 
-
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
+    protected void doFilterInternal(@NotNull HttpServletRequest request,
+                                    @NotNull HttpServletResponse response,
+                                    @NotNull FilterChain chain)
             throws ServletException, IOException {
-
 
         String token = extractJwtFromRequest(request);
 
         if (token != null && isTokenValid(token)) {
-            String userId = extractUserId(token);
-            String username = extractUsername(token);
-            String role = extractRole(token);
-            String email = extractEmail(token);
-            String cartId = extractCartId(token);
+            Claims claims = extractAllClaims(token);
 
-            request.setAttribute("userId", userId);
-            request.setAttribute("username", username);
-            request.setAttribute("email", email);
-            request.setAttribute("role", role);
-            request.setAttribute("cartId", cartId);
+            request.setAttribute("userId", claims.get("userId", String.class));
+            request.setAttribute("username", claims.get("username", String.class));
+            request.setAttribute("email", claims.get("email", String.class));
+            request.setAttribute("role", claims.get("role", String.class));
+            request.setAttribute("cartId", claims.get("cartId", String.class));
 
-            UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, null, null);
+            UsernamePasswordAuthenticationToken authentication =
+                    new UsernamePasswordAuthenticationToken(claims.get("email", String.class), null, null);
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
@@ -66,56 +62,21 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private boolean isTokenValid(String token) {
         try {
-            return !isTokenExpired(token);
+            return extractAllClaims(token).getExpiration().after(new Date());
         } catch (ExpiredJwtException e) {
             return false;
         }
     }
 
-    private boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
-    }
-
-    private Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
-
     private Claims extractAllClaims(String token) {
-        return Jwts
-                .parserBuilder()
+        return Jwts.parserBuilder()
                 .setSigningKey(getSignInKey())
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
     }
 
-    private String extractUserId(String token) {
-        return extractClaim(token, claims -> claims.get("userId", String.class));
-    }
-
-    private String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    private String extractRole(String token) {
-        return extractClaim(token, claims -> claims.get("role", String.class));
-    }
-
-    private String extractEmail(String token) {
-        return extractClaim(token, claims -> claims.get("email", String.class));
-    }
-
-    private String extractCartId(String token) {
-        return extractClaim(token, claims -> claims.get("cartId", String.class));
-    }
-
     private Key getSignInKey() {
         return Keys.hmacShaKeyFor(secretKey.getBytes());
     }
-
 }

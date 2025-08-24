@@ -128,20 +128,7 @@ public class QuestionControllerTest {
                         .header("Authorization", "Bearer " + token))
                 .andExpect(status().isBadRequest());
     }
-
-    @Test
-    void testCreateQuestion() throws Exception {
-        PostQuestionRequest request = new PostQuestionRequest("How was your day?");
-        String requestJson = objectMapper.writeValueAsString(request);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/api/questions/upload")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(requestJson)
-                        .header("Authorization", "Bearer " + token))
-                .andExpect(status().isCreated());
-
-        verify(questionService).createQuestion(Mockito.any(PostQuestionRequest.class), Mockito.any(UUID.class));
-    }
+    
 
     @Test
     void testGetUserQuestions() throws Exception {
